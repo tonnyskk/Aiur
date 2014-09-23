@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="main.balance.padding.topBottom">10dp</dimen>
+    <dimen name="main.balance.padding.leftRight">20dp</dimen>
+
+    <dimen name="main.group.padding.topBottom">10dp</dimen>
+    <dimen name="main.group.padding.leftRight">20dp</dimen>
+
+    <dimen name="main.group.select.margin.topBottom">10dp</dimen>
+    <dimen name="main.group.select.margin.leftRight">10dp</dimen>
+    <dimen name="main.group.select.btn.height">50dp</dimen>
+    <dimen name="main.group.change.btn.width">50dp</dimen>
+
+    <dimen name="main.grid.title.txt.size">20sp</dimen>
+    <dimen name="main.grid.label.txt.size">40sp</dimen>
+
+    <color name="main.balance.bg">#ffff7006</color>
+    <color name="main.balance.txt">#ffffffff</color>
+    <color name="main.bg">#fff3f3f3</color>
+</resources>

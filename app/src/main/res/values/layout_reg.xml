@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="reg.button.margin.topBottom">10dp</dimen>
+    <dimen name="reg.button.MinWidth">200dp</dimen>
+    <dimen name="reg.button.MaxWidth">300dp</dimen>
+
+
+
+</resources>

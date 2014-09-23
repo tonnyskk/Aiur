@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="login.button.margin.topBottom">10dp</dimen>
+    <dimen name="login.button.MinWidth">150dp</dimen>
+    <dimen name="login.button.MaxWidth">200dp</dimen>
+
+    <dimen name="login.button.split.width">20dp</dimen>
+
+
+</resources>

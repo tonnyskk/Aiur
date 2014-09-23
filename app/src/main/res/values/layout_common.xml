@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="commonBlueButtonHeight">40dp</dimen>
+
+    <dimen name="commonBlueButtonTextSize">20sp</dimen>
+    <color name="commonBlueButtonTextColor">#ffffffff</color>
+
+
+</resources>
