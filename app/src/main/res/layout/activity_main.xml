@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="@color/main.bg"
-              tools:context="com.origin.aiur.main.MainActivity"
+              tools:context="com.origin.aiur.activity.main.MainActivity"
               android:id="@+id/mainWin">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/main.title.balance"
+                android:text="@string/main_title_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/main.grid.title.txt.size"
@@ -48,7 +48,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/main.title.cost"
+                android:text="@string/main_title_cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/main.grid.title.txt.size"
@@ -94,7 +94,7 @@
                 android:textColor="@color/commonBlueButtonTextColor"
                 android:textSize="@dimen/commonBlueButtonTextSize"
                 android:textStyle="bold"
-                android:text="@string/main.group.select"
+                android:text="@string/main_group_select"
                 android:minWidth="@dimen/reg.button.MinWidth"
                 android:maxWidth="@dimen/reg.button.MaxWidth"
                 android:layout_gravity="center"/>
@@ -112,7 +112,7 @@
                 android:textStyle="bold"
                 android:clickable="true"
                 android:layout_gravity="center"
-                android:text="@string/main.group.change"
+                android:text="@string/main_group_change"
                 android:visibility="gone"/>
         </LinearLayout>
 
@@ -145,7 +145,7 @@
             android:textColor="@color/commonBlueButtonTextColor"
             android:textSize="@dimen/commonBlueButtonTextSize"
             android:textStyle="bold"
-            android:text="@string/main.group.join"
+            android:text="@string/main_group_join"
             android:minWidth="@dimen/reg.button.MinWidth"
             android:maxWidth="@dimen/reg.button.MaxWidth"
             android:layout_gravity="center"/>
@@ -165,7 +165,7 @@
             android:textColor="@color/commonBlueButtonTextColor"
             android:textSize="@dimen/commonBlueButtonTextSize"
             android:textStyle="bold"
-            android:text="@string/main.group.create"
+            android:text="@string/main_group_create"
             android:minWidth="@dimen/reg.button.MinWidth"
             android:maxWidth="@dimen/reg.button.MaxWidth"
             android:layout_gravity="center"/>

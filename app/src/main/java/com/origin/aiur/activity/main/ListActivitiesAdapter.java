@@ -1,4 +1,4 @@
-package com.origin.aiur.main;
+package com.origin.aiur.activity.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.origin.aiur.R;
 import com.origin.aiur.utils.DateUtils;
-import com.origin.aiur.vo.GroupActivity;
+import com.origin.aiur.vo.GroupEvent;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2014/9/23.
  */
 public class ListActivitiesAdapter extends BaseAdapter {
-    private ArrayList<GroupActivity> activityArrayList = new ArrayList<GroupActivity>();
+    private ArrayList<GroupEvent> activityArrayList = new ArrayList<GroupEvent>();
     private Context context;
     private LayoutInflater mInflater;
 
@@ -26,7 +26,7 @@ public class ListActivitiesAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setActivityList(ArrayList<GroupActivity> activityList) {
+    public void setActivityList(ArrayList<GroupEvent> activityList) {
         if (activityList != null && !activityList.isEmpty()) {
             activityArrayList.clear();
             activityArrayList.addAll(activityList);
@@ -58,10 +58,12 @@ public class ListActivitiesAdapter extends BaseAdapter {
         if (returnView == null) {
             return returnView;
         }
-        GroupActivity activity = activityArrayList.get(i);
+
+        GroupEvent activity = activityArrayList.get(i);
         TextView activityDate = (TextView) returnView.findViewById(R.id.groupActivityDate);
         activityDate.setText(DateUtils.formatDate(activity.getActivityTimestamp()));
-        TextView activityDesc = (TextView) returnView.findViewById(R.id.groupActivityDate);
+
+        TextView activityDesc = (TextView) returnView.findViewById(R.id.groupActivityDesc);
         activityDesc.setText(activity.getActivityDesc());
 
         return returnView;

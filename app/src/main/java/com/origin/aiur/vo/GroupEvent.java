@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Administrator on 2014/9/23.
  */
-public class GroupActivity implements Parcelable{
+public class GroupEvent implements Parcelable{
     private String activityDesc;
     private long activityTimestamp;
 

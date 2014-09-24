@@ -1,21 +1,26 @@
-package com.origin.aiur.logon;
+package com.origin.aiur.activity.logon;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
-import com.origin.aiur.BaseModel;
 import com.origin.aiur.R;
-import com.origin.aiur.main.MainActivity;
+import com.origin.aiur.http.HttpUtils;
+import com.origin.aiur.activity.main.MainActivity;
+
+import java.util.HashMap;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private TextView loginButton;
     private TextView registerButton;
+
+    private EditText userAccount;
+    private EditText userPassword;
 
     enum Actions {
         user_login
@@ -29,36 +34,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
         loginButton = (TextView) findViewById(R.id.loginLogon);
         registerButton = (TextView) findViewById(R.id.loginRegister);
+
+        userAccount = (EditText)findViewById(R.id.loginAccount);
+        userPassword = (EditText)findViewById(R.id.loginPassword);
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onPostExecuteSuccessful(String action) {
+    public void onPostExecuteSuccessful(String action, Object response) {
         MainActivity.startActivity(this);
         this.finish();
     }
@@ -69,19 +58,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    public BaseModel getModel() {
-        return new LoginModel(this);
-    }
-
-    @Override
     public void onClick(View view) {
         if (view == null) {
             return;
         }
-
         switch (view.getId()) {
             case R.id.loginLogon:
-                this.postSync(Actions.user_login.name());
+                if (validateInput()) {
+                    this.postSync(Actions.user_login.name());
+                }
                 break;
 
             case R.id.loginRegister:
@@ -89,4 +74,32 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
+
+    private boolean validateInput() {
+        // TODO:
+
+        return true;
+    }
+
+    protected String getPath(String action){
+        String path = null;
+        switch (Actions.valueOf(action)) {
+            case user_login:
+                path = HttpUtils.user_login;
+                break;
+        }
+        return path;
+    }
+
+    protected HashMap<String, String> getParam(String action) {
+        HashMap<String, String> param = new HashMap<String, String>();
+        switch (Actions.valueOf(action)) {
+            case user_login:
+                param.put("account", userAccount.getText().toString());
+                param.put("password", userPassword.getText().toString());
+                break;
+        }
+        return param;
+    }
 }
+

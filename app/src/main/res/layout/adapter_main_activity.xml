@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/main.group.activity.ListPadding.leftRight"
+    android:paddingRight="@dimen/main.group.activity.ListPadding.leftRight"
+    android:paddingTop="@dimen/main.group.activity.ListPadding.topBottom"
+    android:paddingBottom="@dimen/main.group.activity.ListPadding.topBottom">
 
     <TextView
         android:id="@+id/groupActivityDate"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/main.group.activity.date.width"
         android:layout_height="match_parent"
-        android:text="14/09/12"/>
+        android:text="14/09/12" />
 
     <TextView
         android:id="@+id/groupActivityDesc"
@@ -18,5 +22,5 @@
         android:layout_weight="1"
         android:text="XX have joined XXXgroup"
         android:singleLine="true"
-        android:ellipsize="end"/>
+        android:ellipsize="end" />
 </LinearLayout>

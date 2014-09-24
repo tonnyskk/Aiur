@@ -1,10 +1,11 @@
-package com.origin.aiur.main;
+package com.origin.aiur.activity.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.origin.aiur.R;
 import com.origin.aiur.vo.UserGroup;
@@ -56,6 +57,11 @@ public class ListGroupAdapter extends BaseAdapter {
         if (returnView == null) {
             return returnView;
         }
+
+        UserGroup group = activityArrayList.get(i);
+        returnView.setTag(group);
+        TextView groupName = (TextView)returnView.findViewById(R.id.groupPopupName);
+        groupName.setText(group.getGroupName());
 
         return returnView;
     }
