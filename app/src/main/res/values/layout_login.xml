@@ -8,5 +8,13 @@
 
     <dimen name="login.button.split.width">20dp</dimen>
 
+    <dimen name="splash_promote_text_size">20dp</dimen>
+    <dimen name="splash_bubble_margin_top">120dp</dimen>
+    <dimen name="splash_bubble_margin_leftRight">20dp</dimen>
+    <dimen name="splash_bubble_padding_topBottom">20dp</dimen>
+    <dimen name="splash_bubble_padding_leftRight">20dp</dimen>
+
+    <color name="splash_text_color">#ffffffff</color>
+    <color name="splash_window_bg">#fffbffdf</color>
 
 </resources>

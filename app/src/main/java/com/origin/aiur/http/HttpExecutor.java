@@ -1,5 +1,6 @@
 package com.origin.aiur.http;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -14,14 +15,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by dongjia on 9/24/2014.
  */
 public class HttpExecutor {
     private static HttpExecutor instance = new HttpExecutor();
-    private static final String BASE_URL = "http://127.0.0.1:9090/test";
     private static boolean fakeHttp = true;
+
     private HttpExecutor() {
     }
 
@@ -29,7 +31,7 @@ public class HttpExecutor {
         return instance;
     }
 
-    public void executeGet(final String tag, String path, final BaseActivity callback, boolean isList) {
+    public void executeGet(final String tag, String path, final BaseActivity callback) {
         if (fakeHttp) {
             callback.postExecuteSuccess(tag, null);
             return;
@@ -37,56 +39,71 @@ public class HttpExecutor {
         // cancel pending request
         AiurApplication.getInstance().cancelPendingRequests(tag);
         // Sending request
-        if (isList) {
-            JsonObjectRequest req = new JsonObjectRequest(parseUrl(path), null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                VolleyLog.v("Response:%n %s", response.toString(4));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            if (callback != null) {
-                                callback.postExecuteSuccess(tag, response);
-                            }
+        JsonObjectRequest req = new JsonObjectRequest(parseUrl(path), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            VolleyLog.v("Response:%n %s", response.toString(4));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.e("Error: ", error.getMessage());
-                    if (callback != null) {
-                        callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
+                        if (callback != null) {
+                            callback.postExecuteSuccess(tag, response);
+                        }
                     }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                if (callback != null) {
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
                 }
-            });
-            // add the request object to the queue to be executed
-            AiurApplication.getInstance().addToRequestQueue(req, tag);
-        } else {
-            JsonArrayRequest req = new JsonArrayRequest(parseUrl(path), new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    try {
-                        VolleyLog.v("Response:%n %s", response.toString(4));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    if (callback != null) {
-                        callback.postExecuteSuccess(tag, response);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.e("Error: ", error.getMessage());
-                    if (callback != null) {
-                        callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
-                    }
-                }
-            });
-            // add the request object to the queue to be executed
-            AiurApplication.getInstance().addToRequestQueue(req, tag);
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        // add the request object to the queue to be executed
+        AiurApplication.getInstance().addToRequestQueue(req, tag);
+
+    }
+
+    public void executeGetList(final String tag, String path, final BaseActivity callback) {
+        if (fakeHttp) {
+            callback.postExecuteSuccess(tag, null);
+            return;
         }
+        // cancel pending request
+        AiurApplication.getInstance().cancelPendingRequests(tag);
+        // Sending request
+        JsonArrayRequest req = new JsonArrayRequest(parseUrl(path), new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    VolleyLog.v("Response:%n %s", response.toString(4));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (callback != null) {
+                    //callback.postExecuteSuccess(tag, response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                if (callback != null) {
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
+                }
+            }
+        });
+        // add the request object to the queue to be executed
+        AiurApplication.getInstance().addToRequestQueue(req, tag);
     }
 
     public void executePost(final String tag, String path, HashMap<String, String> params, final BaseActivity callback) {
@@ -117,21 +134,28 @@ public class HttpExecutor {
                         }
                     }
                 }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.e("Error: ", error.getMessage());
-                        if (callback != null) {
-                            callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
-                        }
-                    }
-                });
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                if (callback != null) {
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
+                }
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
 
         // add the request object to the queue to be executed
         AiurApplication.getInstance().addToRequestQueue(req, tag);
     }
 
     private String parseUrl(String path) {
-        String finalUrl = BASE_URL;
+        String finalUrl = HttpUtils.BASE_URL;
         if (path.startsWith("/")) {
             finalUrl += path;
         } else {

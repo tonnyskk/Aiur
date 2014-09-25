@@ -6,6 +6,9 @@ import android.widget.Toast;
 import com.origin.aiur.app.AiurApplication;
 import com.origin.aiur.http.HttpExecutor;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
@@ -14,10 +17,6 @@ import java.util.HashMap;
 public abstract class BaseActivity extends ActionBarActivity {
 
     protected final void getSync(final String action) {
-        getSync(action, false);
-    }
-
-    protected final void getSync(final String action, final boolean isList) {
         String path = getPath(action);
         if (path == null) {
             postExecuteFailed(action, this.getResources().getString(R.string.invalid_path));
@@ -28,7 +27,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         onPreExecute(action);
 
         // Sendout http request
-        HttpExecutor.getExecutor().executeGet(action, path, this, isList);
+        HttpExecutor.getExecutor().executeGet(action, path, this);
     }
 
     protected final void postSync(final String action) {
@@ -51,19 +50,21 @@ public abstract class BaseActivity extends ActionBarActivity {
         onPostExecuteFailed(action);
     }
 
-    public void postExecuteSuccess(String action, Object message) {
+    public void postExecuteSuccess(String action, JSONObject message) {
         //1.  cancel loading dialog
 
-        //2. Notify activity
+        //2. Alert warning message
+        int responseStatus = getResponseStatus(message);
+        if (responseStatus <= 0) {
+            Toast.makeText(this, getResources().getText(R.string.invalid_response_format), Toast.LENGTH_LONG).show();
+        }
+        //3. Notify activity
         onPostExecuteSuccessful(action, message);
     }
 
-    protected abstract void onPostExecuteSuccessful(String action, Object response);
+    protected abstract void onPostExecuteSuccessful(String action, JSONObject response);
     protected abstract void onPostExecuteFailed(String action);
-
-    protected String getPath(String action){
-        return null;
-    }
+    protected abstract String getPath(String action);
 
     protected HashMap<String, String> getParam(String action) {
         return null;
@@ -76,4 +77,15 @@ public abstract class BaseActivity extends ActionBarActivity {
         return true;
     }
 
+    protected int getResponseStatus(JSONObject response) {
+        if (response != null && response.has("statusCode")) {
+            try {
+                //JSONObject responseStatus = response.getJSONObject("status");
+                return response.getInt("statusCode");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
 }

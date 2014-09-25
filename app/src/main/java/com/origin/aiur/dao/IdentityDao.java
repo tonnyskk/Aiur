@@ -16,4 +16,8 @@ public class IdentityDao {
     public boolean isLogon() {
         return false;
     }
+
+    public String getToken() {
+        return "AsjfiwJDfwejOKJfjwuhf";
+    }
 }

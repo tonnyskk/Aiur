@@ -12,6 +12,8 @@ import com.origin.aiur.R;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.activity.main.MainActivity;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
@@ -50,7 +52,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void onPostExecuteSuccessful(String action, Object response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
             case user_login:
                 MainActivity.startActivity(this);
@@ -67,6 +69,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     }
 
+    @Override
     protected String getPath(String action){
         String path = null;
         switch (Actions.valueOf(action)) {

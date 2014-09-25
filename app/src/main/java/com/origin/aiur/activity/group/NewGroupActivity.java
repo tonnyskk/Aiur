@@ -10,6 +10,8 @@ import android.view.Window;
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 
+import org.json.JSONObject;
+
 public class NewGroupActivity extends BaseActivity {
 
     public static void startActivity(Context context) {
@@ -45,12 +47,17 @@ public class NewGroupActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, Object response) {
+    protected void onPostExecuteSuccessful(String action, JSONObject response) {
 
     }
 
     @Override
     protected void onPostExecuteFailed(String action) {
 
+    }
+
+    @Override
+    protected String getPath(String action) {
+        return null;
     }
 }

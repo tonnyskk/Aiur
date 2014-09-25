@@ -25,6 +25,8 @@ import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.vo.UserGroup;
 
+import org.json.JSONObject;
+
 public class GroupTabActivity extends BaseActivity implements ActionBar.TabListener {
 
     /**
@@ -135,13 +137,18 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, Object response) {
+    protected void onPostExecuteSuccessful(String action, JSONObject response) {
 
     }
 
     @Override
     protected void onPostExecuteFailed(String action) {
 
+    }
+
+    @Override
+    protected String getPath(String action) {
+        return null;
     }
 
     /**

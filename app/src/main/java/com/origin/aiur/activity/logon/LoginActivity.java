@@ -13,6 +13,8 @@ import com.origin.aiur.R;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.activity.main.MainActivity;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -47,7 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onPostExecuteSuccessful(String action, Object response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
         MainActivity.startActivity(this);
         this.finish();
     }
@@ -81,6 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         return true;
     }
 
+    @Override
     protected String getPath(String action){
         String path = null;
         switch (Actions.valueOf(action)) {

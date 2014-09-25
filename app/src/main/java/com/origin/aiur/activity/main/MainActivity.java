@@ -25,6 +25,8 @@ import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
@@ -99,8 +101,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             btnGotoGroup.setVisibility(View.GONE);
         }
 
-        this.getSync(Actions.load_user_group.name(), true);
-        this.getSync(Actions.load_group_activity.name(), true);
+        this.getSync(Actions.load_user_group.name());
+        this.getSync(Actions.load_group_activity.name());
     }
 
     @Override
@@ -127,7 +129,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
-    public void onPostExecuteSuccessful(String action, Object response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
             case load_group_activity:
                 ArrayList<GroupEvent> userActivityList = MainHelper.getInstance().getGroupActivityList(response);
@@ -172,6 +174,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     }
 
+    @Override
     protected String getPath(String action){
         String path = null;
         switch (Actions.valueOf(action)) {

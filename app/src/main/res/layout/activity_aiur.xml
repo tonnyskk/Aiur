@@ -1,12 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/splash_bg_farm_unfocused"
     tools:context="com.origin.aiur.activity.splash.AiurActivity">
 
-    <TextView
-        android:text="@string/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/splash_text_color"
+        android:textSize="@dimen/splash_promote_text_size"
+        android:text="@string/splash_promote_text"
+        android:background="@drawable/button_blue_disabled"
+        android:layout_marginTop="@dimen/splash_bubble_margin_top"
+        android:layout_marginLeft="@dimen/splash_bubble_margin_leftRight"
+        android:layout_marginRight="@dimen/splash_bubble_margin_leftRight"
+        android:paddingLeft="@dimen/splash_bubble_padding_leftRight"
+        android:paddingRight="@dimen/splash_bubble_padding_leftRight"
+        android:paddingTop="@dimen/splash_bubble_padding_topBottom"
+        android:paddingBottom="@dimen/splash_bubble_padding_topBottom"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"/>
+
+
+</LinearLayout>

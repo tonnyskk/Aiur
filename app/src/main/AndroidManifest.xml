@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.origin.aiur" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".app.AiurApplication"
         android:allowBackup="true"
@@ -10,7 +12,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.splash.AiurActivity"
-            android:theme="@style/Theme.NoActionBar" >
+            android:theme="@style/Theme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

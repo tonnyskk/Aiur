@@ -10,6 +10,8 @@ import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.vo.UserGroup;
 
+import org.json.JSONObject;
+
 public class GroupActivity extends BaseActivity {
 
     enum Keys {
@@ -48,12 +50,17 @@ public class GroupActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, Object response) {
+    protected void onPostExecuteSuccessful(String action, JSONObject response) {
 
     }
 
     @Override
     protected void onPostExecuteFailed(String action) {
 
+    }
+
+    @Override
+    protected String getPath(String action) {
+        return null;
     }
 }
