@@ -3,6 +3,7 @@ package com.origin.aiur.activity.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,10 +17,10 @@ import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
-import com.origin.aiur.dao.GroupDao;
-import com.origin.aiur.activity.group.GroupActivity;
+import com.origin.aiur.activity.group.GroupTabActivity;
 import com.origin.aiur.activity.group.JoinGroupActivity;
 import com.origin.aiur.activity.group.NewGroupActivity;
+import com.origin.aiur.dao.GroupDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
@@ -58,6 +59,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set up the action bar.
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
         btnGotoGroup = (TextView) findViewById(R.id.btnGotoGroup);
         btnGotoGroup.setOnClickListener(this);
@@ -205,7 +210,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.btnGotoGroup:
-                GroupActivity.startActivity(this, GroupDao.getInstance().getCurrentGroup());
+                GroupTabActivity.startActivity(this, GroupDao.getInstance().getCurrentGroup());
                 break;
             case R.id.btnCreateGroup:
                 NewGroupActivity.startActivity(this);
@@ -243,7 +248,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     UserGroup group = (UserGroup)view.getTag();
                     GroupDao.getInstance().setCurrentGroup(group);
                     // TODO: go to group detail page
-                    GroupActivity.startActivity(MainActivity.this, group);
+                    GroupTabActivity.startActivity(MainActivity.this, group);
                     dismissPopup();
                 }
             });

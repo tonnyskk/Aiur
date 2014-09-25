@@ -37,6 +37,10 @@
             android:name=".activity.group.JoinGroupActivity"
             android:label="@string/title_activity_join_group" >
         </activity>
+        <activity
+            android:name=".activity.group.GroupTabActivity"
+            android:label="@string/title_activity_group_tab" >
+        </activity>
     </application>
 
 </manifest>

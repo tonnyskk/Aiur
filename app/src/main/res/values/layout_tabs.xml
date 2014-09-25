@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="tab_index_cash_padding_topBottom">10dp</dimen>
+    <dimen name="tab_index_cash_padding_leftRight">20dp</dimen>
+
+    <dimen name="tab_index_btn_margin_top">10dp</dimen>
+    <dimen name="tab_index_btn_margin_bottom">10dp</dimen>
+    <dimen name="tab_index_btn_padding_topBottom">15dp</dimen>
+    <dimen name="tab_index_btn_padding_leftRight">10dp</dimen>
+
+    <dimen name="tab_index_btn_icon_margin_leftRight">10dp</dimen>
+    <dimen name="tab_index_btn_icon_width">40dp</dimen>
+    <dimen name="tab_index_btn_icon_height">40dp</dimen>
+
+    <dimen name="tab_index_cash_title_txt_size">20sp</dimen>
+    <dimen name="tab_index_cash_txt_size">40sp</dimen>
+    <dimen name="tab_index_btn_txt_size">18sp</dimen>
+
+    <color name="tab_index_cash_bg">#ffff7006</color>
+    <color name="tab_index_btn_bg">#ffffffff</color>
+    <color name="tab_index_cash_txt_color">#ffffffff</color>
+    <color name="tab_bg">#fff3f3f3</color>
+    <color name="tab_index_btn_split">#ffdadada</color>
+</resources>
