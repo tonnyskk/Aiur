@@ -1,8 +1,12 @@
 package com.origin.aiur.activity.main;
 
 import com.origin.aiur.dao.GroupDao;
+import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +42,7 @@ public class MainHelper {
         return groupEventList;
     }
 
-    public List<UserGroup> getGroupList(Object object) {
+    public List<UserGroup> getGroupList(JSONObject object) {
 
         // parse response and save data into DAO
         List<UserGroup> groupList = new ArrayList<UserGroup>();
@@ -51,7 +55,7 @@ public class MainHelper {
         groupList.add(userGroup);
 
         // Save group list to
-        GroupDao.getInstance().setGroupList(groupList);
+        UserDao.getInstance().updateUserGroup(groupList);
         return groupList;
     }
 }

@@ -1,17 +1,14 @@
 package com.origin.aiur.vo;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2014/9/23.
  */
-public class UserGroup implements Parcelable {
+public class UserGroup implements IJsonPacket {
     private long groupId;
     private String groupName;
     private long ownerUserId;
@@ -49,15 +46,6 @@ public class UserGroup implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
-
     public void fromJsonObject(JSONObject jsonObject) {
         try {
             if (jsonObject != null) {
@@ -76,5 +64,14 @@ public class UserGroup implements Parcelable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public JSONObject toJsonObject() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("groupId", groupId);
+        jsonObject.put("groupName", groupName);
+        jsonObject.put("ownerUserId", ownerUserId);
+        return jsonObject;
     }
 }

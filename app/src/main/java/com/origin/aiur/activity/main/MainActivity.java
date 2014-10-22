@@ -21,6 +21,7 @@ import com.origin.aiur.activity.group.GroupTabActivity;
 import com.origin.aiur.activity.group.JoinGroupActivity;
 import com.origin.aiur.activity.group.NewGroupActivity;
 import com.origin.aiur.dao.GroupDao;
+import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
@@ -93,7 +94,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     protected void onResume() {
         super.onResume();
 
-        UserGroup currentGroup = GroupDao.getInstance().getCurrentGroup();
+        UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();
 
         if (currentGroup != null) {
             String txt = getResources().getString(R.string.main_group_select, currentGroup.getGroupName());
@@ -157,10 +158,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         btnChangeGroup.setVisibility(View.VISIBLE);
                     }
 
-                    UserGroup currentGroup = GroupDao.getInstance().getCurrentGroup();
+                    UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();
                     if (currentGroup == null) {
                         UserGroup defaultGroup = userGroupList.get(0);
-                        GroupDao.getInstance().setCurrentGroup(defaultGroup);
+                        UserDao.getInstance().setCurrentGroup(defaultGroup);
                         // set userGroupList.get(0) as selected group, and save into DAO
                         String txt = getResources().getString(R.string.main_group_select, defaultGroup.getGroupName());
                         btnGotoGroup.setText(txt);
@@ -203,9 +204,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         switch (view.getId()) {
             case R.id.btnChangeGroup:
-                List<UserGroup> userGroupList = GroupDao.getInstance().getGroupList();
+                List<UserGroup> userGroupList = UserDao.getInstance().getUserGroupList();
                 if (userGroupList != null && !userGroupList.isEmpty()) {
-                    UserGroup currentGroup = GroupDao.getInstance().getCurrentGroup();
+                    UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();
                     if (currentGroup != null) {
                         ArrayList<UserGroup> filterList = new ArrayList<UserGroup>();
                         for(UserGroup userGroup : userGroupList) {
@@ -220,7 +221,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.btnGotoGroup:
-                GroupTabActivity.startActivity(this, GroupDao.getInstance().getCurrentGroup());
+                GroupTabActivity.startActivity(this, UserDao.getInstance().getCurrentGroup());
                 break;
             case R.id.btnCreateGroup:
                 NewGroupActivity.startActivity(this);
@@ -256,7 +257,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     UserGroup group = (UserGroup)view.getTag();
-                    GroupDao.getInstance().setCurrentGroup(group);
+                    UserDao.getInstance().setCurrentGroup(group);
                     // TODO: go to group detail page
                     GroupTabActivity.startActivity(MainActivity.this, group);
                     dismissPopup();

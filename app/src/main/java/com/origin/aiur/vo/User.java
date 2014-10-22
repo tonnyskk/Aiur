@@ -1,6 +1,7 @@
 package com.origin.aiur.vo;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -9,15 +10,23 @@ import java.util.List;
 /**
  * Created by dongjia on 10/22/2014.
  */
-public class User {
+public class User implements IJsonPacket {
     private long userID;
     private String loginName;
     private String nickName;
 
     private List<UserGroup> userGroupList;
 
+    public User() {
+
+    }
+
     public User(JSONObject jsonObject) {
-        this.fromJsonObject(jsonObject);
+        try {
+            this.fromJsonObject(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public long getUserID() {
@@ -52,33 +61,48 @@ public class User {
         this.userGroupList = userGroupList;
     }
 
-    public void fromJsonObject(JSONObject jsonObject) {
-        try {
-            if (jsonObject != null) {
-                if (jsonObject.has("userID")) {
-                    setUserID(jsonObject.getLong("userID"));
-                }
+    @Override
+    public void fromJsonObject(JSONObject jsonObject) throws JSONException {
+        if (jsonObject != null) {
+            if (jsonObject.has("userID")) {
+                setUserID(jsonObject.getLong("userID"));
+            }
 
-                if (jsonObject.has("loginName")) {
-                    setLoginName(jsonObject.getString("loginName"));
-                }
+            if (jsonObject.has("loginName")) {
+                setLoginName(jsonObject.getString("loginName"));
+            }
 
-                if (jsonObject.has("nickName")) {
-                    setNickName(jsonObject.getString("nickName"));
-                }
+            if (jsonObject.has("nickName")) {
+                setNickName(jsonObject.getString("nickName"));
+            }
 
-                if (jsonObject.has("userGroupList")) {
-                    JSONArray groupList = jsonObject.getJSONArray("userGroupList");
-                    userGroupList = new ArrayList<UserGroup>();
-                    for (int i = 0; i < groupList.length(); i ++) {
-                        JSONObject groupObj = (JSONObject)groupList.get(i);
-                        UserGroup group = new UserGroup(groupObj);
-                        userGroupList.add(group);
-                    }
+            if (jsonObject.has("userGroupList")) {
+                JSONArray groupList = jsonObject.getJSONArray("userGroupList");
+                userGroupList = new ArrayList<UserGroup>();
+                for (int i = 0; i < groupList.length(); i++) {
+                    JSONObject groupObj = (JSONObject) groupList.get(i);
+                    UserGroup group = new UserGroup(groupObj);
+                    userGroupList.add(group);
                 }
             }
-        }catch (Exception e) {
-            e.printStackTrace();
         }
+    }
+
+    @Override
+    public JSONObject toJsonObject() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("userID", userID);
+        jsonObject.put("loginName", loginName);
+        jsonObject.put("nickName", nickName);
+
+        if (userGroupList != null) {
+            JSONArray jsonArray = new JSONArray();
+            for (UserGroup userGroup : userGroupList) {
+                JSONObject groupObject = userGroup.toJsonObject();
+                jsonArray.put(groupObject);
+            }
+            jsonObject.put("userGroupList", jsonArray);
+        }
+        return jsonObject;
     }
 }

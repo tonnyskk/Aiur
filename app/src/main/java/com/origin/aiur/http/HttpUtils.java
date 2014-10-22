@@ -11,7 +11,7 @@ public class HttpUtils {
     public static final String user_login = "/user/login";
     public static final String user_reg= "/user/reg";
 
-    public static final String load_user_group = "";
+    public static final String load_user_group = "user/%s/group";
     public static final String load_user_group_activity = "";
     //public static final String validate_token = "/user/status/%s";
 

@@ -24,8 +24,9 @@ import org.apache.commons.codec.binary.Base64;
  * Created by dongjia on 10/22/2014.
  */
 public class AppUtils {
-    public static final String KEY_ALGORITHM = "RSA";
+    private static final String KEY_ALGORITHM = "RSA";
     private static final int MAX_ENCRYPT_BLOCK = 117;
+    public static final String CHARSET = "UTF-8";
 
     public static String generateDeviceId() {
 

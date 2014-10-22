@@ -12,6 +12,7 @@ import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.dao.GroupDao;
 import com.origin.aiur.dao.IdentityDao;
+import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.utils.AppUtils;
@@ -61,8 +62,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // Update user identity data
         JSONObject userInfo = AppUtils.getJsonObject(response, "data");
         User loginUser = new User(userInfo);
-        IdentityDao.getInstance().setUser(loginUser);
-        GroupDao.getInstance().setGroupList(loginUser.getUserGroupList());
+        UserDao.getInstance().setCurrentUser(loginUser);
 
         // Start main activity
         MainActivity.startActivity(this);
