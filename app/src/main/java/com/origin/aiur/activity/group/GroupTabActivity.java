@@ -1,5 +1,6 @@
 package com.origin.aiur.activity.group;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.content.Context;
@@ -148,6 +149,10 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
 
     @Override
     protected String getPath(String action) {
+        return null;
+    }
+    @Override
+    protected HashMap<String, String> getPostParam(String action) {
         return null;
     }
 

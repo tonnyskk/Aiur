@@ -12,6 +12,8 @@ import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class GroupActivity extends BaseActivity {
 
     enum Keys {
@@ -61,6 +63,11 @@ public class GroupActivity extends BaseActivity {
 
     @Override
     protected String getPath(String action) {
+        return null;
+    }
+
+    @Override
+    protected HashMap<String, String> getPostParam(String action) {
         return null;
     }
 }

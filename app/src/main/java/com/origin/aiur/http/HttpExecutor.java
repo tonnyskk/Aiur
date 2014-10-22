@@ -1,6 +1,7 @@
 package com.origin.aiur.http;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -8,6 +9,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.app.AiurApplication;
+import com.origin.aiur.dao.IdentityDao;
+import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.utils.VolleyErrorHelper;
 
 import org.json.JSONArray;
@@ -22,7 +25,7 @@ import java.util.Map;
  */
 public class HttpExecutor {
     private static HttpExecutor instance = new HttpExecutor();
-    private static boolean fakeHttp = true;
+    private static boolean fakeHttp = false;
 
     private HttpExecutor() {
     }
@@ -56,8 +59,13 @@ public class HttpExecutor {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
+                NetworkResponse response = error.networkResponse;
+                int statusCode = -1;
+                if (response != null) {
+                    statusCode = response.statusCode;
+                }
                 if (callback != null) {
-                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback), statusCode);
                 }
             }
         }){
@@ -65,45 +73,14 @@ public class HttpExecutor {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
+                headers.put("device-id", IdentityDao.getInstance().getDeviceId());
+                headers.put("token", IdentityDao.getInstance().getToken());
                 return headers;
             }
         };
         // add the request object to the queue to be executed
         AiurApplication.getInstance().addToRequestQueue(req, tag);
 
-    }
-
-    public void executeGetList(final String tag, String path, final BaseActivity callback) {
-        if (fakeHttp) {
-            callback.postExecuteSuccess(tag, null);
-            return;
-        }
-        // cancel pending request
-        AiurApplication.getInstance().cancelPendingRequests(tag);
-        // Sending request
-        JsonArrayRequest req = new JsonArrayRequest(parseUrl(path), new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    VolleyLog.v("Response:%n %s", response.toString(4));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                if (callback != null) {
-                    //callback.postExecuteSuccess(tag, response);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
-                if (callback != null) {
-                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
-                }
-            }
-        });
-        // add the request object to the queue to be executed
-        AiurApplication.getInstance().addToRequestQueue(req, tag);
     }
 
     public void executePost(final String tag, String path, HashMap<String, String> params, final BaseActivity callback) {
@@ -137,8 +114,13 @@ public class HttpExecutor {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
+                NetworkResponse response = error.networkResponse;
+                int statusCode = -1;
+                if (response != null) {
+                    statusCode = response.statusCode;
+                }
                 if (callback != null) {
-                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback));
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback), statusCode);
                 }
             }
         }){
@@ -146,6 +128,8 @@ public class HttpExecutor {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/json");
+                headers.put("device-id", IdentityDao.getInstance().getDeviceId());
+                headers.put("token", IdentityDao.getInstance().getToken());
                 return headers;
             }
         };

@@ -28,6 +28,8 @@ import com.origin.aiur.vo.UserGroup;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -139,7 +141,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
 
             case load_user_group:
-                ArrayList<UserGroup> userGroupList = MainHelper.getInstance().getGroupList(response);
+                List<UserGroup> userGroupList = MainHelper.getInstance().getGroupList(response);
                 if (userGroupList == null || userGroupList.isEmpty()) {
                     // user has not join or create any group
                     userGroupInfoContainer.setVisibility(View.GONE);
@@ -189,6 +191,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
+    protected HashMap<String, String> getPostParam(String action) {
+        return null;
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == null) {
             return;
@@ -196,7 +203,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         switch (view.getId()) {
             case R.id.btnChangeGroup:
-                ArrayList<UserGroup> userGroupList = GroupDao.getInstance().getGroupList();
+                List<UserGroup> userGroupList = GroupDao.getInstance().getGroupList();
                 if (userGroupList != null && !userGroupList.isEmpty()) {
                     UserGroup currentGroup = GroupDao.getInstance().getCurrentGroup();
                     if (currentGroup != null) {
@@ -225,7 +232,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private void showPopupWindow(View parent, ArrayList<UserGroup> groupList) {
+    private void showPopupWindow(View parent, List<UserGroup> groupList) {
 
         if (groupPopupWindow == null) {
             LayoutInflater mLayoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);

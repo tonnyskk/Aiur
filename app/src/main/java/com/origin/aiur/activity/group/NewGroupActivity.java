@@ -12,6 +12,8 @@ import com.origin.aiur.R;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class NewGroupActivity extends BaseActivity {
 
     public static void startActivity(Context context) {
@@ -60,4 +62,10 @@ public class NewGroupActivity extends BaseActivity {
     protected String getPath(String action) {
         return null;
     }
+
+    @Override
+    protected HashMap<String, String> getPostParam(String action) {
+        return null;
+    }
+
 }

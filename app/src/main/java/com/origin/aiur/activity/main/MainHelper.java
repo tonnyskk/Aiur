@@ -6,6 +6,7 @@ import com.origin.aiur.vo.UserGroup;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2014/9/23.
@@ -37,10 +38,10 @@ public class MainHelper {
         return groupEventList;
     }
 
-    public ArrayList<UserGroup> getGroupList(Object object) {
+    public List<UserGroup> getGroupList(Object object) {
 
         // parse response and save data into DAO
-        ArrayList<UserGroup> groupList = new ArrayList<UserGroup>();
+        List<UserGroup> groupList = new ArrayList<UserGroup>();
         UserGroup userGroup = new UserGroup();
         userGroup.setGroupName("Eating GP");
         groupList.add(userGroup);

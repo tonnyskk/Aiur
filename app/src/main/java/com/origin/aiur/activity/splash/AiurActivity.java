@@ -9,14 +9,17 @@ import com.origin.aiur.activity.logon.LoginActivity;
 import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.dao.IdentityDao;
 import com.origin.aiur.http.HttpUtils;
+import com.origin.aiur.utils.AppUtils;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 
 public class AiurActivity extends BaseActivity {
 
     enum Actions {
-        validate_token
+        check_login, init_startup
     }
 
     @Override
@@ -30,33 +33,31 @@ public class AiurActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         String token = IdentityDao.getInstance().getToken();
-        if (token != null && token.length() > 0) {
-            this.getSync(Actions.validate_token.name());
+        if (token == null || token.trim().length() <= 0) {
+            this.getSync(Actions.init_startup.name());
         } else {
-            LoginActivity.startActivity(this);
-            this.finish();
+            this.getSync(Actions.check_login.name());
         }
     }
 
     @Override
     protected void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
-            case validate_token:
-                int statusCode = super.getResponseStatus(response);
-                if (statusCode == 200) {
-                    MainActivity.startActivity(this);
-                } else {
-                    LoginActivity.startActivity(this);
-                }
+            case check_login:
+                MainActivity.startActivity(this);
                 this.finish();
                 break;
+            case init_startup:
+                LoginActivity.startActivity(this);
+                this.finish();
         }
     }
 
     @Override
     protected void onPostExecuteFailed(String action) {
         switch (Actions.valueOf(action)) {
-            case validate_token:
+            case check_login:
+            case init_startup:
                 try {
                     Thread.sleep(5000);
                 } catch (Exception e) {
@@ -72,11 +73,17 @@ public class AiurActivity extends BaseActivity {
     protected String getPath(String action){
         String path = null;
         switch (Actions.valueOf(action)) {
-            case validate_token:
-                String token = IdentityDao.getInstance().getToken();
-                path = HttpUtils.buildPath(HttpUtils.validate_token, token);
+            case check_login:
+                path = HttpUtils.buildPath(HttpUtils.check_login);
                 break;
+            case init_startup:
+                path = HttpUtils.buildPath(HttpUtils.init_startup);
         }
         return path;
+    }
+
+    @Override
+    protected HashMap<String, String> getPostParam(String action) {
+        return null;
     }
 }

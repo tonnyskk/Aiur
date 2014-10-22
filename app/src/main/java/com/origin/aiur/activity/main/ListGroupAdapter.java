@@ -11,6 +11,7 @@ import com.origin.aiur.R;
 import com.origin.aiur.vo.UserGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2014/9/24.
@@ -25,7 +26,7 @@ public class ListGroupAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setGroupList(ArrayList<UserGroup> activityList) {
+    public void setGroupList(List<UserGroup> activityList) {
         if (activityList != null && !activityList.isEmpty()) {
             activityArrayList.clear();
             activityArrayList.addAll(activityList);

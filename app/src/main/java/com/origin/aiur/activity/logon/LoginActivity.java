@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
+import com.origin.aiur.dao.GroupDao;
+import com.origin.aiur.dao.IdentityDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.activity.main.MainActivity;
+import com.origin.aiur.utils.AppUtils;
+import com.origin.aiur.vo.User;
 
 import org.json.JSONObject;
 
@@ -50,6 +54,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
+        // Update token
+        String token = AppUtils.getJsonString(response, "token");
+        IdentityDao.getInstance().setToken(token);
+
+        // Update user identity data
+        JSONObject userInfo = AppUtils.getJsonObject(response, "data");
+        User loginUser = new User(userInfo);
+        IdentityDao.getInstance().setUser(loginUser);
+        GroupDao.getInstance().setGroupList(loginUser.getUserGroupList());
+
+        // Start main activity
         MainActivity.startActivity(this);
         this.finish();
     }
@@ -66,7 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         switch (view.getId()) {
             case R.id.loginLogon:
-                if (validateInput()) {
+                if (isInputValid()) {
                     this.postSync(Actions.user_login.name());
                 }
                 break;
@@ -77,8 +92,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private boolean validateInput() {
-        // TODO:
+    private boolean isInputValid() {
+        String account = userAccount.getText().toString();
+        String pwd = userPassword.getText().toString();
+
+        if (AppUtils.isEmpty(account) || AppUtils.isEmpty(pwd)) {
+            showToastMessage(this.getString(R.string.no_input_value));
+            return false;
+        }
 
         return true;
     }
@@ -94,14 +115,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         return path;
     }
 
-    protected HashMap<String, String> getParam(String action) {
+    @Override
+    protected HashMap<String, String> getPostParam(String action) {
         HashMap<String, String> param = new HashMap<String, String>();
         switch (Actions.valueOf(action)) {
             case user_login:
-                param.put("account", userAccount.getText().toString());
-                param.put("password", userPassword.getText().toString());
+                param.put("loginName", userAccount.getText().toString());
+                param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
+                param.put("deviceId", IdentityDao.getInstance().getDeviceId());
                 break;
         }
+
         return param;
     }
 }
