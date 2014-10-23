@@ -15,7 +15,6 @@ import com.origin.aiur.dao.IdentityDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.activity.main.MainActivity;
-import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
@@ -118,9 +117,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (Actions.valueOf(action)) {
             case user_login:
                 param.put("loginName", userAccount.getText().toString());
-                String encodePassword = AppUtils.encryptKey(userPassword.getText().toString());
-                param.put("password", encodePassword);
-                ALogger.log(ALogger.LogPriority.debug, LoginActivity.class, "Encrypt message result > " + encodePassword);
+                param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
                 break;
         }
 

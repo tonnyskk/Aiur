@@ -19,6 +19,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.UUID;
 
 import javax.crypto.Cipher;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * Created by dongjia on 10/22/2014.
@@ -39,7 +40,7 @@ public class AppUtils {
     }
 
     public static boolean isEmpty(String param) {
-        if (param == null || param.trim().length() <= 0 || param.trim().equalsIgnoreCase("null")) {
+        if (param == null || param.trim().length() <= 0) {
             return true;
         }
         return false;
@@ -103,14 +104,11 @@ public class AppUtils {
 
     public static String encryptKey(String encrypt) {
         String publicKey = IdentityDao.getInstance().getKey();
-        ALogger.log(ALogger.LogPriority.debug, AppUtils.class, "Encrypt message with key > " + publicKey);
         if (isEmpty(publicKey)) {
             return encrypt;
         }
-
         try {
-            return Base64Util.encode(encrypt.getBytes());
-            //return Base64Util.encode(encryptByPublicKey(encrypt.getBytes(), publicKey));
+            return new String(encryptByPublicKey(encrypt.getBytes(), publicKey));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,7 +117,7 @@ public class AppUtils {
 
     private static byte[] encryptByPublicKey(byte[] data, String publicKey)
             throws Exception {
-        byte[] keyBytes = Base64Util.decode(publicKey);
+        byte[] keyBytes = Base64.decodeBase64(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(KEY_ALGORITHM);
         Key publicK = keyFactory.generatePublic(x509KeySpec);
@@ -173,5 +171,4 @@ public class AppUtils {
         }
         return R.string.error_msg;
     }
-
 }

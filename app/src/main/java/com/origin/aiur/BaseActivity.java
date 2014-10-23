@@ -74,11 +74,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
 
         //3. Alert warning message
-        int statusCode = AppUtils.getJsonInt(message, "statusCode");
-        if (statusCode != 200) {
-            if (statusCode >= 4000) {
-                Toast.makeText(this, getText(AppUtils.getResIdByStatusCode(statusCode)), Toast.LENGTH_LONG).show();
-            }
+        int responseStatus = AppUtils.getJsonInt(message, "statusCode");
+        if (responseStatus != 200) {
+            String respMessage = AppUtils.getJsonString(message, "statusMessage");
+            Toast.makeText(this, getText(AppUtils.getResIdByStatusCode(responseStatus)), Toast.LENGTH_LONG).show();
             onPostExecuteFailed(action);
         } else {
             //4. Notify activity
