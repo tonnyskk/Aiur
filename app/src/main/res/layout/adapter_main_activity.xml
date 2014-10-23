@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/groupActivityDate"
-        android:layout_width="@dimen/main.group.activity.date.width"
+        android:layout_width="@dimen/mainGroupActivityDateWidth"
         android:layout_height="match_parent"
         android:text="14/09/12" />
 
@@ -23,4 +23,10 @@
         android:text="XX have joined XXXgroup"
         android:singleLine="true"
         android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/groupActivityStatus"
+        android:layout_width="@dimen/mainGroupActivityStatusWidth"
+        android:layout_height="match_parent"
+        android:text="OK" />
 </LinearLayout>

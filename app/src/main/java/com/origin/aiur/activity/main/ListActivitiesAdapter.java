@@ -12,12 +12,13 @@ import com.origin.aiur.utils.DateUtils;
 import com.origin.aiur.vo.GroupEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2014/9/23.
  */
 public class ListActivitiesAdapter extends BaseAdapter {
-    private ArrayList<GroupEvent> activityArrayList = new ArrayList<GroupEvent>();
+    private List<GroupEvent> groupEventList = new ArrayList<GroupEvent>();
     private Context context;
     private LayoutInflater mInflater;
 
@@ -26,22 +27,22 @@ public class ListActivitiesAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setActivityList(ArrayList<GroupEvent> activityList) {
+    public void setActivityList(List<GroupEvent> activityList) {
         if (activityList != null && !activityList.isEmpty()) {
-            activityArrayList.clear();
-            activityArrayList.addAll(activityList);
+            groupEventList.clear();
+            groupEventList.addAll(activityList);
             this.notifyDataSetChanged();
         }
     }
 
     @Override
     public int getCount() {
-        return activityArrayList.size();
+        return groupEventList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return activityArrayList.get(i);
+        return groupEventList.get(i);
     }
 
     @Override
@@ -55,16 +56,20 @@ public class ListActivitiesAdapter extends BaseAdapter {
         if (returnView == null) {
             returnView = mInflater.inflate(R.layout.adapter_main_activity, null);
         }
+
         if (returnView == null) {
             return returnView;
         }
 
-        GroupEvent activity = activityArrayList.get(i);
+        GroupEvent groupEvent = groupEventList.get(i);
         TextView activityDate = (TextView) returnView.findViewById(R.id.groupActivityDate);
-        activityDate.setText(DateUtils.formatDate(activity.getActivityTimestamp()));
+        activityDate.setText(DateUtils.formatDate(groupEvent.getCreateTime()));
 
         TextView activityDesc = (TextView) returnView.findViewById(R.id.groupActivityDesc);
-        activityDesc.setText(activity.getActivityDesc());
+        activityDesc.setText(groupEvent.getDescription());
+
+        TextView eventStatus = (TextView) returnView.findViewById(R.id.groupActivityStatus);
+        eventStatus.setText(groupEvent.getStatus());
 
         return returnView;
     }

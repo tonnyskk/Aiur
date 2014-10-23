@@ -2,10 +2,13 @@ package com.origin.aiur.activity.main;
 
 import com.origin.aiur.dao.GroupDao;
 import com.origin.aiur.dao.UserDao;
+import com.origin.aiur.utils.ALogger;
+import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -24,38 +27,46 @@ public class MainHelper {
         return mainHelper;
     }
 
-    public ArrayList<GroupEvent> getGroupActivityList(Object object) {
+    public List<GroupEvent> getGroupEventList(JSONObject object) {
+        JSONArray groupArray = AppUtils.getJsonArray(object, "data");
 
-        // parse response and save data into DAO
-        ArrayList<GroupEvent> groupEventList = new ArrayList<GroupEvent>();
+        if (groupArray == null || groupArray.length() <= 0) {
+            return null;
+        }
 
-        GroupEvent groupEvent = new GroupEvent();
-        groupEvent.setActivityDesc("A has Joined Group!");
-        groupEvent.setActivityTimestamp(new Date().getTime());
-        groupEventList.add(groupEvent);
+        List<GroupEvent> groupEventList = new ArrayList<GroupEvent>();
+        try {
+            for(int i = 0; i < groupArray.length(); i ++) {
+                JSONObject groupObject = groupArray.getJSONObject(i);
+                groupEventList.add(new GroupEvent(groupObject));
+            }
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, MainHelper.class, "Parse JSON failed. %s", groupArray.toString(), e);
+        }
 
-        groupEvent = new GroupEvent();
-        groupEvent.setActivityDesc("Group B payed 100$ for lunch!");
-        groupEvent.setActivityTimestamp(new Date().getTime());
-        groupEventList.add(groupEvent);
-
+        GroupDao.getInstance().saveGroupEvents(groupEventList);
         return groupEventList;
     }
 
     public List<UserGroup> getGroupList(JSONObject object) {
+        JSONArray groupArray = AppUtils.getJsonArray(object, "data");
 
-        // parse response and save data into DAO
-        List<UserGroup> groupList = new ArrayList<UserGroup>();
-        UserGroup userGroup = new UserGroup();
-        userGroup.setGroupName("Eating GP");
-        groupList.add(userGroup);
+        if (groupArray == null || groupArray.length() <= 0) {
+            return null;
+        }
 
-        userGroup = new UserGroup();
-        userGroup.setGroupName("Super Man");
-        groupList.add(userGroup);
+        List<UserGroup> userGroupList = new ArrayList<UserGroup>();
+        try {
+            for(int i = 0; i < groupArray.length(); i ++) {
+                JSONObject groupObject = groupArray.getJSONObject(i);
+                userGroupList.add(new UserGroup(groupObject));
+            }
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, MainHelper.class, "Parse JSON failed. %s", groupArray.toString(), e);
+        }
 
         // Save group list to
-        UserDao.getInstance().updateUserGroup(groupList);
-        return groupList;
+        UserDao.getInstance().updateUserGroup(userGroupList);
+        return userGroupList;
     }
 }

@@ -67,6 +67,12 @@ public abstract class BaseActivity extends ActionBarActivity {
             IdentityDao.getInstance().setKey(rsaPublicKey);
         }
 
+        //3. Check token
+        String token = AppUtils.getJsonString(message, "token");
+        if (!AppUtils.isEmpty(token)) {
+            IdentityDao.getInstance().setToken(token);
+        }
+
         //3. Alert warning message
         int responseStatus = AppUtils.getJsonInt(message, "statusCode");
         if (responseStatus != 200) {

@@ -10,6 +10,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.app.AiurApplication;
 import com.origin.aiur.dao.IdentityDao;
+import com.origin.aiur.dao.UserDao;
+import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.utils.VolleyErrorHelper;
 
@@ -48,6 +50,7 @@ public class HttpExecutor {
                     public void onResponse(JSONObject response) {
                         try {
                             VolleyLog.v("Response:%n %s", response.toString(4));
+                            ALogger.log(ALogger.LogPriority.debug, HttpExecutor.class, "Response:%n %s", response.toString(4));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -58,7 +61,8 @@ public class HttpExecutor {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
+                VolleyLog.e("Error: %s", error.getMessage());
+                ALogger.log(ALogger.LogPriority.error, HttpExecutor.class, "Error:%n %s", error.getMessage());
                 NetworkResponse response = error.networkResponse;
                 int statusCode = -1;
                 if (response != null) {
@@ -75,6 +79,7 @@ public class HttpExecutor {
                 headers.put("Content-Type", "application/json");
                 headers.put("device-id", IdentityDao.getInstance().getDeviceId());
                 headers.put("token", IdentityDao.getInstance().getToken());
+                headers.put("uId", String.valueOf(UserDao.getInstance().getUserId()));
                 return headers;
             }
         };
@@ -103,6 +108,7 @@ public class HttpExecutor {
                     public void onResponse(JSONObject response) {
                         try {
                             VolleyLog.v("Response:%n %s", response.toString(4));
+                            ALogger.log(ALogger.LogPriority.debug, HttpExecutor.class, "Response:%n %s", response.toString(4));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -113,7 +119,8 @@ public class HttpExecutor {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
+                VolleyLog.e("Error: %s", error.getMessage());
+                ALogger.log(ALogger.LogPriority.error, HttpExecutor.class, "Error:%n %s", error.getMessage());
                 NetworkResponse response = error.networkResponse;
                 int statusCode = -1;
                 if (response != null) {
@@ -130,6 +137,7 @@ public class HttpExecutor {
                 headers.put("Content-Type", "application/json");
                 headers.put("device-id", IdentityDao.getInstance().getDeviceId());
                 headers.put("token", IdentityDao.getInstance().getToken());
+                headers.put("uId", String.valueOf(UserDao.getInstance().getUserId()));
                 return headers;
             }
         };

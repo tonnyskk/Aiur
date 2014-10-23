@@ -55,10 +55,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
-        // Update token
-        String token = AppUtils.getJsonString(response, "token");
-        IdentityDao.getInstance().setToken(token);
-
         // Update user identity data
         JSONObject userInfo = AppUtils.getJsonObject(response, "data");
         User loginUser = new User(userInfo);
@@ -122,7 +118,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case user_login:
                 param.put("loginName", userAccount.getText().toString());
                 param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
-                param.put("deviceId", IdentityDao.getInstance().getDeviceId());
                 break;
         }
 

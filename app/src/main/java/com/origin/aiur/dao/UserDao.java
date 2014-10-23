@@ -91,6 +91,14 @@ public class UserDao {
         }
     }
 
+    public long getUserId() {
+        User user = getCurrentUser();
+        if (user != null) {
+            return user.getUserID();
+        }
+        return -1;
+    }
+
     public ASQLMapStorage getStore() {
         return AStoreManager.getInstance().getUserStore();
     }

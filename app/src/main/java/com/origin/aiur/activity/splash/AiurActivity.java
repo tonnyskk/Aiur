@@ -8,6 +8,7 @@ import com.origin.aiur.R;
 import com.origin.aiur.activity.logon.LoginActivity;
 import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.dao.IdentityDao;
+import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.utils.AppUtils;
 
@@ -32,8 +33,11 @@ public class AiurActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         String token = IdentityDao.getInstance().getToken();
-        if (token == null || token.trim().length() <= 0) {
+        long userId = UserDao.getInstance().getUserId();
+
+        if (token == null || token.trim().length() <= 0 || userId < 0) {
             this.getSync(Actions.init_startup.name());
         } else {
             this.getSync(Actions.check_login.name());

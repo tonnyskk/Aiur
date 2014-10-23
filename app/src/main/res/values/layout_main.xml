@@ -15,7 +15,8 @@
 
     <dimen name="main.group.activity.ListPadding.leftRight">10dp</dimen>
     <dimen name="main.group.activity.ListPadding.topBottom">10dp</dimen>
-    <dimen name="main.group.activity.date.width">80dp</dimen>
+    <dimen name="mainGroupActivityDateWidth">80dp</dimen>
+    <dimen name="mainGroupActivityStatusWidth">60dp</dimen>
 
     <dimen name="mainGroupPopupPaddingLeftRight">10dp</dimen>
     <dimen name="mainGroupPopupPaddingTopBottom">10dp</dimen>

@@ -18,7 +18,11 @@ public class UserGroup implements IJsonPacket {
     }
 
     public UserGroup(JSONObject jsonObject) {
-        this.fromJsonObject(jsonObject);
+        try {
+            this.fromJsonObject(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getGroupName() {
@@ -46,23 +50,19 @@ public class UserGroup implements IJsonPacket {
     }
 
     @Override
-    public void fromJsonObject(JSONObject jsonObject) {
-        try {
-            if (jsonObject != null) {
-                if (jsonObject.has("groupId")) {
-                    setGroupId(jsonObject.getLong("groupId"));
-                }
-
-                if (jsonObject.has("groupName")) {
-                    setGroupName(jsonObject.getString("groupName"));
-                }
-
-                if (jsonObject.has("ownerUserId")) {
-                    setOwnerUserId(jsonObject.getLong("ownerUserId"));
-                }
+    public void fromJsonObject(JSONObject jsonObject) throws JSONException{
+        if (jsonObject != null) {
+            if (jsonObject.has("groupId")) {
+                setGroupId(jsonObject.getLong("groupId"));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            if (jsonObject.has("groupName")) {
+                setGroupName(jsonObject.getString("groupName"));
+            }
+
+            if (jsonObject.has("ownerUserId")) {
+                setOwnerUserId(jsonObject.getLong("ownerUserId"));
+            }
         }
     }
 

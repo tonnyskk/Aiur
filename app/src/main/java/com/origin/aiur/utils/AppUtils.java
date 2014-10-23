@@ -8,6 +8,7 @@ import com.origin.aiur.R;
 import com.origin.aiur.app.AiurApplication;
 import com.origin.aiur.dao.IdentityDao;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,6 +67,20 @@ public class AppUtils {
         try {
             if (response.has(key)) {
                 return response.getJSONObject(key);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONArray getJsonArray(JSONObject response, String key) {
+        if (response == null || key == null) {
+            return null;
+        }
+        try {
+            if (response.has(key)) {
+                return response.getJSONArray(key);
             }
         } catch (JSONException e) {
             e.printStackTrace();

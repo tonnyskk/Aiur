@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView btnGotoGroup;
     private TextView btnChangeGroup;
@@ -135,57 +135,76 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
             case load_group_activity:
-                ArrayList<GroupEvent> userActivityList = MainHelper.getInstance().getGroupActivityList(response);
-                if (userActivityList != null) {
-                    groupActivityAdapter.setActivityList(userActivityList);
-                }
+                List<GroupEvent> groupEventList = MainHelper.getInstance().getGroupEventList(response);
+                refreshGroupEvent(groupEventList);
                 break;
 
             case load_user_group:
                 List<UserGroup> userGroupList = MainHelper.getInstance().getGroupList(response);
-                if (userGroupList == null || userGroupList.isEmpty()) {
-                    // user has not join or create any group
-                    userGroupInfoContainer.setVisibility(View.GONE);
-                    userGroupModifyContainer.setVisibility(View.VISIBLE);
-                } else {
-                    // user has joined some group, then load user activities
-                    userGroupInfoContainer.setVisibility(View.VISIBLE);
-                    userGroupModifyContainer.setVisibility(View.GONE);
-
-                    if (userGroupList.size() <= 1) {
-                        btnChangeGroup.setVisibility(View.GONE);
-                    } else {
-                        btnChangeGroup.setVisibility(View.VISIBLE);
-                    }
-
-                    UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();
-                    if (currentGroup == null) {
-                        UserGroup defaultGroup = userGroupList.get(0);
-                        UserDao.getInstance().setCurrentGroup(defaultGroup);
-                        // set userGroupList.get(0) as selected group, and save into DAO
-                        String txt = getResources().getString(R.string.main_group_select, defaultGroup.getGroupName());
-                        btnGotoGroup.setText(txt);
-                    }
-                    btnGotoGroup.setVisibility(View.VISIBLE);
-                }
+                refreshUserGroup(userGroupList);
                 break;
         }
     }
 
     @Override
     public void onPostExecuteFailed(String action) {
+        // Use offline data to generate page if exist
+        switch (Actions.valueOf(action)) {
+            case load_group_activity:
+                List<GroupEvent> groupEventList = GroupDao.getInstance().getGroupEvents();
+                refreshGroupEvent(groupEventList);
+                break;
 
+            case load_user_group:
+                List<UserGroup> userGroupList = UserDao.getInstance().getUserGroupList();
+                refreshUserGroup(userGroupList);
+                break;
+        }
+    }
+
+    private void refreshGroupEvent(List<GroupEvent> groupEventList) {
+        if (groupEventList != null && !groupEventList.isEmpty()) {
+            groupActivityAdapter.setActivityList(groupEventList);
+        }
+    }
+
+    private void refreshUserGroup(List<UserGroup> userGroupList) {
+        if (userGroupList == null || userGroupList.isEmpty()) {
+            // user has not join or create any group
+            userGroupInfoContainer.setVisibility(View.GONE);
+            userGroupModifyContainer.setVisibility(View.VISIBLE);
+        } else {
+            // user has joined some group, then load user activities
+            userGroupInfoContainer.setVisibility(View.VISIBLE);
+            userGroupModifyContainer.setVisibility(View.GONE);
+
+            if (userGroupList.size() <= 1) {
+                btnChangeGroup.setVisibility(View.GONE);
+            } else {
+                btnChangeGroup.setVisibility(View.VISIBLE);
+            }
+
+            UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();
+            if (currentGroup == null) {
+                UserGroup defaultGroup = userGroupList.get(0);
+                UserDao.getInstance().setCurrentGroup(defaultGroup);
+                // set userGroupList.get(0) as selected group, and save into DAO
+                String txt = getResources().getString(R.string.main_group_select, defaultGroup.getGroupName());
+                btnGotoGroup.setText(txt);
+            }
+            btnGotoGroup.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
-    protected String getPath(String action){
+    protected String getPath(String action) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case load_user_group:
-                path = HttpUtils.load_user_group;
+                path = HttpUtils.buildPath(HttpUtils.load_user_group, UserDao.getInstance().getUserId());
                 break;
             case load_group_activity:
-                path = HttpUtils.load_user_group_activity;
+                path = HttpUtils.buildPath(HttpUtils.load_group_activity, UserDao.getInstance().getUserId());
                 break;
         }
         return path;
@@ -209,13 +228,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();
                     if (currentGroup != null) {
                         ArrayList<UserGroup> filterList = new ArrayList<UserGroup>();
-                        for(UserGroup userGroup : userGroupList) {
+                        for (UserGroup userGroup : userGroupList) {
                             if (!userGroup.getGroupName().equalsIgnoreCase(currentGroup.getGroupName())) {
                                 filterList.add(userGroup);
                             }
                         }
                         showPopupWindow(view, filterList);
-                    }else {
+                    } else {
                         showPopupWindow(view, userGroupList);
                     }
                 }
@@ -240,7 +259,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
             View topWindow = mLayoutInflater.inflate(R.layout.popup_main_groups, null);
 
-            ListView popupGroupList = (ListView)topWindow.findViewById(R.id.popupGroupList);
+            ListView popupGroupList = (ListView) topWindow.findViewById(R.id.popupGroupList);
             popupAdapter = new ListGroupAdapter(this);
             popupGroupList.setAdapter(popupAdapter);
 
@@ -256,7 +275,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             popupGroupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    UserGroup group = (UserGroup)view.getTag();
+                    UserGroup group = (UserGroup) view.getTag();
                     UserDao.getInstance().setCurrentGroup(group);
                     // TODO: go to group detail page
                     GroupTabActivity.startActivity(MainActivity.this, group);
@@ -272,7 +291,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         dismissPopup();
     }
