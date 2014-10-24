@@ -1,6 +1,7 @@
 package com.origin.aiur.dao;
 
 import com.origin.aiur.dao.storage.ASQLMapStorage;
+import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 import com.origin.aiur.vo.UserGroup;
@@ -29,9 +30,9 @@ public class UserDao {
         try {
             getStore().put(Keys.CurrentUser.name(), user.toJsonObject().toString().getBytes(AppUtils.CHARSET));
         } catch (JSONException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Set current user failed for JSON parse!", e);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Set current user failed for Charset error!", e);
         }
     }
 
@@ -39,13 +40,13 @@ public class UserDao {
         try {
             byte[] data = getStore().get(Keys.CurrentUser.name());
             if (data != null) {
-                User user = new User(new JSONObject(new String(data, "utf-8")));
+                User user = new User(new JSONObject(new String(data, AppUtils.CHARSET)));
                 return user;
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (JSONException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Get current user failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Get current user failed for Charset error!", e);
         }
         return null;
     }
@@ -70,13 +71,13 @@ public class UserDao {
         try {
             byte[] data = getStore().get(Keys.CurrentGroup.name());
             if (data != null) {
-                UserGroup userGroup = new UserGroup(new JSONObject(new String(data, "utf-8")));
+                UserGroup userGroup = new UserGroup(new JSONObject(new String(data, AppUtils.CHARSET)));
                 return userGroup;
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (JSONException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Get current group failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Get current group failed for Charset error!", e);
         }
         return null;
     }
@@ -85,9 +86,9 @@ public class UserDao {
         try {
             getStore().put(Keys.CurrentGroup.name(), userGroup.toJsonObject().toString().getBytes(AppUtils.CHARSET));
         } catch (JSONException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Set current group failed for JSON parse!", e);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Set current group failed for Charset error!", e);
         }
     }
 

@@ -31,16 +31,18 @@ public class GroupDao {
         if (groupEventList == null || groupEventList.isEmpty()) {
             return;
         }
+
         try {
+            // clear exist data firstly
+            getStore().clear();
             for (GroupEvent groupEvent : groupEventList) {
                 JSONObject groupEventJson = groupEvent.toJsonObject();
                 getStore().put(String.valueOf(groupEvent.getEventId()), groupEventJson.toString().getBytes(AppUtils.CHARSET), groupEvent.getCreateTime());
             }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Save group event failed.", e);
         } catch (JSONException e) {
-            e.printStackTrace();
+            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Save GroupEvents failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Save GroupEvents failed for Charset error!", e);
         }
     }
 
@@ -51,13 +53,15 @@ public class GroupDao {
             if (groupData.size() > 0) {
                 for (byte[] data : groupData) {
                     if (data != null) {
-                        GroupEvent group = new GroupEvent(new JSONObject(new String(data)));
+                        GroupEvent group = new GroupEvent(new JSONObject(new String(data, AppUtils.CHARSET)));
                         groupEvents.add(group);
                     }
                 }
             }
-        } catch (Throwable e) {
-            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Get all group event failed.", e);
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Get GroupEvents failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Get GroupEvents failed for Charset error!", e);
         }
         return groupEvents;
     }

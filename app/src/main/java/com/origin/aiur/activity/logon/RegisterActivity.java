@@ -115,8 +115,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected HashMap<String, String> getPostParam(String action) {
-        HashMap<String, String> param = new HashMap<String, String>();
+    protected HashMap<String, Object> getPostParam(String action) {
+        HashMap<String, Object> param = new HashMap<String, Object>();
         switch (Actions.valueOf(action)) {
             case user_reg:
                 param.put("loginName", userAccount.getText().toString());

@@ -34,6 +34,9 @@ public class AiurActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
+        // Show process dialog
+        showProcessDialog(this.getString(R.string.splash_loading_text));
+
         String token = IdentityDao.getInstance().getToken();
         long userId = UserDao.getInstance().getUserId();
 
@@ -62,13 +65,18 @@ public class AiurActivity extends BaseActivity {
         switch (Actions.valueOf(action)) {
             case check_login:
             case init_startup:
-                try {
-                    Thread.sleep(5000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }
+                    }
+                }).start();
                 break;
         }
     }
@@ -87,7 +95,7 @@ public class AiurActivity extends BaseActivity {
     }
 
     @Override
-    protected HashMap<String, String> getPostParam(String action) {
+    protected HashMap<String, Object> getPostParam(String action) {
         return null;
     }
 }

@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -20,9 +22,11 @@ import com.origin.aiur.R;
 import com.origin.aiur.activity.group.GroupTabActivity;
 import com.origin.aiur.activity.group.JoinGroupActivity;
 import com.origin.aiur.activity.group.NewGroupActivity;
+import com.origin.aiur.dao.FinanceDao;
 import com.origin.aiur.dao.GroupDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
+import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
 
@@ -39,6 +43,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView btnCreateGroup;
     private TextView btnJoinGroup;
 
+    private TextView txtTotalBalance;
+    private TextView txtTotalCost;
+
     private View userGroupInfoContainer;
     private View userGroupModifyContainer;
 
@@ -52,7 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     enum Actions {
-        load_user_group, load_group_activity
+        load_user_group, load_group_activity, load_user_finance
     }
 
     public static void startActivity(Context context) {
@@ -84,6 +91,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         userGroupInfoContainer = findViewById(R.id.userGroupInfoContainer);
         userGroupModifyContainer = findViewById(R.id.userGroupModifyContainer);
 
+        txtTotalBalance = (TextView) findViewById(R.id.txtTotalBalance);
+        txtTotalCost = (TextView) findViewById(R.id.txtTotalCost);
+
         groupActivityList = (ListView) findViewById(R.id.listGroupActivity);
         groupActivityAdapter = new ListActivitiesAdapter(this);
         groupActivityList.setAdapter(groupActivityAdapter);
@@ -106,6 +116,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         this.getSync(Actions.load_user_group.name());
         this.getSync(Actions.load_group_activity.name());
+        this.getSync(Actions.load_user_finance.name());
     }
 
     @Override
@@ -143,6 +154,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 List<UserGroup> userGroupList = MainHelper.getInstance().getGroupList(response);
                 refreshUserGroup(userGroupList);
                 break;
+            case load_user_finance:
+                Finance finance = MainHelper.getInstance().getFinanceInfo(response);
+                refreshFinance(finance);
+                break;
         }
     }
 
@@ -158,6 +173,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case load_user_group:
                 List<UserGroup> userGroupList = UserDao.getInstance().getUserGroupList();
                 refreshUserGroup(userGroupList);
+                break;
+            case load_user_finance:
+                Finance finance = FinanceDao.getInstance().getUserFinance();
+                refreshFinance(finance);
                 break;
         }
     }
@@ -196,6 +215,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    private void refreshFinance(Finance finance) {
+        if (finance != null) {
+            txtTotalCost.setText(MainHelper.getInstance().formatMoney(finance.getConsumeSummary()));
+            txtTotalBalance.setText(MainHelper.getInstance().formatMoney(finance.getIncomingSummary() - finance.getConsumeSummary()));
+        }
+    }
+
     @Override
     protected String getPath(String action) {
         String path = null;
@@ -206,12 +232,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case load_group_activity:
                 path = HttpUtils.buildPath(HttpUtils.load_group_activity, UserDao.getInstance().getUserId());
                 break;
+            case load_user_finance:
+                path = HttpUtils.buildPath(HttpUtils.load_user_finance, UserDao.getInstance().getUserId());
+                break;
         }
         return path;
     }
 
     @Override
-    protected HashMap<String, String> getPostParam(String action) {
+    protected HashMap<String, Object> getPostParam(String action) {
         return null;
     }
 

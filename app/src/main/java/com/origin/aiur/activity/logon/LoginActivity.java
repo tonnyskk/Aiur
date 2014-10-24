@@ -85,6 +85,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.loginRegister:
                 RegisterActivity.startActivity(this);
+
+                // TODO:
+                // Terminate this activity temporary, if not, after register finished, user
+                // click back from main activity, this loginActivity will display.
+                this.finish();
                 break;
         }
     }
@@ -113,14 +118,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected HashMap<String, String> getPostParam(String action) {
-        HashMap<String, String> param = new HashMap<String, String>();
+    protected HashMap<String, Object> getPostParam(String action) {
+        HashMap<String, Object> param = new HashMap<String, Object>();
         switch (Actions.valueOf(action)) {
             case user_login:
                 param.put("loginName", userAccount.getText().toString());
-                String encodePassword = AppUtils.encryptKey(userPassword.getText().toString());
-                param.put("password", encodePassword);
-                ALogger.log(ALogger.LogPriority.debug, LoginActivity.class, "Encrypt message result > " + encodePassword);
+                param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
                 break;
         }
 

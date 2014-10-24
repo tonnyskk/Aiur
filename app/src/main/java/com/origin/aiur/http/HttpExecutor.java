@@ -1,5 +1,7 @@
 package com.origin.aiur.http;
 
+import android.content.Context;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
@@ -88,7 +90,7 @@ public class HttpExecutor {
 
     }
 
-    public void executePost(final String tag, String path, HashMap<String, String> params, final BaseActivity callback) {
+    public void executePost(final String tag, String path, HashMap<String, Object> params, final BaseActivity callback) {
         if (fakeHttp) {
             callback.postExecuteSuccess(tag, null);
             return;
@@ -99,7 +101,7 @@ public class HttpExecutor {
 
         // Post params to be sent to the server
         if (params == null) {
-            params = new HashMap<String, String>();
+            params = new HashMap<String, Object>();
         }
 
         JsonObjectRequest req = new JsonObjectRequest(parseUrl(path), new JSONObject(params),

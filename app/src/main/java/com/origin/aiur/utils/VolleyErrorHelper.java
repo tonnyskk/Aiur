@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.origin.aiur.R;
+import com.origin.aiur.app.AiurApplication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,15 +31,15 @@ public class VolleyErrorHelper {
      */
     public static String getMessage(Object error, Context context) {
         if (error instanceof TimeoutError) {
-            return context.getResources().getString(R.string.generic_server_down);
+            return context.getString(R.string.generic_server_down);
         }
         else if (isServerProblem(error)) {
             return handleServerError(error, context);
         }
         else if (isNetworkProblem(error)) {
-            return context.getResources().getString(R.string.no_internet);
+            return context.getString(R.string.no_internet);
         }
-        return context.getResources().getString(R.string.generic_error);
+        return context.getString(R.string.generic_error);
     }
 
     /**
@@ -93,9 +94,9 @@ public class VolleyErrorHelper {
                     return error.getMessage();
 
                 default:
-                    return context.getResources().getString(R.string.generic_server_down);
+                    return context.getString(R.string.generic_server_down);
             }
         }
-        return context.getResources().getString(R.string.generic_error);
+        return context.getString(R.string.generic_error);
     }
 }

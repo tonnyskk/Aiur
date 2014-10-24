@@ -1,12 +1,15 @@
 package com.origin.aiur;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.origin.aiur.activity.logon.LoginActivity;
 import com.origin.aiur.app.AiurApplication;
 import com.origin.aiur.dao.IdentityDao;
 import com.origin.aiur.http.HttpExecutor;
+import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 
 import org.json.JSONException;
@@ -18,6 +21,7 @@ import java.util.HashMap;
  * Created by Administrator on 2014/9/23.
  */
 public abstract class BaseActivity extends ActionBarActivity {
+    private ProgressDialog progressDialog;
 
     protected final void getSync(final String action) {
         String path = getPath(action);
@@ -45,14 +49,22 @@ public abstract class BaseActivity extends ActionBarActivity {
         HttpExecutor.getExecutor().executePost(action, path, getPostParam(action), this);
     }
 
+    protected void onPreExecute(final String action) {
+    }
+
     public void postExecuteFailed(String action, String message, int errorCode) {
+        ALogger.log(ALogger.LogPriority.debug, BaseActivity.class, "postExecuteFailed %s [%d]", message, errorCode);
+        // Cancel loading dialog if exists
+        hideProcessDialog();
+
+        // process error logic
         if (errorCode == 4096) {
             // token expire or invalid any more, need refresh token
             IdentityDao.getInstance().clearToken();
             LoginActivity.startActivity(this);
         } else {
-            if (showToastMessage() && message != null) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            if (isToastError() && message != null) {
+                showToastMessage(message);
             }
             onPostExecuteFailed(action);
         }
@@ -60,6 +72,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     public void postExecuteSuccess(String action, JSONObject message) {
         //1.  cancel loading dialog
+        hideProcessDialog();
 
         //2. Check RSA public key
         String rsaPublicKey = AppUtils.getJsonString(message, "key");
@@ -77,7 +90,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         int statusCode = AppUtils.getJsonInt(message, "statusCode");
         if (statusCode != 200) {
             if (statusCode >= 4000) {
-                Toast.makeText(this, getText(AppUtils.getResIdByStatusCode(statusCode)), Toast.LENGTH_LONG).show();
+                showToastMessage(getText(AppUtils.getResIdByStatusCode(statusCode)).toString());
             }
             onPostExecuteFailed(action);
         } else {
@@ -102,16 +115,35 @@ public abstract class BaseActivity extends ActionBarActivity {
      * @param action
      * @return HashMap
      */
-    protected abstract HashMap<String, String> getPostParam(String action);
+    protected abstract HashMap<String, Object> getPostParam(String action);
 
-    protected void onPreExecute(String action) {
-    }
-
-    protected boolean showToastMessage() {
+    protected boolean isToastError() {
         return true;
     }
 
     protected void showToastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(BaseActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showProcessDialog(String message) {
+        hideProcessDialog();
+
+        progressDialog = new ProgressDialog(this, R.style.dialog);
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+        if (message != null) {
+            progressDialog.setMessage(message);
+        }
+        progressDialog.show();
+
+    }
+
+    protected void hideProcessDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 }
