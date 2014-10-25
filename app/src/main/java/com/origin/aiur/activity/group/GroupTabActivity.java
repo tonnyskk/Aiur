@@ -1,32 +1,26 @@
 package com.origin.aiur.activity.group;
 
-import java.util.HashMap;
-import java.util.Locale;
-
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Locale;
 
 public class GroupTabActivity extends BaseActivity implements ActionBar.TabListener {
 
@@ -63,10 +57,10 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
         setContentView(R.layout.activity_group_tab);
 
         // Set up the action bar.
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
-        actionBar.setDisplayOptions(0,ActionBar.DISPLAY_SHOW_HOME|ActionBar.DISPLAY_SHOW_TITLE );
+        actionBar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -101,20 +95,35 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
                             .setTabListener(this));
         }
     }
+//
+//    @Override
+//    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//        // When the given tab is selected, switch to the corresponding page in
+//        // the ViewPager.
+//        mViewPager.setCurrentItem(tab.getPosition());
+//    }
+//
+//    @Override
+//    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//    }
+//
+//    @Override
+//    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        // When the given tab is selected, switch to the corresponding page in
-        // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
     }
 
     @Override
@@ -128,9 +137,10 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
     }
 
     @Override
-    protected String getPath(String action) {
+    protected String getPath(String action, Object... args) {
         return null;
     }
+
     @Override
     protected HashMap<String, Object> getPostParam(String action) {
         return null;
@@ -232,7 +242,7 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(getLayoutId(), container, false);
 
             return rootView;

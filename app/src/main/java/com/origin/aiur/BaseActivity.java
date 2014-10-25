@@ -1,18 +1,16 @@
 package com.origin.aiur;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.widget.Toast;
 
 import com.origin.aiur.activity.logon.LoginActivity;
-import com.origin.aiur.app.AiurApplication;
 import com.origin.aiur.dao.IdentityDao;
 import com.origin.aiur.http.HttpExecutor;
 import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -20,11 +18,19 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2014/9/23.
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends FragmentActivity {
     private ProgressDialog progressDialog;
 
-    protected final void getSync(final String action) {
-        String path = getPath(action);
+    /**
+     * Send out a GET request to backend server
+     *
+     * @param action
+     * @param args   parameters to construct restful get url
+     */
+    protected final void getSync(final String action, Object... args) {
+        String path = getPath(action, args);
+        ALogger.log(ALogger.LogPriority.debug, BaseActivity.class, "Send GET request to %s", path);
+
         if (path == null) {
             postExecuteFailed(action, this.getResources().getString(R.string.invalid_path), -1);
             return;
@@ -37,8 +43,15 @@ public abstract class BaseActivity extends ActionBarActivity {
         HttpExecutor.getExecutor().executeGet(action, path, this);
     }
 
+    /**
+     * Send out a post request to backend server
+     *
+     * @param action
+     */
     protected final void postSync(final String action) {
         String path = getPath(action);
+        ALogger.log(ALogger.LogPriority.debug, BaseActivity.class, "Send POST request to %s", path);
+
         if (path == null) {
             postExecuteFailed(action, this.getResources().getString(R.string.invalid_path), -1);
             return;
@@ -101,17 +114,20 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     protected abstract void onPostExecuteSuccessful(String action, JSONObject response);
+
     protected abstract void onPostExecuteFailed(String action);
 
     /**
      * Request path for your request.
+     *
      * @param action
      * @return
      */
-    protected abstract String getPath(String action);
+    protected abstract String getPath(String action, Object... args);
 
     /**
      * Parameter map for POST request, fill your parameters into a hashmap
+     *
      * @param action
      * @return HashMap
      */
@@ -123,6 +139,10 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     protected void showToastMessage(String message) {
         Toast.makeText(BaseActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showProcessDialog() {
+        showProcessDialog(null);
     }
 
     protected void showProcessDialog(String message) {

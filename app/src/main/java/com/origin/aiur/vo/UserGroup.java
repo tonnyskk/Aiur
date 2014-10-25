@@ -11,6 +11,7 @@ import org.json.JSONObject;
 public class UserGroup implements IJsonPacket {
     private long groupId;
     private String groupName;
+    private String groupDesc;
     private long ownerUserId;
 
     public UserGroup() {
@@ -49,6 +50,14 @@ public class UserGroup implements IJsonPacket {
         this.ownerUserId = ownerUserId;
     }
 
+    public String getGroupDesc() {
+        return groupDesc;
+    }
+
+    public void setGroupDesc(String groupDesc) {
+        this.groupDesc = groupDesc;
+    }
+
     @Override
     public void fromJsonObject(JSONObject jsonObject) throws JSONException{
         if (jsonObject != null) {
@@ -63,6 +72,10 @@ public class UserGroup implements IJsonPacket {
             if (jsonObject.has("ownerUserId")) {
                 setOwnerUserId(jsonObject.getLong("ownerUserId"));
             }
+
+            if (jsonObject.has("groupDesc")) {
+                setGroupDesc(jsonObject.getString("groupDesc"));
+            }
         }
     }
 
@@ -71,6 +84,7 @@ public class UserGroup implements IJsonPacket {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("groupId", groupId);
         jsonObject.put("groupName", groupName);
+        jsonObject.put("groupDesc", groupDesc);
         jsonObject.put("ownerUserId", ownerUserId);
         return jsonObject;
     }

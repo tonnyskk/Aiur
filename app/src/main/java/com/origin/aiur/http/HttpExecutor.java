@@ -78,7 +78,7 @@ public class HttpExecutor {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
+                headers.put("Content-Type", "application/json;charset=UTF-8");
                 headers.put("device-id", IdentityDao.getInstance().getDeviceId());
                 headers.put("token", IdentityDao.getInstance().getToken());
                 headers.put("uId", String.valueOf(UserDao.getInstance().getUserId()));
@@ -136,7 +136,7 @@ public class HttpExecutor {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
+                headers.put("Content-Type", "application/json;charset=UTF-8");
                 headers.put("device-id", IdentityDao.getInstance().getDeviceId());
                 headers.put("token", IdentityDao.getInstance().getToken());
                 headers.put("uId", String.valueOf(UserDao.getInstance().getUserId()));

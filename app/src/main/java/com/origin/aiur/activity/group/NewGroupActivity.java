@@ -67,7 +67,7 @@ public class NewGroupActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected String getPath(String action) {
+    protected String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case create_group:

@@ -1,9 +1,9 @@
 package com.origin.aiur.activity.main;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
 
         btnGotoGroup = (TextView) findViewById(R.id.btnGotoGroup);
@@ -223,7 +223,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected String getPath(String action) {
+    protected String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case load_user_group:

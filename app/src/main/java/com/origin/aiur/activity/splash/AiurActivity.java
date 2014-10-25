@@ -82,7 +82,7 @@ public class AiurActivity extends BaseActivity {
     }
 
     @Override
-    protected String getPath(String action){
+    protected String getPath(String action, Object... args){
         String path = null;
         switch (Actions.valueOf(action)) {
             case check_login:
