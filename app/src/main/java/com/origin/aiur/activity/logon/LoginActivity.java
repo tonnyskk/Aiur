@@ -10,12 +10,9 @@ import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
-import com.origin.aiur.dao.GroupDao;
-import com.origin.aiur.dao.IdentityDao;
+import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
-import com.origin.aiur.activity.main.MainActivity;
-import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
@@ -48,8 +45,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         loginButton = (TextView) findViewById(R.id.loginLogon);
         registerButton = (TextView) findViewById(R.id.loginRegister);
 
-        userAccount = (EditText)findViewById(R.id.loginAccount);
-        userPassword = (EditText)findViewById(R.id.loginPassword);
+        userAccount = (EditText) findViewById(R.id.loginAccount);
+        userPassword = (EditText) findViewById(R.id.loginPassword);
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
     }
@@ -79,7 +76,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (view.getId()) {
             case R.id.loginLogon:
                 if (isInputValid()) {
-                    this.postSync(Actions.user_login.name());
+                    HashMap<String, Object> param = new HashMap<String, Object>();
+                    param.put("loginName", userAccount.getText().toString());
+                    param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
+
+                    this.postSync(Actions.user_login.name(), param);
                 }
                 break;
 
@@ -107,7 +108,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    protected String getPath(String action, Object... args){
+    protected String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case user_login:
@@ -115,19 +116,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
         return path;
-    }
-
-    @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        HashMap<String, Object> param = new HashMap<String, Object>();
-        switch (Actions.valueOf(action)) {
-            case user_login:
-                param.put("loginName", userAccount.getText().toString());
-                param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
-                break;
-        }
-
-        return param;
     }
 }
 

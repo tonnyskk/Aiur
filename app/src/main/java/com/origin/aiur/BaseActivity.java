@@ -2,6 +2,7 @@ package com.origin.aiur;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -25,10 +26,10 @@ public abstract class BaseActivity extends FragmentActivity {
      * Send out a GET request to backend server
      *
      * @param action
-     * @param args   parameters to construct restful get url
+     * @param pathParam   parameters to construct restful get url
      */
-    protected final void getSync(final String action, Object... args) {
-        String path = getPath(action, args);
+    protected final void getSync(final String action, final Object... pathParam) {
+        String path = getPath(action, pathParam);
         ALogger.log(ALogger.LogPriority.debug, BaseActivity.class, "Send GET request to %s", path);
 
         if (path == null) {
@@ -47,9 +48,11 @@ public abstract class BaseActivity extends FragmentActivity {
      * Send out a post request to backend server
      *
      * @param action
+     * @param paramMap post parameters
+     * @param  pathParam parameters to construct restful post url
      */
-    protected final void postSync(final String action) {
-        String path = getPath(action);
+    protected final void postSync(final String action, final HashMap<String, Object> paramMap, final Object... pathParam) {
+        String path = getPath(action, pathParam);
         ALogger.log(ALogger.LogPriority.debug, BaseActivity.class, "Send POST request to %s", path);
 
         if (path == null) {
@@ -59,7 +62,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
         // Call onPreExecute in UI Thread to show loading dialog or other
         onPreExecute(action);
-        HttpExecutor.getExecutor().executePost(action, path, getPostParam(action), this);
+        HttpExecutor.getExecutor().executePost(action, path, paramMap, this);
     }
 
     protected void onPreExecute(final String action) {
@@ -101,10 +104,8 @@ public abstract class BaseActivity extends FragmentActivity {
 
         //3. Alert warning message
         int statusCode = AppUtils.getJsonInt(message, "statusCode");
-        if (statusCode != 200) {
-            if (statusCode >= 4000) {
-                showToastMessage(getText(AppUtils.getResIdByStatusCode(statusCode)).toString());
-            }
+        if (statusCode >= 4000) {
+            showToastMessage(getText(AppUtils.getResIdByStatusCode(statusCode)).toString());
             onPostExecuteFailed(action);
         } else {
             //4. Notify activity
@@ -124,14 +125,6 @@ public abstract class BaseActivity extends FragmentActivity {
      * @return
      */
     protected abstract String getPath(String action, Object... args);
-
-    /**
-     * Parameter map for POST request, fill your parameters into a hashmap
-     *
-     * @param action
-     * @return HashMap
-     */
-    protected abstract HashMap<String, Object> getPostParam(String action);
 
     protected boolean isToastError() {
         return true;

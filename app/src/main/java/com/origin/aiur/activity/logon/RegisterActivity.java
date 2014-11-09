@@ -10,11 +10,9 @@ import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
-import com.origin.aiur.dao.GroupDao;
-import com.origin.aiur.dao.IdentityDao;
+import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
-import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
@@ -47,12 +45,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_register);
 
 
-        userAccount = (EditText)findViewById(R.id.registerEmail);
-        userNickName = (EditText)findViewById(R.id.registerNick);
-        userPassword = (EditText)findViewById(R.id.registerPassword);
-        userPasswordConfirm = (EditText)findViewById(R.id.registerConfirmPassword);
+        userAccount = (EditText) findViewById(R.id.registerEmail);
+        userNickName = (EditText) findViewById(R.id.registerNick);
+        userPassword = (EditText) findViewById(R.id.registerPassword);
+        userPasswordConfirm = (EditText) findViewById(R.id.registerConfirmPassword);
 
-        regButton = (TextView)findViewById(R.id.btnRegister);
+        regButton = (TextView) findViewById(R.id.btnRegister);
         regButton.setOnClickListener(this);
     }
 
@@ -64,7 +62,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btnRegister:
                 if (isInputValid()) {
-                    this.postSync(Actions.user_reg.name());
+                    HashMap<String, Object> param = new HashMap<String, Object>();
+                    param.put("loginName", userAccount.getText().toString());
+                    param.put("nickName", userNickName.getText().toString());
+                    param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
+                    this.postSync(Actions.user_reg.name(), param);
                 }
                 break;
         }
@@ -104,7 +106,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected String getPath(String action, Object... args){
+    protected String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case user_reg:
@@ -112,18 +114,5 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
         return path;
-    }
-
-    @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        HashMap<String, Object> param = new HashMap<String, Object>();
-        switch (Actions.valueOf(action)) {
-            case user_reg:
-                param.put("loginName", userAccount.getText().toString());
-                param.put("nickName", userNickName.getText().toString());
-                param.put("password", AppUtils.encryptKey(userPassword.getText().toString()));
-                break;
-        }
-        return param;
     }
 }

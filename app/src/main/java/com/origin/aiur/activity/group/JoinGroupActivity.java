@@ -29,14 +29,15 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 
-public class JoinGroupActivity extends BaseActivity implements SearchView.OnQueryTextListener, AdapterView.OnItemClickListener {
+public class JoinGroupActivity extends BaseActivity implements SearchView.OnQueryTextListener, View.OnClickListener {
 
     private SearchView searchView;
     private ListView listView;
     private SearchGroupAdapter listAdapter;
 
+
     enum Actions {
-        search_group
+        search_group, join_group
     }
 
     public static void startActivity(Context context) {
@@ -54,7 +55,6 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
         listView = (ListView) findViewById(R.id.searchGroupItemList);
         listAdapter = new SearchGroupAdapter(this);
         listView.setAdapter(listAdapter);
-        listView.setOnItemClickListener(this);
 
     }
 
@@ -96,6 +96,10 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
                 List<UserGroup> groupList = GroupHelper.getInstance().getSearchGroupList(response);
                 listAdapter.setGroupList(groupList);
                 break;
+            case join_group:
+                long joinedGroupId = GroupHelper.getInstance().getJoinedGroupId(response);
+                listAdapter.updateJoinedGroup(joinedGroupId);
+                break;
         }
     }
 
@@ -115,13 +119,10 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
             case search_group:
                 path = HttpUtils.buildPath(HttpUtils.search_group, args);
                 break;
+            case join_group:
+                path = HttpUtils.buildPath(HttpUtils.join_group, args);
         }
         return path;
-    }
-
-    @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        return null;
     }
 
     @Override
@@ -150,9 +151,13 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
         return false;
     }
 
-
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.joinGroupRequest:
+                long groupId = (Long)view.getTag(R.string.tagSearchGroupListJoinButton);
+                this.postSync(Actions.join_group.name(), null, UserDao.getInstance().getUserId(), groupId);
+                break;
+        }
     }
 }

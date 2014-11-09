@@ -240,11 +240,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        return null;
-    }
-
-    @Override
     public void onClick(View view) {
         if (view == null) {
             return;

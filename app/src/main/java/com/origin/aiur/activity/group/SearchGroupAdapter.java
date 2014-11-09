@@ -34,6 +34,18 @@ public class SearchGroupAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public void updateJoinedGroup(long groupId) {
+        if (groupId <= 0) {
+            return;
+        }
+        for (UserGroup group : activityArrayList) {
+            if (group.getGroupId() == groupId) {
+                group.setRequired(true);
+            }
+        }
+        this.notifyDataSetChanged();
+    }
+
     public void clearGroupItem() {
         activityArrayList.clear();
         this.notifyDataSetChanged();
@@ -67,12 +79,20 @@ public class SearchGroupAdapter extends BaseAdapter {
         UserGroup group = activityArrayList.get(i);
         returnView.setTag(group);
 
-        TextView groupName = (TextView)returnView.findViewById(R.id.joinGroupInfo);
+        TextView groupName = (TextView) returnView.findViewById(R.id.joinGroupInfo);
         groupName.setText(group.getGroupName());
 
-        TextView groupDesc = (TextView)returnView.findViewById(R.id.joinGroupDesc);
+        TextView groupDesc = (TextView) returnView.findViewById(R.id.joinGroupDesc);
         groupDesc.setText(group.getGroupDesc());
 
+        TextView joinBtn = (TextView) returnView.findViewById(R.id.joinGroupRequest);
+        joinBtn.setTag(R.string.tagSearchGroupListJoinButton, group.getGroupId());
+
+        if (group.isRequired()) {
+            joinBtn.setEnabled(false);
+        } else {
+            joinBtn.setEnabled(true);
+        }
         return returnView;
     }
 }

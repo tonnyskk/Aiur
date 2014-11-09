@@ -93,9 +93,4 @@ public class AiurActivity extends BaseActivity {
         }
         return path;
     }
-
-    @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        return null;
-    }
 }

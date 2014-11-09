@@ -43,4 +43,17 @@ public class GroupHelper {
 
         return userGroupList;
     }
+
+    public long getJoinedGroupId(JSONObject object) {
+        JSONObject jsonObject = AppUtils.getJsonObject(object, "data");
+        long joinedGroupId = -1;
+        if (jsonObject == null) {
+            try {
+                joinedGroupId = jsonObject.getLong("groupId");
+            } catch (JSONException e) {
+                ALogger.log(ALogger.LogPriority.error, GroupHelper.class, "Parse JSON failed. %s", object.toString(), e);
+            }
+        }
+        return joinedGroupId;
+    }
 }

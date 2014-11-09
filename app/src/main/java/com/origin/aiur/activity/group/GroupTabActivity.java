@@ -141,11 +141,6 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
         return null;
     }
 
-    @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        return null;
-    }
-
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.

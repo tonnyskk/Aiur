@@ -49,5 +49,6 @@
         android:layout_marginLeft="@dimen/searchGroupButtonMarginLeftRight"
         android:layout_marginRight="@dimen/searchGroupButtonMarginLeftRight"
         android:paddingLeft="@dimen/searchGroupButtonPaddingLeftRight"
-        android:paddingRight="@dimen/searchGroupButtonPaddingLeftRight" />
+        android:paddingRight="@dimen/searchGroupButtonPaddingLeftRight"
+        android:onClick="onClick"/>
 </LinearLayout>

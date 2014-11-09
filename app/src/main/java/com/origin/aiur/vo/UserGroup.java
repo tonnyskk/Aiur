@@ -13,6 +13,7 @@ public class UserGroup implements IJsonPacket {
     private String groupName;
     private String groupDesc;
     private long ownerUserId;
+    private boolean isRequired;
 
     public UserGroup() {
 
@@ -56,6 +57,14 @@ public class UserGroup implements IJsonPacket {
 
     public void setGroupDesc(String groupDesc) {
         this.groupDesc = groupDesc;
+    }
+
+    public boolean isRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(boolean isRequired) {
+        this.isRequired = isRequired;
     }
 
     @Override

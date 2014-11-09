@@ -42,7 +42,7 @@
     <!-- Join group -->
     <string name="join_group_search_hint">查找小组</string>
     <string name="join_group_search_title">查找</string>
-    <string name="btn_join_request">申请加入</string>
+    <string name="btn_join_request">加入</string>
 
     <!-- Group tag page -->
     <string name="title_section1">小组</string>
@@ -78,6 +78,9 @@
     <string name="error_msg_4009">创建账号失败，请稍后重试！</string>
     <string name="error_msg_4010">请输入小组名称！</string>
     <string name="error_msg_4011">未查询到相关小组信息，请输入其他关键字查询。</string>
+
+
+    <string name="tagSearchGroupListJoinButton">TagSearchGroupListJoinButton</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

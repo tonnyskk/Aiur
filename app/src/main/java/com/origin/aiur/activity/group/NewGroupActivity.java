@@ -78,20 +78,6 @@ public class NewGroupActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected HashMap<String, Object> getPostParam(String action) {
-        HashMap<String, Object> param = new HashMap<String, Object>();
-        switch (Actions.valueOf(action)) {
-            case create_group:
-                param.put("groupName", newGroupName.getText().toString());
-                param.put("groupDesc", newGroupIntro.getText().toString());
-                param.put("ownerUserId", UserDao.getInstance().getUserId());
-                break;
-        }
-
-        return param;
-    }
-
-    @Override
     public void onClick(View view) {
         if (view == null) {
             return;
@@ -99,7 +85,11 @@ public class NewGroupActivity extends BaseActivity implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btnNewGroup:
                 if (isInputValid()) {
-                    this.postSync(Actions.create_group.name());
+                    HashMap<String, Object> param = new HashMap<String, Object>();
+                    param.put("groupName", newGroupName.getText().toString());
+                    param.put("groupDesc", newGroupIntro.getText().toString());
+                    param.put("ownerUserId", UserDao.getInstance().getUserId());
+                    this.postSync(Actions.create_group.name(), param);
                 }
                 break;
         }

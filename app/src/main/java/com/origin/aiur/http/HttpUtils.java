@@ -18,6 +18,8 @@ public class HttpUtils {
     public static final String load_group_activity = "/group/activity/%s";
     public static final String create_group = "/group/new";
     public static final String search_group = "/group/search/%s/%s"; // UserId/SearchText
+    public static final String join_group = "/group/join/%s/%s"; // userId / groupId
+
 
     public static String buildPath(String path, Object ... args) {
         return String.format(path, args);
