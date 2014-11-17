@@ -45,11 +45,11 @@
     <string name="btn_join_request">加入</string>
 
     <!-- Group tag page -->
-    <string name="title_section1">小组</string>
-    <string name="title_section2">消息</string>
-    <string name="title_section3">充值</string>
-    <string name="title_section4">付款</string>
-    <string name="title_section5">管理</string>
+    <string name="title_section_index">小组</string>
+    <string name="title_section_message">消息</string>
+    <string name="title_section_charge">充值</string>
+    <string name="title_section_prepay">付款</string>
+    <string name="title_section_manage">管理</string>
 
     <!-- Group tag page @index -->
     <string name="tab_index_cash_title">个人余额:</string>

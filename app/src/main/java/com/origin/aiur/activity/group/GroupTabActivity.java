@@ -5,22 +5,15 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
+import com.origin.aiur.activity.group.pager.SectionsPagerAdapter;
 import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Locale;
 
 public class GroupTabActivity extends BaseActivity implements ActionBar.TabListener {
 
@@ -32,7 +25,7 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    SectionsPagerAdapter mSectionsPagerAdapter;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -65,9 +58,8 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        mSectionsPagerAdapter.setOwner(this.getIntent().getBooleanExtra(Keys.is_owner.name(), false));
-        mSectionsPagerAdapter.setGpName(this.getIntent().getStringExtra(Keys.group_name.name()));
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this, this.getIntent().getBooleanExtra(Keys.is_owner.name(), false));
+        //mSectionsPagerAdapter.setGpName(this.getIntent().getStringExtra(Keys.group_name.name()));
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -113,6 +105,7 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        // When the given tab is selected, switch to the corresponding page in the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
@@ -140,108 +133,4 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
     protected String getPath(String action, Object... args) {
         return null;
     }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        private boolean isOwner;
-        private String gpName;
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return isOwner ? 5 : 4; //TODO: if is owner show 5 tabs else show 4 tabs
-        }
-
-        public void setOwner(boolean isOwner) {
-            this.isOwner = isOwner;
-        }
-
-        public void setGpName(String gpName) {
-            this.gpName = gpName;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
-                case 3:
-                    return getString(R.string.title_section4).toUpperCase(l);
-                case 4:
-                    return getString(R.string.title_section5).toUpperCase(l);
-            }
-            return null;
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        private int getLayoutId() {
-            int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-            switch (sectionNumber) {
-                case 1:
-                    return R.layout.group_tab_index;
-                case 2:
-                    return R.layout.group_tab_message;
-                case 3:
-                    return R.layout.group_tab_prepay;
-                case 4:
-                    return R.layout.group_tab_charge;
-                case 5:
-                    return R.layout.group_tab_manage;
-            }
-            return R.layout.group_tab_index;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(getLayoutId(), container, false);
-
-            return rootView;
-        }
-    }
-
 }

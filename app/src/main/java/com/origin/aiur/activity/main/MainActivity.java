@@ -254,7 +254,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     if (currentGroup != null) {
                         ArrayList<UserGroup> filterList = new ArrayList<UserGroup>();
                         for (UserGroup userGroup : userGroupList) {
-                            ALogger.log(ALogger.LogPriority.debug, MainActivity.class, "Group Name = " + userGroup.getGroupName() + ", desc=" + userGroup.getGroupDesc());
                             if (!userGroup.getGroupName().equalsIgnoreCase(currentGroup.getGroupName())) {
                                 filterList.add(userGroup);
                             }
