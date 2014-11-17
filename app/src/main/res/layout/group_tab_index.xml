@@ -25,6 +25,7 @@
             android:text="@string/tab_index_cash_title" />
 
         <TextView
+            android:id="@+id/groupPrepayLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/tab_index_cash_txt_size"
@@ -101,5 +102,13 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/listUserGroupActivity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/round_corner_bg">
+    </ListView>
 
 </LinearLayout>

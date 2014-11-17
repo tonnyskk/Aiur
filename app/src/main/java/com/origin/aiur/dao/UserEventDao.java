@@ -15,19 +15,19 @@ import java.util.List;
 /**
  * Created by dongjia on 9/24/2014.
  */
-public class GroupDao {
+public class UserEventDao {
 
-    private static GroupDao instance = new GroupDao();
+    private static UserEventDao instance = new UserEventDao();
 
-    private GroupDao() {
+    private UserEventDao() {
 
     }
 
-    public static GroupDao getInstance() {
+    public static UserEventDao getInstance() {
         return instance;
     }
 
-    public void saveGroupEvents(List<GroupEvent> groupEventList) {
+    public void saveUserEvents(List<GroupEvent> groupEventList) {
         if (groupEventList == null || groupEventList.isEmpty()) {
             return;
         }
@@ -40,13 +40,13 @@ public class GroupDao {
                 getStore().put(String.valueOf(groupEvent.getEventId()), groupEventJson.toString().getBytes(AppUtils.CHARSET), groupEvent.getCreateTime());
             }
         } catch (JSONException e) {
-            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Save GroupEvents failed for JSON parse!", e);
+            ALogger.log(ALogger.LogPriority.error, UserEventDao.class, "Save GroupEvents failed for JSON parse!", e);
         } catch (UnsupportedEncodingException e) {
-            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Save GroupEvents failed for Charset error!", e);
+            ALogger.log(ALogger.LogPriority.error, UserEventDao.class, "Save GroupEvents failed for Charset error!", e);
         }
     }
 
-    public List<GroupEvent> getGroupEvents() {
+    public List<GroupEvent> getUserEvents() {
         List<GroupEvent> groupEvents = new ArrayList<GroupEvent>();
         try {
             List<byte[]> groupData = getStore().getAllData();
@@ -59,14 +59,14 @@ public class GroupDao {
                 }
             }
         } catch (JSONException e) {
-            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Get GroupEvents failed for JSON parse!", e);
+            ALogger.log(ALogger.LogPriority.error, UserEventDao.class, "Get GroupEvents failed for JSON parse!", e);
         } catch (UnsupportedEncodingException e) {
-            ALogger.log(ALogger.LogPriority.error, GroupDao.class, "Get GroupEvents failed for Charset error!", e);
+            ALogger.log(ALogger.LogPriority.error, UserEventDao.class, "Get GroupEvents failed for Charset error!", e);
         }
         return groupEvents;
     }
 
     public ASQLMapStorage getStore() {
-        return AStoreManager.getInstance().getGroupStore();
+        return AStoreManager.getInstance().getUserEventStore();
     }
 }

@@ -1,7 +1,12 @@
 package com.origin.aiur.activity.group;
 
+import com.origin.aiur.dao.FinanceDao;
+import com.origin.aiur.dao.GroupEventDao;
+import com.origin.aiur.dao.UserEventDao;
 import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
+import com.origin.aiur.vo.Finance;
+import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONArray;
@@ -55,5 +60,46 @@ public class GroupHelper {
             }
         }
         return joinedGroupId;
+    }
+
+
+    public Finance getFinanceInfo(JSONObject object) {
+        JSONObject financeObject = AppUtils.getJsonObject(object, "data");
+
+        if (financeObject == null) {
+            return null;
+        }
+
+        Finance finance = new Finance();
+        try {
+            finance.fromJsonObject(financeObject);
+            FinanceDao.getInstance().saveGroupFinance(finance);
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, GroupHelper.class, "Parse JSON failed. %s", object.toString(), e);
+        }
+        return finance;
+    }
+
+
+
+    public List<GroupEvent> getGroupEventList(JSONObject object) {
+        JSONArray groupArray = AppUtils.getJsonArray(object, "data");
+
+        if (groupArray == null || groupArray.length() <= 0) {
+            return null;
+        }
+
+        List<GroupEvent> groupEventList = new ArrayList<GroupEvent>();
+        try {
+            for(int i = 0; i < groupArray.length(); i ++) {
+                JSONObject groupObject = groupArray.getJSONObject(i);
+                groupEventList.add(new GroupEvent(groupObject));
+            }
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, GroupHelper.class, "Parse JSON failed. %s", object.toString(), e);
+        }
+
+        GroupEventDao.getInstance().saveGroupEvents(groupEventList);
+        return groupEventList;
     }
 }

@@ -21,13 +21,15 @@ public class ListActivitiesAdapter extends BaseAdapter {
     private List<GroupEvent> groupEventList = new ArrayList<GroupEvent>();
     private Context context;
     private LayoutInflater mInflater;
+    private boolean isGroupActivity;
 
     public ListActivitiesAdapter(Context context) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
     }
 
-    public void setActivityList(List<GroupEvent> activityList) {
+    public void setActivityList(List<GroupEvent> activityList, boolean isGroupActivity) {
+        this.isGroupActivity = isGroupActivity;
         if (activityList != null && !activityList.isEmpty()) {
             groupEventList.clear();
             groupEventList.addAll(activityList);
@@ -61,6 +63,12 @@ public class ListActivitiesAdapter extends BaseAdapter {
             return returnView;
         }
 
+        // TODO:
+        if (isGroupActivity) {
+
+        } else {
+
+        }
         GroupEvent groupEvent = groupEventList.get(i);
         TextView activityDate = (TextView) returnView.findViewById(R.id.groupActivityDate);
         activityDate.setText(DateUtils.formatDate(groupEvent.getCreateTime()));

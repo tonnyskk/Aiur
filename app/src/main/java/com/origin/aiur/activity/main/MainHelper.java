@@ -1,7 +1,7 @@
 package com.origin.aiur.activity.main;
 
 import com.origin.aiur.dao.FinanceDao;
-import com.origin.aiur.dao.GroupDao;
+import com.origin.aiur.dao.UserEventDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
@@ -14,10 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,7 +46,7 @@ public class MainHelper {
             ALogger.log(ALogger.LogPriority.error, MainHelper.class, "Parse JSON failed. %s", object.toString(), e);
         }
 
-        GroupDao.getInstance().saveGroupEvents(groupEventList);
+        UserEventDao.getInstance().saveUserEvents(groupEventList);
         return groupEventList;
     }
 

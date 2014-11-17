@@ -17,7 +17,7 @@ public class AStoreManager {
     private static final HashMap<StorageName, IAStorage> storages = new HashMap<StorageName, IAStorage>(9);
 
     static enum StorageName {
-        UserIdentityStore, UserStore, GroupStore, FinanceStore
+        UserIdentityStore, UserStore, UserEventStore, GroupEventStore, FinanceStore
     }
 
     private AStoreManager() {
@@ -50,12 +50,21 @@ public class AStoreManager {
         return asqlMapStorage;
     }
 
-    public synchronized ASQLMapStorage getGroupStore() {
-        if (storages.containsKey(StorageName.GroupStore)) {
-            return (ASQLMapStorage) storages.get(StorageName.GroupStore);
+    public synchronized ASQLMapStorage getUserEventStore() {
+        if (storages.containsKey(StorageName.UserEventStore)) {
+            return (ASQLMapStorage) storages.get(StorageName.UserEventStore);
         }
-        ASQLMapStorage asqlMapStorage = new ASQLMapStorage(ASQLMapHelper.getInstance(), StorageName.GroupStore.name());
-        storages.put(StorageName.GroupStore, asqlMapStorage);
+        ASQLMapStorage asqlMapStorage = new ASQLMapStorage(ASQLMapHelper.getInstance(), StorageName.UserEventStore.name());
+        storages.put(StorageName.UserEventStore, asqlMapStorage);
+        return asqlMapStorage;
+    }
+
+    public synchronized ASQLMapStorage getGroupEventStore() {
+        if (storages.containsKey(StorageName.GroupEventStore)) {
+            return (ASQLMapStorage) storages.get(StorageName.GroupEventStore);
+        }
+        ASQLMapStorage asqlMapStorage = new ASQLMapStorage(ASQLMapHelper.getInstance(), StorageName.GroupEventStore.name());
+        storages.put(StorageName.GroupEventStore, asqlMapStorage);
         return asqlMapStorage;
     }
 

@@ -120,17 +120,17 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, JSONObject response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
 
     }
 
     @Override
-    protected void onPostExecuteFailed(String action) {
+    public void onPostExecuteFailed(String action) {
 
     }
 
     @Override
-    protected String getPath(String action, Object... args) {
+    public String getPath(String action, Object... args) {
         return null;
     }
 }

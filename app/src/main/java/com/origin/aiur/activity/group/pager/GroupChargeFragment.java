@@ -1,27 +1,30 @@
 package com.origin.aiur.activity.group.pager;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.origin.aiur.BaseFragment;
 import com.origin.aiur.R;
 import com.origin.aiur.utils.ALogger;
+
+import org.json.JSONObject;
 
 /**
  * Created by dongjia on 11/17/2014.
  */
-@SuppressLint("ValidFragment")
 public class GroupChargeFragment extends BaseFragment {
     private Context context;
 
-    public GroupChargeFragment(){
+    public static GroupChargeFragment startFragment(Context context) {
+        GroupChargeFragment instance = new GroupChargeFragment();
+        instance.setContext(context);
+        return instance;
     }
 
-    public GroupChargeFragment(Context context) {
+    public void setContext(Context context) {
         this.context = context;
     }
 
@@ -62,5 +65,20 @@ public class GroupChargeFragment extends BaseFragment {
     @Override
     public String getTitle() {
         return this.context.getString(R.string.title_section_charge);
+    }
+
+    @Override
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
+
+    }
+
+    @Override
+    public void onPostExecuteFailed(String action) {
+
+    }
+
+    @Override
+    public String getPath(String action, Object... args) {
+        return null;
     }
 }

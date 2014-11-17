@@ -10,6 +10,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.origin.aiur.BaseActivity;
+import com.origin.aiur.BaseHelper;
+import com.origin.aiur.IBaseActivity;
 import com.origin.aiur.app.AiurApplication;
 import com.origin.aiur.dao.IdentityDao;
 import com.origin.aiur.dao.UserDao;
@@ -38,7 +40,7 @@ public class HttpExecutor {
         return instance;
     }
 
-    public void executeGet(final String tag, String path, final BaseActivity callback) {
+    public void executeGet(final String tag, String path, final BaseHelper callback) {
         if (fakeHttp) {
             callback.postExecuteSuccess(tag, null);
             return;
@@ -71,7 +73,7 @@ public class HttpExecutor {
                     statusCode = response.statusCode;
                 }
                 if (callback != null) {
-                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback), statusCode);
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback.getContext()), statusCode);
                 }
             }
         }){
@@ -90,7 +92,7 @@ public class HttpExecutor {
 
     }
 
-    public void executePost(final String tag, String path, HashMap<String, Object> params, final BaseActivity callback) {
+    public void executePost(final String tag, String path, HashMap<String, Object> params, final BaseHelper callback) {
         if (fakeHttp) {
             callback.postExecuteSuccess(tag, null);
             return;
@@ -129,7 +131,7 @@ public class HttpExecutor {
                     statusCode = response.statusCode;
                 }
                 if (callback != null) {
-                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback), statusCode);
+                    callback.postExecuteFailed(tag, VolleyErrorHelper.getMessage(error, callback.getContext()), statusCode);
                 }
             }
         }){

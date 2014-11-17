@@ -48,7 +48,7 @@ public class AiurActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, JSONObject response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
             case check_login:
                 MainActivity.startActivity(this);
@@ -61,7 +61,7 @@ public class AiurActivity extends BaseActivity {
     }
 
     @Override
-    protected void onPostExecuteFailed(String action) {
+    public void onPostExecuteFailed(String action) {
         switch (Actions.valueOf(action)) {
             case check_login:
             case init_startup:
@@ -82,7 +82,7 @@ public class AiurActivity extends BaseActivity {
     }
 
     @Override
-    protected String getPath(String action, Object... args){
+    public String getPath(String action, Object... args){
         String path = null;
         switch (Actions.valueOf(action)) {
             case check_login:

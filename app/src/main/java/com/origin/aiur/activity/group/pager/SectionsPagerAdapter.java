@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.origin.aiur.BaseFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +42,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void initPager() {
-        pagerLists.add(new GroupIndexFragment(context));
-        pagerLists.add(new GroupMessageFragment(context));
-        pagerLists.add(new GroupPrepayFragment(context));
-        pagerLists.add(new GroupChargeFragment(context));
+        pagerLists.add(GroupIndexFragment.startFragment(context));
+        pagerLists.add(GroupMessageFragment.startFragment(context));
+        pagerLists.add(GroupPrepayFragment.startFragment(context));
+        pagerLists.add(GroupChargeFragment.startFragment(context));
 
         if (this.isOwner) {
-           pagerLists.add(new GroupManageFragment(context));
+           pagerLists.add(GroupManageFragment.startFragment(context));
         }
     }
 

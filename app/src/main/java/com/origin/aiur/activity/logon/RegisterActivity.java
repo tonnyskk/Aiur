@@ -106,7 +106,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected String getPath(String action, Object... args) {
+    public String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case user_reg:

@@ -19,7 +19,7 @@ public class FinanceDao {
     private static FinanceDao instance = new FinanceDao();
 
     private enum Keys {
-        UserFinance
+        UserFinance, GroupFinance
     }
 
     public static FinanceDao getInstance() {
@@ -48,6 +48,33 @@ public class FinanceDao {
             ALogger.log(ALogger.LogPriority.error, FinanceDao.class, "Get UserFinance failed for JSON parse!", e);
         } catch (UnsupportedEncodingException e) {
             ALogger.log(ALogger.LogPriority.error, FinanceDao.class, "Get UserFinance failed for Charset error!", e);
+        }
+        return null;
+    }
+
+
+
+    public void saveGroupFinance(Finance finance) {
+        try {
+            getStore().put(Keys.GroupFinance.name(), finance.toJsonObject().toString().getBytes(AppUtils.CHARSET));
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, FinanceDao.class, "Save GroupFinance failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, FinanceDao.class, "Save GroupFinance failed for Charset error!", e);
+        }
+    }
+
+    public Finance getGroupFinance() {
+        try {
+            byte[] data = getStore().get(Keys.GroupFinance.name());
+            if (data != null) {
+                Finance finance = new Finance(new JSONObject(new String(data, "utf-8")));
+                return finance;
+            }
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, FinanceDao.class, "Get GroupFinance failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, FinanceDao.class, "Get GroupFinance failed for Charset error!", e);
         }
         return null;
     }

@@ -89,7 +89,7 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, JSONObject response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
             case search_group:
                 // parse response to update local groupLit
@@ -106,7 +106,7 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
     }
 
     @Override
-    protected void onPostExecuteFailed(String action) {
+    public void onPostExecuteFailed(String action) {
         switch (Actions.valueOf(action)) {
             case search_group:
                 listAdapter.setGroupList(null);
@@ -115,7 +115,7 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
     }
 
     @Override
-    protected String getPath(String action, Object... args) {
+    public String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case search_group:
@@ -141,7 +141,7 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
         }
 
         this.getSync(Actions.search_group.name(), UserDao.getInstance().getUserId(), encodeQueryText);
-        this.showProcessDialog();
+        this.showProcessDialog(null);
 
         return false;
     }

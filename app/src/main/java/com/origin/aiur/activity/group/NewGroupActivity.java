@@ -50,7 +50,7 @@ public class NewGroupActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void onPostExecuteSuccessful(String action, JSONObject response) {
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
             case create_group:
                 // parse response to update local groupLit
@@ -62,12 +62,12 @@ public class NewGroupActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected void onPostExecuteFailed(String action) {
+    public void onPostExecuteFailed(String action) {
 
     }
 
     @Override
-    protected String getPath(String action, Object... args) {
+    public String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case create_group:

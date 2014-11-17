@@ -10,9 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -23,10 +21,9 @@ import com.origin.aiur.activity.group.GroupTabActivity;
 import com.origin.aiur.activity.group.JoinGroupActivity;
 import com.origin.aiur.activity.group.NewGroupActivity;
 import com.origin.aiur.dao.FinanceDao;
-import com.origin.aiur.dao.GroupDao;
+import com.origin.aiur.dao.UserEventDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
-import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
@@ -34,7 +31,6 @@ import com.origin.aiur.vo.UserGroup;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -167,7 +163,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // Use offline data to generate page if exist
         switch (Actions.valueOf(action)) {
             case load_group_activity:
-                List<GroupEvent> groupEventList = GroupDao.getInstance().getGroupEvents();
+                List<GroupEvent> groupEventList = UserEventDao.getInstance().getUserEvents();
                 refreshGroupEvent(groupEventList);
                 break;
 
@@ -184,7 +180,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void refreshGroupEvent(List<GroupEvent> groupEventList) {
         if (groupEventList != null && !groupEventList.isEmpty()) {
-            groupActivityAdapter.setActivityList(groupEventList);
+            groupActivityAdapter.setActivityList(groupEventList, false);
         }
     }
 
@@ -224,14 +220,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected String getPath(String action, Object... args) {
+    public String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
             case load_user_group:
                 path = HttpUtils.buildPath(HttpUtils.load_user_group, UserDao.getInstance().getUserId());
                 break;
             case load_group_activity:
-                path = HttpUtils.buildPath(HttpUtils.load_group_activity, UserDao.getInstance().getUserId());
+                path = HttpUtils.buildPath(HttpUtils.load_user_activity, UserDao.getInstance().getUserId());
                 break;
             case load_user_finance:
                 path = HttpUtils.buildPath(HttpUtils.load_user_finance, UserDao.getInstance().getUserId());

@@ -1,13 +1,7 @@
 package com.origin.aiur.vo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2014/9/23.
@@ -20,6 +14,9 @@ public class GroupEvent implements IJsonPacket {
     private double money;
     private String status;
     private long createTime;
+    private String type;
+    private double groupConsume;
+    private double userConsume;
 
     public GroupEvent() {
     }
@@ -88,6 +85,30 @@ public class GroupEvent implements IJsonPacket {
         this.createTime = createTime;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getGroupConsume() {
+        return groupConsume;
+    }
+
+    public void setGroupConsume(double groupConsume) {
+        this.groupConsume = groupConsume;
+    }
+
+    public double getUserConsume() {
+        return userConsume;
+    }
+
+    public void setUserConsume(double userConsume) {
+        this.userConsume = userConsume;
+    }
+
     @Override
     public JSONObject toJsonObject() throws JSONException {
         JSONObject jsonObject = new JSONObject();
@@ -98,6 +119,9 @@ public class GroupEvent implements IJsonPacket {
         jsonObject.put("money", money);
         jsonObject.put("status", status);
         jsonObject.put("createTime", createTime);
+        jsonObject.put("type", type);
+        jsonObject.put("groupConsume", groupConsume);
+        jsonObject.put("userConsume", userConsume);
         return jsonObject;
     }
 
@@ -130,6 +154,20 @@ public class GroupEvent implements IJsonPacket {
             if (jsonObject.has("createTime")) {
                 setCreateTime(jsonObject.getLong("createTime"));
             }
+
+            if (jsonObject.has("type")) {
+                setStatus(jsonObject.getString("type"));
+            }
+
+            if (jsonObject.has("groupConsume")) {
+                setGroupConsume(jsonObject.getDouble("groupConsume"));
+            }
+
+
+            if (jsonObject.has("userConsume")) {
+                setUserConsume(jsonObject.getDouble("userConsume"));
+            }
+
         }
     }
 }

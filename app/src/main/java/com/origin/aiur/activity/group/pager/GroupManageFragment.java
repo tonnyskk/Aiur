@@ -3,13 +3,15 @@ package com.origin.aiur.activity.group.pager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.origin.aiur.BaseFragment;
 import com.origin.aiur.R;
 import com.origin.aiur.utils.ALogger;
+
+import org.json.JSONObject;
 
 /**
  * Created by dongjia on 11/17/2014.
@@ -18,12 +20,16 @@ import com.origin.aiur.utils.ALogger;
 public class GroupManageFragment extends BaseFragment {
     private Context context;
 
-    public GroupManageFragment() {
+    public static GroupManageFragment startFragment(Context context) {
+        GroupManageFragment instance = new GroupManageFragment();
+        instance.setContext(context);
+        return instance;
     }
 
-    public GroupManageFragment(Context context) {
+    public void setContext(Context context) {
         this.context = context;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,5 +67,20 @@ public class GroupManageFragment extends BaseFragment {
     @Override
     public String getTitle() {
         return this.context.getString(R.string.title_section_manage);
+    }
+
+    @Override
+    public void onPostExecuteSuccessful(String action, JSONObject response) {
+
+    }
+
+    @Override
+    public void onPostExecuteFailed(String action) {
+
+    }
+
+    @Override
+    public String getPath(String action, Object... args) {
+        return null;
     }
 }
