@@ -69,7 +69,7 @@ public class AiurActivity extends BaseActivity {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(5000);
+                            Thread.sleep(2000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {

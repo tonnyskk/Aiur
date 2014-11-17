@@ -24,7 +24,7 @@
 
     <dimen name="main.grid.title.txt.size">20sp</dimen>
     <dimen name="main.grid.label.txt.size">40sp</dimen>
-    <dimen name="mainGroupPopupNameTxtSize">40sp</dimen>
+    <dimen name="mainGroupPopupNameTxtSize">20sp</dimen>
 
     <color name="main.balance.bg">#ffff7006</color>
     <color name="main.balance.txt">#ffffffff</color>

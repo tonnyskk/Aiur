@@ -47,7 +47,7 @@ public class GroupHelper {
     public long getJoinedGroupId(JSONObject object) {
         JSONObject jsonObject = AppUtils.getJsonObject(object, "data");
         long joinedGroupId = -1;
-        if (jsonObject == null) {
+        if (jsonObject != null) {
             try {
                 joinedGroupId = jsonObject.getLong("groupId");
             } catch (JSONException e) {

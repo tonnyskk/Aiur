@@ -26,6 +26,7 @@ import com.origin.aiur.dao.FinanceDao;
 import com.origin.aiur.dao.GroupDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
+import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
@@ -253,6 +254,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     if (currentGroup != null) {
                         ArrayList<UserGroup> filterList = new ArrayList<UserGroup>();
                         for (UserGroup userGroup : userGroupList) {
+                            ALogger.log(ALogger.LogPriority.debug, MainActivity.class, "Group Name = " + userGroup.getGroupName() + ", desc=" + userGroup.getGroupDesc());
                             if (!userGroup.getGroupName().equalsIgnoreCase(currentGroup.getGroupName())) {
                                 filterList.add(userGroup);
                             }
@@ -295,7 +297,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             groupPopupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
             groupPopupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
             groupPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-
             popupGroupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

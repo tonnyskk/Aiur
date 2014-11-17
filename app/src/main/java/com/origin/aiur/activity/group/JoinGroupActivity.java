@@ -99,6 +99,8 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
             case join_group:
                 long joinedGroupId = GroupHelper.getInstance().getJoinedGroupId(response);
                 listAdapter.updateJoinedGroup(joinedGroupId);
+                String message = joinedGroupId > 0 ? this.getString(R.string.common_add_group_req) :  this.getString(R.string.warn_add_group_req);
+                showToastMessage(message);
                 break;
         }
     }

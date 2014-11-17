@@ -28,7 +28,7 @@
     <string name="main_title_balance">余额累计：</string>
     <string name="main_title_cost">消费累计：</string>
     <string name="main_group_select">[%s]小组</string>
-    <string name="main_group_change">其他</string>
+    <string name="main_group_change">切换</string>
     <string name="main_group_create">创建小组</string>
     <string name="main_group_join">加入小组</string>
     <string name="menu_create_group">创建小组</string>
@@ -55,6 +55,10 @@
     <string name="tab_index_cash_title">个人余额:</string>
     <string name="tab_index_btn_prepay">充值</string>
     <string name="tab_index_btn_charge">付款</string>
+
+    <!-- Common message -->
+    <string name="common_add_group_req">申请已提交，等待审批中。</string>
+    <string name="warn_add_group_req">申请失败，请稍后重试。</string>
 
     <!-- Error message -->
     <string name="generic_server_down">服务器异常，请稍后重试</string>
