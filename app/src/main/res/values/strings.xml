@@ -27,7 +27,7 @@
     <!-- Main page -->
     <string name="main_title_balance">余额累计：</string>
     <string name="main_title_cost">消费累计：</string>
-    <string name="main_group_select">进入[%s]小组</string>
+    <string name="main_group_select">[%s]小组</string>
     <string name="main_group_change">其他</string>
     <string name="main_group_create">创建小组</string>
     <string name="main_group_join">加入小组</string>
@@ -78,6 +78,7 @@
     <string name="error_msg_4009">创建账号失败，请稍后重试！</string>
     <string name="error_msg_4010">请输入小组名称！</string>
     <string name="error_msg_4011">未查询到相关小组信息，请输入其他关键字查询。</string>
+    <string name="error_msg_4012">该小组已存在，请重新设置小组名称！</string>
 
 
     <string name="tagSearchGroupListJoinButton">TagSearchGroupListJoinButton</string>

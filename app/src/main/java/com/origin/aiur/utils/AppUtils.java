@@ -173,6 +173,8 @@ public class AppUtils {
                 return R.string.error_msg_4010;
             case 4011:
                 return R.string.error_msg_4011;
+            case 4012:
+                return R.string.error_msg_4012;
         }
         return R.string.error_msg;
     }
