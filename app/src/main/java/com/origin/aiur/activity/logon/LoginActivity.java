@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity {
     private TextView loginButton;
     private TextView registerButton;
 
@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View view) {
+    public void performClick(View view) {
         if (view == null) {
             return;
         }

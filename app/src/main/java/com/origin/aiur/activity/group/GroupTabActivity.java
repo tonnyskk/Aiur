@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
@@ -15,7 +16,7 @@ import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONObject;
 
-public class GroupTabActivity extends BaseActivity implements ActionBar.TabListener {
+public class GroupTabActivity extends BaseActivity implements ActionBar.TabListener, IChangeTabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -126,11 +127,32 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
 
     @Override
     public void onPostExecuteFailed(String action) {
-
     }
 
     @Override
     public String getPath(String action, Object... args) {
         return null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        GroupHelper.getInstance().addChangeTabListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        GroupHelper.getInstance().removeChangeTabListener(this);
+    }
+
+    @Override
+    public void onChangeTabEvent(int index) {
+        getActionBar().setSelectedNavigationItem(index);
+    }
+
+    @Override
+    public void performClick(View view) {
+
     }
 }

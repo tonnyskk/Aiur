@@ -69,6 +69,11 @@ public class GroupPrepayFragment extends BaseFragment {
     }
 
     @Override
+    public void performClick(View view) {
+
+    }
+
+    @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
 
     }

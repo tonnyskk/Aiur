@@ -31,8 +31,10 @@
     <string name="main_group_change">切换</string>
     <string name="main_group_create">创建小组</string>
     <string name="main_group_join">加入小组</string>
+
     <string name="menu_create_group">创建小组</string>
     <string name="menu_join_group">加入小组</string>
+    <string name="msg_main_group_consume" formatted="false">[%1$s]消费 %2$s</string>
 
     <!-- New group -->
     <string name="new_group_hint_name">小组名称</string>
@@ -47,14 +49,42 @@
     <!-- Group tag page -->
     <string name="title_section_index">小组</string>
     <string name="title_section_message">消息</string>
-    <string name="title_section_charge">充值</string>
-    <string name="title_section_prepay">付款</string>
+    <string name="title_section_charge">付款</string>
+    <string name="title_section_prepay">充值</string>
     <string name="title_section_manage">管理</string>
 
     <!-- Group tag page @index -->
     <string name="tab_index_cash_title">个人余额:</string>
     <string name="tab_index_btn_prepay">充值</string>
     <string name="tab_index_btn_charge">付款</string>
+
+    <string name="msg_index_join_group_req">%s 申请加入小组。</string>
+    <string name="msg_index_join_group">%s 加入了小组。</string>
+    <string name="msg_index_join_group_left">%s 离开了小组。</string>
+
+    <string name="msg_index_group_consume" formatted="false">消费银子 %1$s /人均 %2$s 两</string>
+    <string name="msg_index_group_incoming" formatted="false">[%1$s]补充白银 %2$s 两！</string>
+
+    <string name="msg_index_consume_invalid">哟！有人报假账啊！白银 %s 两啊！</string>
+    <string name="msg_index_consume_pending">审批中</string>
+    <string name="msg_index_incoming_pending">充值中</string>
+
+    <string name="msg_index_funny_1">北风那个吹啊。。</string>
+    <string name="msg_index_funny_2">路边小摊随便吃点吧。。</string>
+    <string name="msg_index_funny_3">吃了上顿没下顿。。</string>
+    <string name="msg_index_funny_4">悠着点，还能吃两顿。。</string>
+    <string name="msg_index_funny_5">吃！吃！吃！</string>
+    <string name="msg_index_funny_6">壕！壕！壕！</string>
+
+    <!-- Group tag page @manage-->
+    <!-- Group tag page @message-->
+    <!-- Group tag page @prepay-->
+    <!-- Group tag page @charge-->
+    <string name="btn_charge_group">付款</string>
+    <string name="tab_charge_amount_title">消费</string>
+    <string name="tab_charge_amount_hint">金額</string>
+    <string name="tab_charge_desc_hint">描述</string>
+
 
     <!-- Common message -->
     <string name="common_add_group_req">申请已提交，等待审批中。</string>
@@ -83,7 +113,6 @@
     <string name="error_msg_4010">请输入小组名称！</string>
     <string name="error_msg_4011">未查询到相关小组信息，请输入其他关键字查询。</string>
     <string name="error_msg_4012">该小组已存在，请重新设置小组名称！</string>
-
 
     <string name="tagSearchGroupListJoinButton">TagSearchGroupListJoinButton</string>
 

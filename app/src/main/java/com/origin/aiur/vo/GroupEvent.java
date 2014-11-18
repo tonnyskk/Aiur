@@ -11,7 +11,6 @@ public class GroupEvent implements IJsonPacket {
     private long groupId;
     private String groupName;
     private String description;
-    private double money;
     private String status;
     private long createTime;
     private String type;
@@ -61,14 +60,6 @@ public class GroupEvent implements IJsonPacket {
         this.description = description;
     }
 
-    public double getMoney() {
-        return money;
-    }
-
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -116,7 +107,6 @@ public class GroupEvent implements IJsonPacket {
         jsonObject.put("groupId", groupId);
         jsonObject.put("description", description);
         jsonObject.put("groupName", groupName);
-        jsonObject.put("money", money);
         jsonObject.put("status", status);
         jsonObject.put("createTime", createTime);
         jsonObject.put("type", type);
@@ -143,10 +133,6 @@ public class GroupEvent implements IJsonPacket {
                 setGroupName(jsonObject.getString("groupName"));
             }
 
-            if (jsonObject.has("money")) {
-                setMoney(jsonObject.getDouble("money"));
-            }
-
             if (jsonObject.has("status")) {
                 setStatus(jsonObject.getString("status"));
             }
@@ -156,13 +142,12 @@ public class GroupEvent implements IJsonPacket {
             }
 
             if (jsonObject.has("type")) {
-                setStatus(jsonObject.getString("type"));
+                setType(jsonObject.getString("type"));
             }
 
             if (jsonObject.has("groupConsume")) {
                 setGroupConsume(jsonObject.getDouble("groupConsume"));
             }
-
 
             if (jsonObject.has("userConsume")) {
                 setUserConsume(jsonObject.getDouble("userConsume"));

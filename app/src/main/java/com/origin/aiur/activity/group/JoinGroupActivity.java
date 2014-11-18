@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -26,10 +25,9 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
 
-public class JoinGroupActivity extends BaseActivity implements SearchView.OnQueryTextListener, View.OnClickListener {
+public class JoinGroupActivity extends BaseActivity implements SearchView.OnQueryTextListener {
 
     private SearchView searchView;
     private ListView listView;
@@ -154,7 +152,7 @@ public class JoinGroupActivity extends BaseActivity implements SearchView.OnQuer
     }
 
     @Override
-    public void onClick(View view) {
+    public void performClick(View view) {
         switch (view.getId()) {
             case R.id.joinGroupRequest:
                 long groupId = (Long)view.getTag(R.string.tagSearchGroupListJoinButton);

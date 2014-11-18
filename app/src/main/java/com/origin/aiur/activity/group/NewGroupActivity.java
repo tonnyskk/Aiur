@@ -3,10 +3,7 @@ package com.origin.aiur.activity.group;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,15 +11,13 @@ import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
-import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
-import com.origin.aiur.vo.User;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class NewGroupActivity extends BaseActivity implements View.OnClickListener{
+public class NewGroupActivity extends BaseActivity{
     private TextView btnCreateGroup;
     private EditText newGroupName;
     private EditText newGroupIntro;
@@ -78,7 +73,7 @@ public class NewGroupActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void onClick(View view) {
+    public void performClick(View view) {
         if (view == null) {
             return;
         }

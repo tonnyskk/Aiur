@@ -70,6 +70,11 @@ public class GroupManageFragment extends BaseFragment {
     }
 
     @Override
+    public void performClick(View view) {
+
+    }
+
+    @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
 
     }

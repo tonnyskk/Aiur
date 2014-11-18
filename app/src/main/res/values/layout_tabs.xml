@@ -14,13 +14,34 @@
     <dimen name="tab_index_btn_icon_width">40dp</dimen>
     <dimen name="tab_index_btn_icon_height">40dp</dimen>
 
+    <dimen name="tab_index_cash_margin_left">20dp</dimen>
+    <dimen name="tab_index_funny_margin_left">14dp</dimen>
+
     <dimen name="tab_index_cash_title_txt_size">20sp</dimen>
     <dimen name="tab_index_cash_txt_size">40sp</dimen>
     <dimen name="tab_index_btn_txt_size">18sp</dimen>
+    <dimen name="tab_index_funny_txt_size">12sp</dimen>
 
     <color name="tab_index_cash_bg">#ffff7006</color>
     <color name="tab_index_btn_bg">#ffffffff</color>
     <color name="tab_index_cash_txt_color">#ffffffff</color>
     <color name="tab_bg">#fff3f3f3</color>
     <color name="tab_index_btn_split">#ffdadada</color>
+
+
+    <dimen name="tabChargeCashPaddingLeft">10dp</dimen>
+    <dimen name="tabChargeCashPaddingRight">30dp</dimen>
+    <dimen name="tabChargeCashPaddingTop">5dp</dimen>
+    <dimen name="tabChargeCashPaddingBottom">5dp</dimen>
+    <dimen name="tabChargeCashMarginTop">5dp</dimen>
+    <dimen name="tabChargeCashMarginBottom">20dp</dimen>
+    <dimen name="tabChargeCashInputMarginLeft">20dp</dimen>
+
+    <dimen name="tabChargeButtonMarginTop">10dp</dimen>
+    <dimen name="tabChargeButtonMarginBottom">40dp</dimen>
+    <dimen name="tabChargeButtonMarginLeft">20dp</dimen>
+    <dimen name="tabChargeButtonMarginRight">20dp</dimen>
+
+    <dimen name="tabChargeCashTextSize">22sp</dimen>
+
 </resources>

@@ -24,6 +24,7 @@ import com.origin.aiur.dao.FinanceDao;
 import com.origin.aiur.dao.UserEventDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
+import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
 import com.origin.aiur.vo.UserGroup;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity {
 
     private TextView btnGotoGroup;
     private TextView btnChangeGroup;
@@ -179,8 +180,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void refreshGroupEvent(List<GroupEvent> groupEventList) {
-        if (groupEventList != null && !groupEventList.isEmpty()) {
-            groupActivityAdapter.setActivityList(groupEventList, false);
+        if (groupEventList != null) {
+            groupActivityAdapter.setActivityList(groupEventList);
         }
     }
 
@@ -214,8 +215,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void refreshFinance(Finance finance) {
         if (finance != null) {
-            txtTotalCost.setText(MainHelper.getInstance().formatMoney(finance.getConsumeSummary()));
-            txtTotalBalance.setText(MainHelper.getInstance().formatMoney(finance.getIncomingSummary() - finance.getConsumeSummary()));
+            txtTotalCost.setText(AppUtils.formatMoney(finance.getConsumeSummary()));
+            txtTotalBalance.setText(AppUtils.formatMoney(finance.getIncomingSummary() - finance.getConsumeSummary()));
         }
     }
 
@@ -237,7 +238,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void performClick(View view) {
         if (view == null) {
             return;
         }

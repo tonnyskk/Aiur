@@ -3,6 +3,7 @@ package com.origin.aiur;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -19,12 +20,14 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2014/9/23.
  */
-public abstract class BaseActivity extends FragmentActivity implements IBaseActivity {
+public abstract class BaseActivity extends FragmentActivity implements IBaseActivity, View.OnClickListener {
     private BaseHelper helper;
 
     public BaseActivity() {
         helper = new BaseHelper(this);
     }
+
+    public abstract void performClick(View view);
 
     /**
      * Send out a GET request to backend server
@@ -78,5 +81,10 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public void onClick(View view) {
+        performClick(view);
     }
 }

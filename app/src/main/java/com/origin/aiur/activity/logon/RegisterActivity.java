@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity {
 
     private TextView regButton = null;
 
@@ -55,7 +55,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void onClick(View view) {
+    public void performClick(View view) {
         if (view == null) {
             return;
         }

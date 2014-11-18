@@ -1,6 +1,5 @@
 package com.origin.aiur.activity.group.pager;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +12,12 @@ import com.origin.aiur.BaseFragment;
 import com.origin.aiur.R;
 import com.origin.aiur.activity.group.GroupHelper;
 import com.origin.aiur.activity.main.ListActivitiesAdapter;
-import com.origin.aiur.activity.main.MainHelper;
 import com.origin.aiur.dao.FinanceDao;
+import com.origin.aiur.dao.GroupEventDao;
 import com.origin.aiur.dao.UserDao;
-import com.origin.aiur.dao.UserEventDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.utils.ALogger;
+import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
 
@@ -29,12 +28,14 @@ import java.util.List;
 /**
  * Created by dongjia on 11/17/2014.
  */
-@SuppressLint("ValidFragment")
 public class GroupIndexFragment extends BaseFragment {
     private Context context;
     private TextView groupPrepayLeft;
+    private TextView groupFunnyText;
     private ListView groupActivityList;
     private ListActivitiesAdapter groupActivityAdapter;
+    private View tabBtnPrepay;
+    private View tabBtnCharge;
 
     private enum Actions{
         load_user_finance_by_group, load_group_activity
@@ -67,7 +68,13 @@ public class GroupIndexFragment extends BaseFragment {
         ALogger.log(ALogger.LogPriority.debug, GroupIndexFragment.class, "GroupIndexFragment@onCreateView");
         View rootView = inflater.inflate(R.layout.group_tab_index, container, false);
 
+        tabBtnPrepay = rootView.findViewById(R.id.tabBtnPrepay);
+        tabBtnPrepay.setOnClickListener(this);
+        tabBtnCharge = rootView.findViewById(R.id.tabBtnCharge);
+        tabBtnCharge.setOnClickListener(this);
+
         groupPrepayLeft = (TextView)rootView.findViewById(R.id.groupPrepayLeft);
+        groupFunnyText =  (TextView)rootView.findViewById(R.id.groupFunnyText);
         groupActivityList = (ListView)rootView.findViewById(R.id.listUserGroupActivity);
         groupActivityAdapter = new ListActivitiesAdapter(this.getActivity());
         groupActivityList.setAdapter(groupActivityAdapter);
@@ -86,6 +93,13 @@ public class GroupIndexFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         ALogger.log(ALogger.LogPriority.debug, GroupIndexFragment.class, "GroupIndexFragment@onResume");
+
+        // Refresh Values
+        List<GroupEvent> groupEventList = GroupEventDao.getInstance().getGroupEvents();
+        refreshGroupEvent(groupEventList);
+
+        Finance finance = FinanceDao.getInstance().getGroupFinance();
+        refreshFinance(finance);
     }
 
     @Override
@@ -100,15 +114,27 @@ public class GroupIndexFragment extends BaseFragment {
     }
 
     @Override
+    public void performClick(View view) {
+        switch (view.getId()) {
+            case R.id.tabBtnPrepay:
+                GroupHelper.getInstance().notifyChangeTab(2);
+                break;
+            case R.id.tabBtnCharge:
+                GroupHelper.getInstance().notifyChangeTab(3);
+                break;
+        }
+    }
+
+    @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
              case load_user_finance_by_group:
-                 List<GroupEvent> groupEventList = GroupHelper.getInstance().getGroupEventList(response);
-                 refreshGroupEvent(groupEventList);
-                 break;
-             case load_group_activity:
                  Finance finance = GroupHelper.getInstance().getFinanceInfo(response);
                  refreshFinance(finance);
+                 break;
+             case load_group_activity:
+                 List<GroupEvent> groupEventList = GroupHelper.getInstance().getGroupEventList(response);
+                 refreshGroupEvent(groupEventList);
                  break;
         }
     }
@@ -117,7 +143,8 @@ public class GroupIndexFragment extends BaseFragment {
     public void onPostExecuteFailed(String action) {
         switch (Actions.valueOf(action)) {
             case load_user_finance_by_group:
-
+                List<GroupEvent> groupEventList = GroupEventDao.getInstance().getGroupEvents();
+                refreshGroupEvent(groupEventList);
                 break;
             case load_group_activity:
                 Finance finance = FinanceDao.getInstance().getGroupFinance();
@@ -142,18 +169,48 @@ public class GroupIndexFragment extends BaseFragment {
 
 
     private void refreshFinance(Finance finance) {
+        String funnyText = null;
         if (finance != null) {
             if (groupPrepayLeft != null) {
-                groupPrepayLeft.setText(MainHelper.getInstance().formatMoney(finance.getIncomingSummary() - finance.getConsumeSummary()));
+                groupPrepayLeft.setText(AppUtils.formatMoney(finance.getIncomingSummary() - finance.getConsumeSummary()));
             }
+            funnyText = getFunnyText(finance.getIncomingSummary() - finance.getConsumeSummary());
             //txtTotalCost.setText(MainHelper.getInstance().formatMoney(finance.getConsumeSummary()));
             //txtTotalBalance.setText(MainHelper.getInstance().formatMoney(finance.getIncomingSummary() - finance.getConsumeSummary()));
         }
+
+        if (groupFunnyText != null) {
+            if (funnyText != null) {
+                groupFunnyText.setText(funnyText);
+                groupFunnyText.setVisibility(View.VISIBLE);
+            } else {
+                groupFunnyText.setVisibility(View.GONE);
+            }
+        }
+
     }
 
     private void refreshGroupEvent(List<GroupEvent> groupEventList) {
-        if (groupEventList != null && !groupEventList.isEmpty() && groupActivityAdapter != null) {
-            groupActivityAdapter.setActivityList(groupEventList, true);
+        if (groupEventList != null && groupActivityAdapter != null) {
+            groupActivityAdapter.setActivityList(groupEventList);
         }
+    }
+
+    private String getFunnyText(double money) {
+        String displayText = null;
+        if (money <= 0) {
+            displayText = getString(R.string.msg_index_funny_1);
+        } else if (money <= 20) {
+            displayText = getString(R.string.msg_index_funny_2);
+        } else if (money <= 50) {
+            displayText = getString(R.string.msg_index_funny_3);
+        } else if (money <= 100) {
+            displayText = getString(R.string.msg_index_funny_4);
+        } else if (money <= 200) {
+            displayText = getString(R.string.msg_index_funny_5);
+        } else {
+            displayText = getString(R.string.msg_index_funny_6);
+        }
+        return displayText;
     }
 }

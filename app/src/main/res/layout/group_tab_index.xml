@@ -24,15 +24,33 @@
             android:textStyle="bold"
             android:text="@string/tab_index_cash_title" />
 
-        <TextView
-            android:id="@+id/groupPrepayLeft"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/tab_index_cash_txt_size"
-            android:textColor="@color/tab_index_cash_txt_color"
-            android:textStyle="bold"
-            android:layout_marginLeft="@dimen/abc_action_bar_default_height"
-            android:text="0.00" />
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/tab_index_cash_margin_left">
+            <TextView
+                android:id="@+id/groupPrepayLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tab_index_cash_txt_size"
+                android:textColor="@color/tab_index_cash_txt_color"
+                android:textStyle="bold"
+                android:text="0.00" />
+
+            <TextView
+                android:id="@+id/groupFunnyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tab_index_funny_txt_size"
+                android:textColor="@color/tab_index_cash_txt_color"
+                android:textStyle="normal"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/tab_index_funny_margin_left"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -50,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="onClick"
             android:clickable="true">
 
             <ImageView
@@ -81,6 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:onClick="onClick"
             android:clickable="true">
 
             <ImageView

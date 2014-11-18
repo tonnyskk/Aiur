@@ -7,13 +7,16 @@ package com.origin.aiur;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
+
+import com.origin.aiur.dao.UserDao;
 
 import java.util.HashMap;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public abstract class BaseFragment extends Fragment implements IBaseActivity {
+public abstract class BaseFragment extends Fragment implements IBaseActivity, View.OnClickListener {
     private BaseHelper helper;
 
     public BaseFragment() {
@@ -22,6 +25,7 @@ public abstract class BaseFragment extends Fragment implements IBaseActivity {
     }
 
     public abstract String getTitle();
+    public abstract void performClick(View view);
 
     @Override
     public void getSync(String action, Object... pathParam) {
@@ -60,6 +64,11 @@ public abstract class BaseFragment extends Fragment implements IBaseActivity {
 
     @Override
     public Context getContext() {
-        return this.getContext();
+        return this.getActivity();
+    }
+
+    @Override
+    public void onClick(View view) {
+        performClick(view);
     }
 }

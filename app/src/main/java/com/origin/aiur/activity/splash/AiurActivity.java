@@ -1,6 +1,7 @@
 package com.origin.aiur.activity.splash;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 
 import com.origin.aiur.BaseActivity;
@@ -92,5 +93,10 @@ public class AiurActivity extends BaseActivity {
                 path = HttpUtils.buildPath(HttpUtils.init_startup);
         }
         return path;
+    }
+
+    @Override
+    public void performClick(View view) {
+
     }
 }

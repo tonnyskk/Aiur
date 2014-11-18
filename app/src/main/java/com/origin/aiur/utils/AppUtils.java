@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.spec.X509EncodedKeySpec;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 import javax.crypto.Cipher;
@@ -179,4 +180,8 @@ public class AppUtils {
         return R.string.error_msg;
     }
 
+    public static String formatMoney(double money) {
+        DecimalFormat format = new DecimalFormat("##,##0.00");
+        return format.format(money);
+    }
 }

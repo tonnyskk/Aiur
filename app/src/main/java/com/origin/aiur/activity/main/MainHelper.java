@@ -88,9 +88,4 @@ public class MainHelper {
         }
         return finance;
     }
-
-    public String formatMoney(double money) {
-        DecimalFormat format = new DecimalFormat("##,##0.00");
-        return format.format(money);
-    }
 }
