@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingLeft="@dimen/avatarUserAdapterPaddingLeft"
+    android:paddingRight="@dimen/avatarUserAdapterPaddingRight"
+    android:paddingTop="@dimen/avatarUserAdapterPaddingTop"
+    android:paddingBottom="@dimen/avatarUserAdapterPaddingBottom"
+    android:background="@color/userSelectionListItemBg">
+
+    <ImageView
+        android:layout_width="@dimen/avatarUserIconWidth"
+        android:layout_height="@dimen/avatarUserIconHeight"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
+        android:layout_marginRight="@dimen/selectUserIconMarginRight"
+        android:src="@drawable/user_avatar_unfocused" />
+    <TextView
+        android:id="@+id/userDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/avatarUserNameTextSize"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:text="Aiur"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/userBalanceAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:gravity="center"
+        android:textSize="@dimen/avatarUserBalanceTextSize"
+        android:singleLine="true" />
+
+</LinearLayout>

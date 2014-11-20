@@ -2,10 +2,8 @@ package com.origin.aiur.activity.group.pager;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,7 @@ import android.widget.TextView;
 import com.origin.aiur.BaseFragment;
 import com.origin.aiur.R;
 import com.origin.aiur.activity.group.GroupHelper;
-import com.origin.aiur.dao.GropUserDao;
+import com.origin.aiur.dao.GroupUserDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.utils.ALogger;
@@ -25,7 +23,6 @@ import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +79,6 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         chargeAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
             }
 
             @Override
@@ -92,7 +88,6 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 
@@ -105,7 +100,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         ALogger.log(ALogger.LogPriority.debug, GroupChargeFragment.class, "GroupChargeFragment@onStart");
 
         long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-        List<User> userList = GropUserDao.getInstance().getGroupUserList(currentGroupId);
+        List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
         refreshUserList(userList);
     }
 
@@ -167,7 +162,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         switch (Actions.valueOf(action)) {
             case load_group_user:
                 long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-                List<User> userList = GropUserDao.getInstance().getGroupUserList(currentGroupId);
+                List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
                 refreshUserList(userList);
                 break;
         }

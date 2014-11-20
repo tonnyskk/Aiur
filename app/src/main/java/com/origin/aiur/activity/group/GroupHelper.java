@@ -1,7 +1,7 @@
 package com.origin.aiur.activity.group;
 
 import com.origin.aiur.dao.FinanceDao;
-import com.origin.aiur.dao.GropUserDao;
+import com.origin.aiur.dao.GroupUserDao;
 import com.origin.aiur.dao.GroupEventDao;
 import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
@@ -119,7 +119,7 @@ public class GroupHelper {
             ALogger.log(ALogger.LogPriority.error, GroupHelper.class, "Parse JSON failed. %s", object.toString(), e);
         }
 
-        GropUserDao.getInstance().saveGroupUsers(groupUserList);
+        GroupUserDao.getInstance().saveGroupUsers(groupUserList);
         return groupUserList;
     }
 

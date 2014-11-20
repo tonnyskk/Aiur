@@ -84,6 +84,7 @@
     <string name="tab_charge_amount_title">消费</string>
     <string name="tab_charge_amount_hint">金額</string>
     <string name="tab_charge_desc_hint">描述</string>
+    <string name="charge_prepay">代付</string>
 
 
     <!-- Common message -->

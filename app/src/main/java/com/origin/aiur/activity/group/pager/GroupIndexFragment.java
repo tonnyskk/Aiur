@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.origin.aiur.BaseFragment;
@@ -14,12 +16,14 @@ import com.origin.aiur.activity.group.GroupHelper;
 import com.origin.aiur.activity.main.ListActivitiesAdapter;
 import com.origin.aiur.dao.FinanceDao;
 import com.origin.aiur.dao.GroupEventDao;
+import com.origin.aiur.dao.GroupUserDao;
 import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
+import com.origin.aiur.vo.User;
 
 import org.json.JSONObject;
 
@@ -36,9 +40,11 @@ public class GroupIndexFragment extends BaseFragment {
     private ListActivitiesAdapter groupActivityAdapter;
     private View tabBtnPrepay;
     private View tabBtnCharge;
+    private GridView listUserPrepayList;
+    private UserAvatarAdapter userAdapter;
 
     private enum Actions{
-        load_user_finance_by_group, load_group_activity
+        load_user_finance_by_group, load_group_activity, load_group_user
     }
 
     public static GroupIndexFragment startFragment(Context context) {
@@ -60,6 +66,7 @@ public class GroupIndexFragment extends BaseFragment {
 
         this.getSync(Actions.load_user_finance_by_group.name(), currentUserId, currentGroupId);
         this.getSync(Actions.load_group_activity.name(), currentUserId, currentGroupId);
+        this.getSync(Actions.load_group_user.name(), currentGroupId);
     }
 
     @Override
@@ -75,10 +82,14 @@ public class GroupIndexFragment extends BaseFragment {
 
         groupPrepayLeft = (TextView)rootView.findViewById(R.id.groupPrepayLeft);
         groupFunnyText =  (TextView)rootView.findViewById(R.id.groupFunnyText);
+
         groupActivityList = (ListView)rootView.findViewById(R.id.listUserGroupActivity);
         groupActivityAdapter = new ListActivitiesAdapter(this.getActivity());
         groupActivityList.setAdapter(groupActivityAdapter);
 
+        listUserPrepayList = (GridView)rootView.findViewById(R.id.listUserPrepayList);
+        userAdapter = new UserAvatarAdapter(this.getContext());
+        listUserPrepayList.setAdapter(userAdapter);
         return rootView;
     }
 
@@ -100,6 +111,10 @@ public class GroupIndexFragment extends BaseFragment {
 
         Finance finance = FinanceDao.getInstance().getGroupFinance();
         refreshFinance(finance);
+
+        long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
+        List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+        refreshUserList(userList);
     }
 
     @Override
@@ -136,6 +151,10 @@ public class GroupIndexFragment extends BaseFragment {
                  List<GroupEvent> groupEventList = GroupHelper.getInstance().getGroupEventList(response);
                  refreshGroupEvent(groupEventList);
                  break;
+            case load_group_user:
+                List<User> userList = GroupHelper.getInstance().getGroupUserList(response);
+                refreshUserList(userList);
+                break;
         }
     }
 
@@ -150,6 +169,11 @@ public class GroupIndexFragment extends BaseFragment {
                 Finance finance = FinanceDao.getInstance().getGroupFinance();
                 refreshFinance(finance);
                 break;
+            case load_group_user:
+                long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
+                List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+                refreshUserList(userList);
+                break;
         }
     }
 
@@ -162,6 +186,9 @@ public class GroupIndexFragment extends BaseFragment {
                 break;
             case load_group_activity:
                 path = HttpUtils.buildPath(HttpUtils.load_group_activity, args);
+                break;
+            case load_group_user:
+                path = HttpUtils.buildPath(HttpUtils.load_group_users, args);
                 break;
         }
         return path;
@@ -196,20 +223,26 @@ public class GroupIndexFragment extends BaseFragment {
         }
     }
 
+    private void refreshUserList(List<User> userList) {
+        if (userList != null && userAdapter != null) {
+            userAdapter.setUserList(userList);
+        }
+    }
+
     private String getFunnyText(double money) {
         String displayText = null;
         if (money <= 0) {
-            displayText = getString(R.string.msg_index_funny_1);
+            displayText = getContext().getString(R.string.msg_index_funny_1);
         } else if (money <= 20) {
-            displayText = getString(R.string.msg_index_funny_2);
+            displayText = getContext().getString(R.string.msg_index_funny_2);
         } else if (money <= 50) {
-            displayText = getString(R.string.msg_index_funny_3);
+            displayText = getContext().getString(R.string.msg_index_funny_3);
         } else if (money <= 100) {
-            displayText = getString(R.string.msg_index_funny_4);
+            displayText = getContext().getString(R.string.msg_index_funny_4);
         } else if (money <= 200) {
-            displayText = getString(R.string.msg_index_funny_5);
+            displayText = getContext().getString(R.string.msg_index_funny_5);
         } else {
-            displayText = getString(R.string.msg_index_funny_6);
+            displayText = getContext().getString(R.string.msg_index_funny_6);
         }
         return displayText;
     }

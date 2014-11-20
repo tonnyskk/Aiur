@@ -1,5 +1,7 @@
 package com.origin.aiur.vo;
 
+import com.origin.aiur.utils.AppUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,10 @@ public class User implements IJsonPacket {
     private long userID;
     private String loginName;
     private String nickName;
+    private long groupId;
+    private long createTime;
+    private double prepayMoney;
+    private double consumeMoney;
 
     private List<UserGroup> userGroupList;
 
@@ -61,11 +67,46 @@ public class User implements IJsonPacket {
         this.userGroupList = userGroupList;
     }
 
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(long groupId) {
+        this.groupId = groupId;
+    }
+
+    public double getPrepayMoney() {
+        return prepayMoney;
+    }
+
+    public void setPrepayMoney(double prepayMoney) {
+        this.prepayMoney = prepayMoney;
+    }
+
+    public double getConsumeMoney() {
+        return consumeMoney;
+    }
+
+    public void setConsumeMoney(double consumeMoney) {
+        this.consumeMoney = consumeMoney;
+    }
+
     @Override
     public void fromJsonObject(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
             if (jsonObject.has("userID")) {
                 setUserID(jsonObject.getLong("userID"));
+            }
+            if (jsonObject.has("groupId")) {
+                setGroupId(jsonObject.getLong("groupId"));
             }
 
             if (jsonObject.has("loginName")) {
@@ -75,8 +116,17 @@ public class User implements IJsonPacket {
             if (jsonObject.has("nickName")) {
                 setNickName(jsonObject.getString("nickName"));
             }
+            if (jsonObject.has("createTime")) {
+                setCreateTime(jsonObject.getLong("createTime"));
+            }
+            if (jsonObject.has("prepayMoney")) {
+                setPrepayMoney(jsonObject.getDouble("prepayMoney"));
+            }
+            if (jsonObject.has("consumeMoney")) {
+                setConsumeMoney(jsonObject.getDouble("consumeMoney"));
+            }
 
-            if (jsonObject.has("userGroupList")) {
+            if (jsonObject.has("userGroupList") && !AppUtils.isEmpty(jsonObject.getString("userGroupList"))) {
                 JSONArray groupList = jsonObject.getJSONArray("userGroupList");
                 userGroupList = new ArrayList<UserGroup>();
                 for (int i = 0; i < groupList.length(); i++) {
@@ -92,8 +142,12 @@ public class User implements IJsonPacket {
     public JSONObject toJsonObject() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("userID", userID);
+        jsonObject.put("groupId", groupId);
         jsonObject.put("loginName", loginName);
         jsonObject.put("nickName", nickName);
+        jsonObject.put("createTime", createTime);
+        jsonObject.put("prepayMoney", prepayMoney);
+        jsonObject.put("consumeMoney", consumeMoney);
 
         if (userGroupList != null) {
             JSONArray jsonArray = new JSONArray();

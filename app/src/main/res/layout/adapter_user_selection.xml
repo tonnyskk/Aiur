@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/main.group.activity.ListPadding.leftRight"
+    android:paddingRight="@dimen/main.group.activity.ListPadding.leftRight"
+    android:paddingTop="@dimen/main.group.activity.ListPadding.topBottom"
+    android:paddingBottom="@dimen/main.group.activity.ListPadding.topBottom"
+    android:background="@color/userSelectionListItemBg">
+
+    <ImageView
+        android:layout_width="@dimen/selectUserIconWidth"
+        android:layout_height="@dimen/selectUserIconHeight"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
+        android:layout_marginRight="@dimen/selectUserIconMarginRight"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/userNameSelection"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="AIUR"
+        android:textSize="@dimen/selectUserNameTextSize"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <CheckBox
+        android:id="@+id/userCheckboxSelection"
+        android:layout_width="@dimen/selectUserCheckboxWidth"
+        android:layout_height="@dimen/selectUserCheckboxHeight"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/selectUserCheckboxMarginRight"
+        android:onClick="onClick"/>
+
+</LinearLayout>
