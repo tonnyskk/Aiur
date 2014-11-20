@@ -62,7 +62,7 @@
     <string name="msg_index_join_group">%s 加入了小组。</string>
     <string name="msg_index_join_group_left">%s 离开了小组。</string>
 
-    <string name="msg_index_group_consume" formatted="false">消费银子 %1$s /人均 %2$s 两</string>
+    <string name="msg_index_group_consume" formatted="false">消费%1$s /人均 %2$s 两</string>
     <string name="msg_index_group_incoming" formatted="false">[%1$s]补充白银 %2$s 两！</string>
 
     <string name="msg_index_consume_invalid">哟！有人报假账啊！白银 %s 两啊！</string>
@@ -90,6 +90,8 @@
     <!-- Common message -->
     <string name="common_add_group_req">申请已提交，等待审批中。</string>
     <string name="warn_add_group_req">申请失败，请稍后重试。</string>
+    <string name="common_group_charge_req">付款申请已提交，审批中。</string>
+    <string name="common_group_charge_res">扣款已完成，请确认。</string>
 
     <!-- Error message -->
     <string name="generic_server_down">服务器异常，请稍后重试</string>

@@ -22,6 +22,8 @@
     <dimen name="avatarUserHeight">110dp</dimen>
     <dimen name="avatarUserIconWidth">50dp</dimen>
     <dimen name="avatarUserIconHeight">50dp</dimen>
+    <dimen name="avatarUserGridHorizontalSpacing">2dp</dimen>
+
     <dimen name="avatarUserAdapterPaddingLeft">5dp</dimen>
     <dimen name="avatarUserAdapterPaddingRight">0dp</dimen>
     <dimen name="avatarUserAdapterPaddingTop">5dp</dimen>

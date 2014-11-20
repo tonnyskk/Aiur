@@ -133,14 +133,17 @@
         android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <GridView
                 android:id="@+id/listUserPrepayList"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:columnWidth="@dimen/avatarUserWidth"
+                android:horizontalSpacing="@dimen/avatarUserGridHorizontalSpacing"
                 android:clickable="false"></GridView>
         </LinearLayout>
     </HorizontalScrollView>

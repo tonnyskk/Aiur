@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.origin.aiur.BaseFragment;
@@ -43,7 +43,7 @@ public class GroupIndexFragment extends BaseFragment {
     private GridView listUserPrepayList;
     private UserAvatarAdapter userAdapter;
 
-    private enum Actions{
+    private enum Actions {
         load_user_finance_by_group, load_group_activity, load_group_user
     }
 
@@ -61,12 +61,6 @@ public class GroupIndexFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ALogger.log(ALogger.LogPriority.debug, GroupIndexFragment.class, "GroupIndexFragment@onCreate");
-        long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-        long currentUserId = UserDao.getInstance().getCurrentUser().getUserID();
-
-        this.getSync(Actions.load_user_finance_by_group.name(), currentUserId, currentGroupId);
-        this.getSync(Actions.load_group_activity.name(), currentUserId, currentGroupId);
-        this.getSync(Actions.load_group_user.name(), currentGroupId);
     }
 
     @Override
@@ -80,14 +74,14 @@ public class GroupIndexFragment extends BaseFragment {
         tabBtnCharge = rootView.findViewById(R.id.tabBtnCharge);
         tabBtnCharge.setOnClickListener(this);
 
-        groupPrepayLeft = (TextView)rootView.findViewById(R.id.groupPrepayLeft);
-        groupFunnyText =  (TextView)rootView.findViewById(R.id.groupFunnyText);
+        groupPrepayLeft = (TextView) rootView.findViewById(R.id.groupPrepayLeft);
+        groupFunnyText = (TextView) rootView.findViewById(R.id.groupFunnyText);
 
-        groupActivityList = (ListView)rootView.findViewById(R.id.listUserGroupActivity);
+        groupActivityList = (ListView) rootView.findViewById(R.id.listUserGroupActivity);
         groupActivityAdapter = new ListActivitiesAdapter(this.getActivity());
         groupActivityList.setAdapter(groupActivityAdapter);
 
-        listUserPrepayList = (GridView)rootView.findViewById(R.id.listUserPrepayList);
+        listUserPrepayList = (GridView) rootView.findViewById(R.id.listUserPrepayList);
         userAdapter = new UserAvatarAdapter(this.getContext());
         listUserPrepayList.setAdapter(userAdapter);
         return rootView;
@@ -97,7 +91,6 @@ public class GroupIndexFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         ALogger.log(ALogger.LogPriority.debug, GroupIndexFragment.class, "GroupIndexFragment@onStart");
-
     }
 
     @Override
@@ -105,16 +98,12 @@ public class GroupIndexFragment extends BaseFragment {
         super.onResume();
         ALogger.log(ALogger.LogPriority.debug, GroupIndexFragment.class, "GroupIndexFragment@onResume");
 
-        // Refresh Values
-        List<GroupEvent> groupEventList = GroupEventDao.getInstance().getGroupEvents();
-        refreshGroupEvent(groupEventList);
-
-        Finance finance = FinanceDao.getInstance().getGroupFinance();
-        refreshFinance(finance);
-
         long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-        List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
-        refreshUserList(userList);
+        long currentUserId = UserDao.getInstance().getCurrentUser().getUserID();
+
+        this.getSync(Actions.load_user_finance_by_group.name(), currentUserId, currentGroupId);
+        this.getSync(Actions.load_group_activity.name(), currentUserId, currentGroupId);
+        this.getSync(Actions.load_group_user.name(), currentGroupId);
     }
 
     @Override
@@ -143,14 +132,14 @@ public class GroupIndexFragment extends BaseFragment {
     @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
-             case load_user_finance_by_group:
-                 Finance finance = GroupHelper.getInstance().getFinanceInfo(response);
-                 refreshFinance(finance);
-                 break;
-             case load_group_activity:
-                 List<GroupEvent> groupEventList = GroupHelper.getInstance().getGroupEventList(response);
-                 refreshGroupEvent(groupEventList);
-                 break;
+            case load_user_finance_by_group:
+                Finance finance = GroupHelper.getInstance().getFinanceInfo(response);
+                refreshFinance(finance);
+                break;
+            case load_group_activity:
+                List<GroupEvent> groupEventList = GroupHelper.getInstance().getGroupEventList(response);
+                refreshGroupEvent(groupEventList);
+                break;
             case load_group_user:
                 List<User> userList = GroupHelper.getInstance().getGroupUserList(response);
                 refreshUserList(userList);
@@ -225,6 +214,11 @@ public class GroupIndexFragment extends BaseFragment {
 
     private void refreshUserList(List<User> userList) {
         if (userList != null && userAdapter != null) {
+            int width = this.getContext().getResources().getDimensionPixelSize(R.dimen.avatarUserWidth);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width * userList.size(), LinearLayout.LayoutParams.WRAP_CONTENT);
+            listUserPrepayList.setLayoutParams(params);
+            listUserPrepayList.setNumColumns(userList.size());
+            listUserPrepayList.setStretchMode(GridView.NO_STRETCH);
             userAdapter.setUserList(userList);
         }
     }

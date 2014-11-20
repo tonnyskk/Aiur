@@ -34,18 +34,21 @@ public class SelectUserAdapter extends BaseAdapter {
         this.listener = baseFragment;
     }
 
-    public void setUserList(List<User> activityList, List<Long> checkedUserList) {
+    public void setUserList(List<User> activityList) {
         userList.clear();
-        checkedIdList.clear();
 
         if (activityList != null && !activityList.isEmpty()) {
             userList.addAll(activityList);
         }
+        this.notifyDataSetChanged();
+    }
+
+    public void updateCheckedList(List<Long> checkedUserList) {
+        checkedIdList.clear();
 
         if (checkedUserList != null && !checkedUserList.isEmpty()) {
             checkedIdList.addAll(checkedUserList);
         }
-        this.notifyDataSetChanged();
     }
 
     @Override

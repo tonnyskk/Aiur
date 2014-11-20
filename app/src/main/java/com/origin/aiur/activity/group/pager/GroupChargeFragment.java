@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,6 +27,7 @@ import com.origin.aiur.vo.User;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,16 +39,20 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     private SelectUserAdapter userAdapter;
     private TextView chargeButton;
     private EditText chargeAmount;
+    private EditText description;
+    private CheckBox isPrepay;
+    private View chargePrePayContainer;
     private List<Long> selectedUserList = new ArrayList<Long>();
 
 
     private enum Actions {
-        load_group_user
+        send_group_charge
     }
 
     public static GroupChargeFragment startFragment(Context context) {
         GroupChargeFragment instance = new GroupChargeFragment();
         instance.setContext(context);
+
         return instance;
     }
 
@@ -57,8 +64,6 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ALogger.log(ALogger.LogPriority.debug, GroupChargeFragment.class, "GroupChargeFragment@onCreate");
-        long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-        this.getSync(Actions.load_group_user.name(), currentGroupId);
     }
 
     @Override
@@ -67,15 +72,19 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         ALogger.log(ALogger.LogPriority.debug, GroupChargeFragment.class, "GroupChargeFragment@onCreateView");
         View rootView = inflater.inflate(R.layout.group_tab_charge, container, false);
 
-        userSelectList = (ListView)rootView.findViewById(R.id.groupTabChargeUserList);
+        userSelectList = (ListView) rootView.findViewById(R.id.groupTabChargeUserList);
         userAdapter = new SelectUserAdapter(getContext());
         userAdapter.setListener(this);
         userSelectList.setAdapter(userAdapter);
 
-        chargeButton = (TextView)rootView.findViewById(R.id.btnConsumeChargeForGroup);
+        chargeButton = (TextView) rootView.findViewById(R.id.btnConsumeChargeForGroup);
         chargeButton.setOnClickListener(this);
 
-        chargeAmount = (EditText)rootView.findViewById(R.id.chargeMoneyNumber);
+        description = (EditText) rootView.findViewById(R.id.chargeMoneyDesc);
+        isPrepay = (CheckBox) rootView.findViewById(R.id.chargePrePayBox);
+        chargePrePayContainer = rootView.findViewById(R.id.chargePrePayContainer);
+
+        chargeAmount = (EditText) rootView.findViewById(R.id.chargeMoneyNumber);
         chargeAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
@@ -91,6 +100,15 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
             }
         });
 
+        long ownerId = UserDao.getInstance().getCurrentGroup().getOwnerUserId();
+        long userId = UserDao.getInstance().getUserId();
+
+        if (ownerId == userId) {
+            chargePrePayContainer.setVisibility(View.GONE);
+        } else {
+            chargePrePayContainer.setVisibility(View.VISIBLE);
+        }
+
         return rootView;
     }
 
@@ -99,9 +117,6 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         super.onStart();
         ALogger.log(ALogger.LogPriority.debug, GroupChargeFragment.class, "GroupChargeFragment@onStart");
 
-        long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-        List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
-        refreshUserList(userList);
     }
 
     @Override
@@ -109,6 +124,9 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         super.onResume();
         ALogger.log(ALogger.LogPriority.debug, GroupChargeFragment.class, "GroupChargeFragment@onResume");
 
+        long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
+        List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+        refreshUserList(userList);
     }
 
     @Override
@@ -126,14 +144,27 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     public void performClick(View view) {
         switch (view.getId()) {
             case R.id.btnConsumeChargeForGroup:
+                closeBoard(this.getContext());
 
+                long ownerId = UserDao.getInstance().getCurrentGroup().getOwnerUserId();
+                long userId = UserDao.getInstance().getUserId();
+
+                HashMap<String, Object> param = new HashMap<String, Object>();
+                param.put("userId", userId);
+                param.put("groupId", UserDao.getInstance().getCurrentGroup().getGroupId());
+                param.put("description", description.getText().toString());
+                param.put("userPrePay", isPrepay.isChecked());
+                param.put("payByGroupOwner", ownerId == userId);
+                param.put("money", Double.parseDouble(chargeAmount.getText().toString()));
+                param.put("userList", selectedUserList);
+                this.postSync(Actions.send_group_charge.name(), param);
                 break;
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-        Long userId = (Long)compoundButton.getTag();
+        Long userId = (Long) compoundButton.getTag();
         if (checked) {
             if (!selectedUserList.contains(userId)) {
                 selectedUserList.add(userId);
@@ -143,6 +174,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
                 selectedUserList.remove(userId);
             }
         }
+        userAdapter.updateCheckedList(selectedUserList);
 
         checkButtonEnable();
     }
@@ -150,21 +182,35 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     @Override
     public void onPostExecuteSuccessful(String action, JSONObject response) {
         switch (Actions.valueOf(action)) {
-            case load_group_user:
-                List<User> userList = GroupHelper.getInstance().getGroupUserList(response);
-                refreshUserList(userList);
-            break;
+            case send_group_charge:
+                // Clear selected user
+                selectedUserList.clear();
+                description.setText("");
+                chargeAmount.setText("");
+                isPrepay.setChecked(false);
+
+                long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
+                List<User> users = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+                refreshUserList(users);
+
+                long ownerId = UserDao.getInstance().getCurrentGroup().getOwnerUserId();
+                long userId = UserDao.getInstance().getUserId();
+                if (ownerId == userId) {
+                    this.showToastMessage(this.getContext().getString(R.string.common_group_charge_res));
+                } else {
+                    this.showToastMessage(this.getContext().getString(R.string.common_group_charge_req));
+                }
+
+                // Go back to first tab
+                GroupHelper.getInstance().notifyChangeTab(0);
+
+                break;
         }
     }
 
     @Override
     public void onPostExecuteFailed(String action) {
         switch (Actions.valueOf(action)) {
-            case load_group_user:
-                long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-                List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
-                refreshUserList(userList);
-                break;
         }
 
     }
@@ -173,8 +219,8 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     public String getPath(String action, Object... args) {
         String path = null;
         switch (Actions.valueOf(action)) {
-            case load_group_user:
-                path = HttpUtils.buildPath(HttpUtils.load_group_users, args);
+            case send_group_charge:
+                path = HttpUtils.buildPath(HttpUtils.send_group_charge, args);
                 break;
         }
         return path;
@@ -191,9 +237,18 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
             chargeButton.setEnabled(false);
         }
     }
+
     private void refreshUserList(List<User> userList) {
         if (userList != null && userAdapter != null) {
-            userAdapter.setUserList(userList, selectedUserList);
+            userAdapter.updateCheckedList(selectedUserList);
+            userAdapter.setUserList(userList);
+        }
+    }
+
+    private void closeBoard(Context mContext) {
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 }

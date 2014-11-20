@@ -65,7 +65,7 @@ public class ListActivitiesAdapter extends BaseAdapter {
         GroupEvent groupEvent = groupEventList.get(i);
 
         TextView activityDate = (TextView) returnView.findViewById(R.id.groupActivityDate);
-        activityDate.setText(DateUtils.formatDate(groupEvent.getCreateTime()));
+        activityDate.setText(DateUtils.formatDate(groupEvent.getCreateTime(), "MM/dd HH:mm"));
 
         String type = groupEvent.getType();
 
@@ -94,7 +94,7 @@ public class ListActivitiesAdapter extends BaseAdapter {
                 activityDesc.setText(this.context.getString(R.string.msg_index_consume_invalid, groupConsume));
                 eventStatus.setVisibility(View.GONE);
             } else {
-                String displayText = this.context.getString(R.string.msg_index_group_consume, userConsume, groupConsume);
+                String displayText = this.context.getString(R.string.msg_index_group_consume, groupConsume, userConsume);
                 activityDesc.setText(displayText);
 
                 if ("PENDING".equalsIgnoreCase(groupEvent.getStatus())) {
