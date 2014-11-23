@@ -1,17 +1,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.origin.aiur.activity.group.GroupTabActivity$PlaceholderFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.origin.aiur.activity.group.GroupTabActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="this is fragment"/>
+    <LinearLayout
+        android:id="@+id/groupUserContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tabManageTitleTextSize"
+            android:textColor="@color/tab_index_cash_txt_color"
+            android:textStyle="bold|italic"
+            android:text="@string/tabManageUserTitle"
+            android:paddingTop="@dimen/tabManageTitleTopBottom"
+            android:paddingBottom="@dimen/tabManageTitleTopBottom"
+            android:paddingLeft="@dimen/tabManageTitleLeftRight"
+            android:paddingRight="@dimen/tabManageTitleLeftRight"
+            android:background="@color/tabManageTitleBg"/>
+
+        <ListView
+            android:id="@+id/groupUserItemList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/userRequestContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tabManageTitleTextSize"
+            android:textColor="@color/tab_index_cash_txt_color"
+            android:textStyle="bold|italic"
+            android:text="@string/tabManageRequestTitle"
+            android:paddingTop="@dimen/tabManageTitleTopBottom"
+            android:paddingBottom="@dimen/tabManageTitleTopBottom"
+            android:paddingLeft="@dimen/tabManageTitleLeftRight"
+            android:paddingRight="@dimen/tabManageTitleLeftRight"
+            android:background="@color/tabManageTitleBg"/>
+
+        <ListView
+            android:id="@+id/userRequestItemList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>

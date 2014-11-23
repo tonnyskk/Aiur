@@ -3,10 +3,12 @@ package com.origin.aiur.activity.group;
 import com.origin.aiur.dao.FinanceDao;
 import com.origin.aiur.dao.GroupUserDao;
 import com.origin.aiur.dao.GroupEventDao;
+import com.origin.aiur.dao.RequestEventDao;
 import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
+import com.origin.aiur.vo.RequestEvent;
 import com.origin.aiur.vo.User;
 import com.origin.aiur.vo.UserGroup;
 
@@ -86,6 +88,7 @@ public class GroupHelper {
         JSONArray groupArray = AppUtils.getJsonArray(object, "data");
 
         if (groupArray == null || groupArray.length() <= 0) {
+            GroupEventDao.getInstance().getStore().clear();
             return null;
         }
 
@@ -107,6 +110,7 @@ public class GroupHelper {
         JSONArray groupArray = AppUtils.getJsonArray(object, "data");
 
         if (groupArray == null || groupArray.length() <= 0) {
+
             return null;
         }
         List<User> groupUserList = new ArrayList<User>();
@@ -141,4 +145,27 @@ public class GroupHelper {
         }
     }
 
+
+    public List<RequestEvent> getRequestEventList(JSONObject object) {
+        JSONArray groupArray = AppUtils.getJsonArray(object, "data");
+
+        if (groupArray == null || groupArray.length() <= 0) {
+            //If no valid data found, we need clear the DAO
+            RequestEventDao.getInstance().getStore().clear();
+            return null;
+        }
+
+        List<RequestEvent> groupEventList = new ArrayList<RequestEvent>();
+        try {
+            for(int i = 0; i < groupArray.length(); i ++) {
+                JSONObject groupObject = groupArray.getJSONObject(i);
+                groupEventList.add(new RequestEvent(groupObject));
+            }
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, GroupHelper.class, "Parse JSON failed. %s", object.toString(), e);
+        }
+
+        RequestEventDao.getInstance().saveRequestEvents(groupEventList);
+        return groupEventList;
+    }
 }

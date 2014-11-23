@@ -3,6 +3,8 @@ package com.origin.aiur.activity.logon;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -20,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements TextWatcher {
     private TextView loginButton;
     private TextView registerButton;
 
@@ -46,7 +48,9 @@ public class LoginActivity extends BaseActivity {
         registerButton = (TextView) findViewById(R.id.loginRegister);
 
         userAccount = (EditText) findViewById(R.id.loginAccount);
+        userAccount.addTextChangedListener(this);
         userPassword = (EditText) findViewById(R.id.loginPassword);
+        userPassword.addTextChangedListener(this);
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
     }
@@ -116,6 +120,27 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
         return path;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        String account = userAccount.getText().toString();
+        String pwd = userPassword.getText().toString();
+        if (AppUtils.isEmpty(account) || AppUtils.isEmpty(pwd)) {
+            loginButton.setEnabled(false);
+        } else {
+            loginButton.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }
 

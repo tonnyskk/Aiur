@@ -43,9 +43,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     public void initPager() {
         pagerLists.add(GroupIndexFragment.startFragment(context));
-        pagerLists.add(GroupMessageFragment.startFragment(context));
         pagerLists.add(GroupPrepayFragment.startFragment(context));
         pagerLists.add(GroupChargeFragment.startFragment(context));
+        //pagerLists.add(GroupMessageFragment.startFragment(context));
 
         if (this.isOwner) {
            pagerLists.add(GroupManageFragment.startFragment(context));

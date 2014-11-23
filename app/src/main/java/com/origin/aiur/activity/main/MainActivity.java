@@ -180,9 +180,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void refreshGroupEvent(List<GroupEvent> groupEventList) {
-        if (groupEventList != null) {
-            groupActivityAdapter.setActivityList(groupEventList);
-        }
+        groupActivityAdapter.setActivityList(groupEventList);
     }
 
     private void refreshUserGroup(List<UserGroup> userGroupList) {
@@ -298,7 +296,6 @@ public class MainActivity extends BaseActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     UserGroup group = (UserGroup) view.getTag();
                     UserDao.getInstance().setCurrentGroup(group);
-                    // TODO: go to group detail page
                     GroupTabActivity.startActivity(MainActivity.this, group);
                     dismissPopup();
                 }

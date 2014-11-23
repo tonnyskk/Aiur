@@ -3,6 +3,8 @@ package com.origin.aiur.activity.group;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +19,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class NewGroupActivity extends BaseActivity{
+public class NewGroupActivity extends BaseActivity implements TextWatcher {
     private TextView btnCreateGroup;
     private EditText newGroupName;
     private EditText newGroupIntro;
@@ -41,7 +43,9 @@ public class NewGroupActivity extends BaseActivity{
         btnCreateGroup.setOnClickListener(this);
 
         newGroupName = (EditText) findViewById(R.id.newGroupName);
+        newGroupName.addTextChangedListener(this);
         newGroupIntro = (EditText) findViewById(R.id.newGroupIntro);
+        newGroupIntro.addTextChangedListener(this);
     }
 
     @Override
@@ -90,12 +94,30 @@ public class NewGroupActivity extends BaseActivity{
         }
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        if (isInputValid()) {
+            btnCreateGroup.setEnabled(true);
+        } else {
+            btnCreateGroup.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
+
     private boolean isInputValid() {
         String groupName = newGroupName.getText().toString();
         String groupDesc = newGroupIntro.getText().toString();
 
         if (AppUtils.isEmpty(groupName) || AppUtils.isEmpty(groupDesc)) {
-            showToastMessage(this.getString(R.string.no_input_value));
             return false;
         }
 

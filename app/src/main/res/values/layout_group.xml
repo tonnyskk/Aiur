@@ -9,8 +9,8 @@
     <!-- @Charge tab -->
     <dimen name="selectUserIconWidth">40dp</dimen>
     <dimen name="selectUserIconHeight">40dp</dimen>
-    <dimen name="selectUserIconMarginLeft">10dp</dimen>
-    <dimen name="selectUserIconMarginRight">10dp</dimen>
+    <dimen name="selectUserIconMarginLeft">2dp</dimen>
+    <dimen name="selectUserIconMarginRight">2dp</dimen>
     <dimen name="selectUserCheckboxWidth">40dp</dimen>
     <dimen name="selectUserCheckboxHeight">40dp</dimen>
     <dimen name="selectUserCheckboxMarginRight">10dp</dimen>
@@ -18,20 +18,20 @@
     <dimen name="selectUserNameTextSize">20sp</dimen>
 
     <!--Adapter user avatar -->
-    <dimen name="avatarUserWidth">100dp</dimen>
-    <dimen name="avatarUserHeight">110dp</dimen>
+    <dimen name="avatarUserWidth">80dp</dimen>
+    <dimen name="avatarUserHeight">100dp</dimen>
     <dimen name="avatarUserIconWidth">50dp</dimen>
     <dimen name="avatarUserIconHeight">50dp</dimen>
     <dimen name="avatarUserGridHorizontalSpacing">2dp</dimen>
 
-    <dimen name="avatarUserAdapterPaddingLeft">5dp</dimen>
-    <dimen name="avatarUserAdapterPaddingRight">0dp</dimen>
-    <dimen name="avatarUserAdapterPaddingTop">5dp</dimen>
-    <dimen name="avatarUserAdapterPaddingBottom">5dp</dimen>
+    <dimen name="avatarUserAdapterPaddingLeft">2dp</dimen>
+    <dimen name="avatarUserAdapterPaddingRight">2dp</dimen>
+    <dimen name="avatarUserAdapterPaddingTop">1dp</dimen>
+    <dimen name="avatarUserAdapterPaddingBottom">1dp</dimen>
     <dimen name="avatarUserNameMaxWidth">80dp</dimen>
 
-    <dimen name="avatarUserNameTextSize">20sp</dimen>
-    <dimen name="avatarUserBalanceTextSize">18sp</dimen>
+    <dimen name="avatarUserNameTextSize">16sp</dimen>
+    <dimen name="avatarUserBalanceTextSize">16sp</dimen>
 
     <dimen name="searchGroupDescriptionTextSize">20sp</dimen>
 

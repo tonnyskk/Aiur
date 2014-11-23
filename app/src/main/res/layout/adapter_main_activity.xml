@@ -13,20 +13,21 @@
         android:id="@+id/groupActivityDate"
         android:layout_width="@dimen/mainGroupActivityDateWidth"
         android:layout_height="match_parent"
-        android:text="14/09/12" />
+        android:text="14/09/12"
+        android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/groupActivityDesc"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="XX have joined XXXgroup"
-        android:singleLine="true"
-        android:ellipsize="end" />
+        android:text="XX have joined XXXgroup"/>
 
     <TextView
         android:id="@+id/groupActivityStatus"
         android:layout_width="@dimen/mainGroupActivityStatusWidth"
         android:layout_height="match_parent"
-        android:text="OK"/>
+        android:text="OK"
+        android:textStyle="bold|italic"
+        android:gravity="center_vertical"/>
 </LinearLayout>

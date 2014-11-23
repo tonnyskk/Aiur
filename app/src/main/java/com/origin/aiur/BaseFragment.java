@@ -8,8 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
-
-import com.origin.aiur.dao.UserDao;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.HashMap;
 
@@ -25,6 +24,7 @@ public abstract class BaseFragment extends Fragment implements IBaseActivity, Vi
     }
 
     public abstract String getTitle();
+
     public abstract void performClick(View view);
 
     @Override
@@ -70,5 +70,13 @@ public abstract class BaseFragment extends Fragment implements IBaseActivity, Vi
     @Override
     public void onClick(View view) {
         performClick(view);
+    }
+
+    protected void closeBoard() {
+        Context mContext = getContext();
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

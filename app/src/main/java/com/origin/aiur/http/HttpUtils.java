@@ -24,7 +24,21 @@ public class HttpUtils {
     public static final String join_group = "/group/join/%s/%s"; // #userId/#groupId
     public static final String load_user_finance_by_group = "/group/finance/%s/%s";// /finance/#userId/#groupId
     public static final String load_group_users = "/group/users/%s";// /#groupId
+
+    // group charge tab
     public static final String send_group_charge = "/group/charge";
+    // group prepay tab
+    public static final String send_group_user_prepay = "/group/prepay";
+
+    // Group manage tab
+    public static final String load_user_request_event = "/group/request/%s";// /#groupId
+
+    public static final String send_manage_finance_event_approve = "/group/manageFinance/%s?type=approve"; // /#groupId
+    public static final String send_manage_finance_event_reject = "/group/manageFinance/%s?type=reject"; // /#groupId
+
+    public static final String send_manage_user_request_approve = "/group/manageUser?type=approve";
+    public static final String send_manage_user_request_reject = "/group/manageUser?type=reject";
+    public static final String send_manage_user_request_remove = "/group/manageUser?type=remove";
 
     public static String buildPath(String path, Object ... args) {
         return String.format(path, args);

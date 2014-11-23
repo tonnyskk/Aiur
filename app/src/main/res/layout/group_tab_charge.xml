@@ -7,22 +7,26 @@
 
     <ListView
         android:id="@+id/groupTabChargeUserList"
+        android:layout_marginBottom="@dimen/tabChargeUserListMarginBottom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     </ListView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/tab_block_separator"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/tabChargeCashMarginTop"
-        android:layout_marginBottom="@dimen/tabChargeCashMarginBottom"
         android:paddingTop="@dimen/tabChargeCashPaddingTop"
         android:paddingBottom="@dimen/tabChargeCashPaddingBottom"
         android:paddingLeft="@dimen/tabChargeCashPaddingLeft"
-        android:paddingRight="@dimen/tabChargeCashPaddingRight"
-        android:background="@drawable/round_corner_bg">
+        android:paddingRight="@dimen/tabChargeCashPaddingRight">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,6 +80,11 @@
             android:gravity="top"
             android:hint="@string/tab_charge_desc_hint"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/tab_block_separator"/>
 
     <TextView
         android:id="@+id/btnConsumeChargeForGroup"

@@ -34,7 +34,7 @@
 
     <string name="menu_create_group">创建小组</string>
     <string name="menu_join_group">加入小组</string>
-    <string name="msg_main_group_consume" formatted="false">[%1$s]消费 %2$s</string>
+    <string name="msg_main_group_consume" formatted="false">[%1$s]消费 %2$s两. %3$s</string>
 
     <!-- New group -->
     <string name="new_group_hint_name">小组名称</string>
@@ -62,7 +62,7 @@
     <string name="msg_index_join_group">%s 加入了小组。</string>
     <string name="msg_index_join_group_left">%s 离开了小组。</string>
 
-    <string name="msg_index_group_consume" formatted="false">消费%1$s /人均 %2$s 两</string>
+    <string name="msg_index_group_consume" formatted="false">消费%1$s /人均%2$s. %3$s</string>
     <string name="msg_index_group_incoming" formatted="false">[%1$s]补充白银 %2$s 两！</string>
 
     <string name="msg_index_consume_invalid">哟！有人报假账啊！白银 %s 两啊！</string>
@@ -77,8 +77,24 @@
     <string name="msg_index_funny_6">壕！壕！壕！</string>
 
     <!-- Group tag page @manage-->
+    <string name="tabManageRequestTitle">申请条目</string>
+    <string name="tabManageUserTitle">人员管理</string>
+    <string name="tabManageUserListItemJoinRequest">申请加入</string>
+
+    <string name="tabManageUserListItemButtonApprove">批准</string>
+    <string name="tabManageUserListItemButtonReject">拒绝</string>
+    <string name="tabManageUserListItemButtonRemove">移除</string>
+    <string name="tabManageUserListItemButtonCancel">无效</string>
+
+    <string name="msg_manage_group_consume" formatted="false">消费%1$s 申请人：%2$s. %3$s</string>
+    <string name="msg_manage_user_incoming" formatted="false">充值%1$s 申请人：%2$s</string>
+
     <!-- Group tag page @message-->
     <!-- Group tag page @prepay-->
+    <string name="tab_prepay_title">小组预付款</string>
+    <string name="tab_prepay_amount_hint">金額</string>
+    <string name="btn_prepay_user">充值</string>
+
     <!-- Group tag page @charge-->
     <string name="btn_charge_group">付款</string>
     <string name="tab_charge_amount_title">消费</string>
@@ -92,7 +108,11 @@
     <string name="warn_add_group_req">申请失败，请稍后重试。</string>
     <string name="common_group_charge_req">付款申请已提交，审批中。</string>
     <string name="common_group_charge_res">扣款已完成，请确认。</string>
+    <string name="common_group_prepay_req">充值申请已提交，审批中。</string>
+    <string name="common_group_prepay_res">充值已完成，请确认。</string>
 
+    <string name="common_group_manage_finance">申请信息已更新。</string>
+    <string name="common_group_manage_user">用户信息已更新。</string>
     <!-- Error message -->
     <string name="generic_server_down">服务器异常，请稍后重试</string>
     <string name="no_internet">网络异常，请确认您的网络状态！</string>
@@ -106,7 +126,7 @@
     <string name="error_msg_4000">4000</string>
     <string name="error_msg_4001">为了账户安全，请重新登陆！</string>
     <string name="error_msg_4002">为了账户安全，请重新登陆！</string>
-    <string name="error_msg_4003">TODO</string>
+    <string name="error_msg_4003">错误的请求信息，请确认！</string>
     <string name="error_msg_4004">用户登陆失败，请确认账户信息！</string>
     <string name="error_msg_4005">请输入账号！</string>
     <string name="error_msg_4006">请输入密码！</string>

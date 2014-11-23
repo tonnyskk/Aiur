@@ -5,6 +5,13 @@
 
     <dimen name="commonBlueButtonTextSize">20sp</dimen>
 
+
+    <dimen name="commonBlueButtonSmallHeight">26dp</dimen>
+    <dimen name="commonBlueButtonSmallPaddingLeftRight">5dp</dimen>
+    <dimen name="commonBlueButtonSmallMarginLeft">0dp</dimen>
+    <dimen name="commonBlueButtonSmallMarginRight">5dp</dimen>
+    <dimen name="commonBlueButtonSmallTextSize">14sp</dimen>
+
     <color name="commonBlueButtonTextColor">#ffffffff</color>
     <color name="commonBgColor">#ffffffff</color>
 

@@ -51,7 +51,8 @@
             android:text="@string/btn_login"
             android:layout_marginTop="@dimen/loginButtonMarginTopBottom"
             android:layout_marginLeft="@dimen/loginButtonMarginLeftRight"
-            android:layout_marginRight="@dimen/loginButtonMarginLeftRight" />
+            android:layout_marginRight="@dimen/loginButtonMarginLeftRight"
+            android:enabled="false"/>
 
     </LinearLayout>
 

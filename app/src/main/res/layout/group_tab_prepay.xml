@@ -2,16 +2,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
     tools:context="com.origin.aiur.activity.group.GroupTabActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="this is fragment"/>
+        android:orientation="vertical"
+        android:paddingTop="@dimen/tabPrepayCashPaddingTop"
+        android:paddingBottom="@dimen/tabPrepayCashPaddingBottom"
+        android:paddingLeft="@dimen/tabPrepayCashPaddingLeft"
+        android:paddingRight="@dimen/tabPrepayCashPaddingRight">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tabPrepayCashTextSize"
+            android:text="@string/tab_prepay_title"/>
+
+        <EditText
+            android:id="@+id/prepayMoneyNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tabPrepayCashInputMarginLeft"
+            android:layout_marginTop="@dimen/tabPrepayCashInputMarginTop"
+            android:numeric="decimal|signed"
+            android:ems="10"
+            android:hint="@string/tab_prepay_amount_hint"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnPrepayForUser"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/commonBlueButtonHeight"
+        android:background="@drawable/button_blue_bg"
+        android:clickable="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/commonBlueButtonTextColor"
+        android:textSize="@dimen/commonBlueButtonTextSize"
+        android:textStyle="bold"
+        android:text="@string/btn_prepay_user"
+        android:layout_marginTop="@dimen/tabPrepayButtonMarginTop"
+        android:layout_marginLeft="@dimen/tabPrepayButtonMarginLeft"
+        android:layout_marginRight="@dimen/tabPrepayButtonMarginRight"
+        android:layout_marginBottom="@dimen/tabPrepayButtonMarginBottom"
+        android:enabled="false"/>
 </LinearLayout>

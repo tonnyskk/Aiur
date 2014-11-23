@@ -12,6 +12,7 @@ import android.view.View;
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.activity.group.pager.SectionsPagerAdapter;
+import com.origin.aiur.dao.UserDao;
 import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONObject;
@@ -41,7 +42,9 @@ public class GroupTabActivity extends BaseActivity implements ActionBar.TabListe
         Intent intent = new Intent(context, GroupTabActivity.class);
         intent.putExtra(Keys.group_id.name(), userGroup.getGroupName());
         intent.putExtra(Keys.group_name.name(), userGroup.getGroupName());
-        intent.putExtra(Keys.is_owner.name(), true);
+        long groupOwner = userGroup.getOwnerUserId();
+        long currentUserId = UserDao.getInstance().getUserId();
+        intent.putExtra(Keys.is_owner.name(), currentUserId == groupOwner);
         context.startActivity(intent);
     }
 

@@ -17,7 +17,7 @@ public class AStoreManager {
     private static final HashMap<StorageName, IAStorage> storages = new HashMap<StorageName, IAStorage>(9);
 
     static enum StorageName {
-        UserIdentityStore, UserStore, UserEventStore, GroupEventStore, FinanceStore, GroupUserStore
+        UserIdentityStore, UserStore, UserEventStore, GroupEventStore, FinanceStore, GroupUserStore, RequestEventStore
     }
 
     private AStoreManager() {
@@ -65,6 +65,15 @@ public class AStoreManager {
         }
         ASQLMapStorage asqlMapStorage = new ASQLMapStorage(ASQLMapHelper.getInstance(), StorageName.GroupEventStore.name());
         storages.put(StorageName.GroupEventStore, asqlMapStorage);
+        return asqlMapStorage;
+    }
+
+    public synchronized ASQLMapStorage getRequestEventStore() {
+        if (storages.containsKey(StorageName.RequestEventStore)) {
+            return (ASQLMapStorage) storages.get(StorageName.RequestEventStore);
+        }
+        ASQLMapStorage asqlMapStorage = new ASQLMapStorage(ASQLMapHelper.getInstance(), StorageName.RequestEventStore.name());
+        storages.put(StorageName.RequestEventStore, asqlMapStorage);
         return asqlMapStorage;
     }
 

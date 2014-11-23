@@ -94,7 +94,7 @@ public class ListActivitiesAdapter extends BaseAdapter {
                 activityDesc.setText(this.context.getString(R.string.msg_index_consume_invalid, groupConsume));
                 eventStatus.setVisibility(View.GONE);
             } else {
-                String displayText = this.context.getString(R.string.msg_index_group_consume, groupConsume, userConsume);
+                String displayText = this.context.getString(R.string.msg_index_group_consume, groupConsume, userConsume, groupEvent.getDescription());
                 activityDesc.setText(displayText);
 
                 if ("PENDING".equalsIgnoreCase(groupEvent.getStatus())) {
@@ -113,13 +113,13 @@ public class ListActivitiesAdapter extends BaseAdapter {
             } else {
                 eventStatus.setVisibility(View.GONE);
             }
-        }else {
+        } else {
             // Is Activity Item in MainActivity
             String groupConsume = AppUtils.formatMoney(groupEvent.getGroupConsume());
-            String displayText = this.context.getString(R.string.msg_main_group_consume, groupEvent.getGroupName(), groupConsume);
+            String displayText = this.context.getString(R.string.msg_main_group_consume, groupEvent.getGroupName(), groupConsume, groupEvent.getDescription());
             activityDesc.setText(displayText);
 
-            if ("PENDING".equalsIgnoreCase(groupEvent.getStatus())){
+            if ("PENDING".equalsIgnoreCase(groupEvent.getStatus())) {
                 eventStatus.setText(this.context.getString(R.string.msg_index_consume_pending));
             } else {
                 eventStatus.setVisibility(View.GONE);

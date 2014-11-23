@@ -125,7 +125,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         ALogger.log(ALogger.LogPriority.debug, GroupChargeFragment.class, "GroupChargeFragment@onResume");
 
         long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-        List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+        List<User> userList = GroupUserDao.getInstance().getGroupJoinedUserList(currentGroupId);
         refreshUserList(userList);
     }
 
@@ -144,7 +144,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     public void performClick(View view) {
         switch (view.getId()) {
             case R.id.btnConsumeChargeForGroup:
-                closeBoard(this.getContext());
+                closeBoard();
 
                 long ownerId = UserDao.getInstance().getCurrentGroup().getOwnerUserId();
                 long userId = UserDao.getInstance().getUserId();
@@ -190,7 +190,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
                 isPrepay.setChecked(false);
 
                 long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-                List<User> users = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+                List<User> users = GroupUserDao.getInstance().getGroupJoinedUserList(currentGroupId);
                 refreshUserList(users);
 
                 long ownerId = UserDao.getInstance().getCurrentGroup().getOwnerUserId();
@@ -242,13 +242,6 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
         if (userList != null && userAdapter != null) {
             userAdapter.updateCheckedList(selectedUserList);
             userAdapter.setUserList(userList);
-        }
-    }
-
-    private void closeBoard(Context mContext) {
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm.isActive()) {
-            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 }

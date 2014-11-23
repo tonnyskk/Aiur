@@ -47,16 +47,16 @@ public class GroupUserDao {
         }
     }
 
-    public List<User> getGroupUserList(long groupId) {
+    public List<User> getGroupJoinedUserList(long groupId) {
         List<User> userList = new ArrayList<User>();
         try {
             List<byte[]> groupData = getStore().getAllData();
             if (groupData.size() > 0) {
                 for (byte[] data : groupData) {
                     if (data != null) {
-                        User group = new User(new JSONObject(new String(data, AppUtils.CHARSET)));
-                        if (groupId == group.getGroupId()) {
-                            userList.add(group);
+                        User userInfo = new User(new JSONObject(new String(data, AppUtils.CHARSET)));
+                        if (groupId == userInfo.getGroupId() && "JOINED".equalsIgnoreCase(userInfo.getJoinStatus())) {
+                            userList.add(userInfo);
                         }
                     }
                 }
@@ -69,6 +69,27 @@ public class GroupUserDao {
         return userList;
     }
 
+    public List<User> getGroupUserList(long groupId) {
+        List<User> userList = new ArrayList<User>();
+        try {
+            List<byte[]> groupData = getStore().getAllData();
+            if (groupData.size() > 0) {
+                for (byte[] data : groupData) {
+                    if (data != null) {
+                        User userInfo = new User(new JSONObject(new String(data, AppUtils.CHARSET)));
+                        if (groupId == userInfo.getGroupId()) {
+                            userList.add(userInfo);
+                        }
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Get Users failed for JSON parse!", e);
+        } catch (UnsupportedEncodingException e) {
+            ALogger.log(ALogger.LogPriority.error, UserDao.class, "Get Users failed for Charset error!", e);
+        }
+        return userList;
+    }
     public ASQLMapStorage getStore() {
         return AStoreManager.getInstance().getGroupUserStore();
     }

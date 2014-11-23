@@ -33,6 +33,7 @@ public class MainHelper {
         JSONArray groupArray = AppUtils.getJsonArray(object, "data");
 
         if (groupArray == null || groupArray.length() <= 0) {
+            UserEventDao.getInstance().getStore().clear();
             return null;
         }
 

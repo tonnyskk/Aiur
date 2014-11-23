@@ -3,6 +3,8 @@ package com.origin.aiur.activity.logon;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -20,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements TextWatcher{
 
     private TextView regButton = null;
 
@@ -46,9 +48,13 @@ public class RegisterActivity extends BaseActivity {
 
 
         userAccount = (EditText) findViewById(R.id.registerEmail);
+        userAccount.addTextChangedListener(this);
         userNickName = (EditText) findViewById(R.id.registerNick);
+        userNickName.addTextChangedListener(this);
         userPassword = (EditText) findViewById(R.id.registerPassword);
+        userPassword.addTextChangedListener(this);
         userPasswordConfirm = (EditText) findViewById(R.id.registerConfirmPassword);
+        userPasswordConfirm.addTextChangedListener(this);
 
         regButton = (TextView) findViewById(R.id.btnRegister);
         regButton.setOnClickListener(this);
@@ -85,7 +91,28 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void onPostExecuteFailed(String action) {
+    }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        String account = userAccount.getText().toString();
+        String nick = userNickName.getText().toString();
+        String pwd = userPassword.getText().toString();
+        String pwdConfirm = userPasswordConfirm.getText().toString();
+
+        if (AppUtils.isEmpty(account) || AppUtils.isEmpty(nick) || AppUtils.isEmpty(pwd) || AppUtils.isEmpty(pwdConfirm)) {
+            regButton.setEnabled(false);
+        } else {
+            regButton.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
     }
 
     private boolean isInputValid() {

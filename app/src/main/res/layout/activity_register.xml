@@ -57,6 +57,7 @@
         android:text="@string/btn_register"
         android:minWidth="@dimen/reg.button.MinWidth"
         android:maxWidth="@dimen/reg.button.MaxWidth"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:enabled="false"/>
 
 </LinearLayout>

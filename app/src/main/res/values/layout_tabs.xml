@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
+    <!-- Group tab index  -->
     <dimen name="tab_index_cash_padding_topBottom">10dp</dimen>
     <dimen name="tab_index_cash_padding_leftRight">20dp</dimen>
 
@@ -30,22 +30,57 @@
     <color name="tab_index_btn_split">#ffdadada</color>
 
 
+    <!-- Group tab charge  -->
     <dimen name="tabChargeCashPaddingLeft">10dp</dimen>
     <dimen name="tabChargeCashPaddingRight">30dp</dimen>
     <dimen name="tabChargeCashPaddingTop">5dp</dimen>
     <dimen name="tabChargeCashPaddingBottom">5dp</dimen>
-    <dimen name="tabChargeCashMarginTop">5dp</dimen>
-    <dimen name="tabChargeCashMarginBottom">20dp</dimen>
+    <dimen name="tabChargeUserListMarginBottom">5dp</dimen>
     <dimen name="tabChargeCashInputMarginLeft">20dp</dimen>
     <dimen name="tabChargeCheckboxWidth">40dp</dimen>
     <dimen name="tabChargeCheckboxHeight">40dp</dimen>
 
-    <dimen name="tabChargeButtonMarginTop">10dp</dimen>
+    <dimen name="tabChargeButtonMarginTop">15dp</dimen>
     <dimen name="tabChargeButtonMarginBottom">40dp</dimen>
     <dimen name="tabChargeButtonMarginLeft">20dp</dimen>
     <dimen name="tabChargeButtonMarginRight">20dp</dimen>
 
     <dimen name="tabChargeCashTextSize">22sp</dimen>
     <dimen name="tabChargeCheckboxTextSize">20sp</dimen>
+    <color name="tab_block_separator">#ffdadada</color>
+
+
+    <!-- Group tab pre-pay  -->
+    <dimen name="tabPrepayCashPaddingLeft">10dp</dimen>
+    <dimen name="tabPrepayCashPaddingRight">30dp</dimen>
+    <dimen name="tabPrepayCashPaddingTop">5dp</dimen>
+    <dimen name="tabPrepayCashPaddingBottom">5dp</dimen>
+    <dimen name="tabPrepayCashInputMarginLeft">20dp</dimen>
+    <dimen name="tabPrepayCashInputMarginTop">5dp</dimen>
+
+    <dimen name="tabPrepayButtonMarginTop">15dp</dimen>
+    <dimen name="tabPrepayButtonMarginBottom">40dp</dimen>
+    <dimen name="tabPrepayButtonMarginLeft">20dp</dimen>
+    <dimen name="tabPrepayButtonMarginRight">20dp</dimen>
+
+    <dimen name="tabPrepayCashTextSize">22sp</dimen>
+
+    <!-- Group tab manage  -->
+    <dimen name="tabManageTitleTopBottom">5dp</dimen>
+    <dimen name="tabManageTitleLeftRight">10dp</dimen>
+    <dimen name="tabManageUserItemIconWidth">40dp</dimen>
+    <dimen name="tabManageUserItemIconHeight">40dp</dimen>
+    <dimen name="tabManageItemDateMarginLeft">2dp</dimen>
+    <dimen name="tabManageItemDateMarginRight">5dp</dimen>
+    <dimen name="tabManageItemDateWidth">90dp</dimen>
+
+    <dimen name="tabManageListPaddingLeftRight">5dp</dimen>
+    <dimen name="tabManageListPaddingTopBottom">5dp</dimen>
+
+    <color name="tabManageTitleBg">#ff0fae7b</color>
+
+
+    <dimen name="tabManageRequestEventListItemTextSize">16sp</dimen>
+    <dimen name="tabManageTitleTextSize">28sp</dimen>
 
 </resources>

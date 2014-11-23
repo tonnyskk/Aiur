@@ -121,10 +121,10 @@ public class GroupIndexFragment extends BaseFragment {
     public void performClick(View view) {
         switch (view.getId()) {
             case R.id.tabBtnPrepay:
-                GroupHelper.getInstance().notifyChangeTab(2);
+                GroupHelper.getInstance().notifyChangeTab(1);
                 break;
             case R.id.tabBtnCharge:
-                GroupHelper.getInstance().notifyChangeTab(3);
+                GroupHelper.getInstance().notifyChangeTab(2);
                 break;
         }
     }
@@ -160,7 +160,7 @@ public class GroupIndexFragment extends BaseFragment {
                 break;
             case load_group_user:
                 long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
-                List<User> userList = GroupUserDao.getInstance().getGroupUserList(currentGroupId);
+                List<User> userList = GroupUserDao.getInstance().getGroupJoinedUserList(currentGroupId);
                 refreshUserList(userList);
                 break;
         }
