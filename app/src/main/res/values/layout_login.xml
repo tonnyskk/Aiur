@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="loginContainerMarginLeft">40dp</dimen>
+    <dimen name="loginContainerMarginRight">40dp</dimen>
 
     <dimen name="loginButtonMarginTopBottom">35dp</dimen>
     <dimen name="loginButtonMarginLeftRight">20dp</dimen>
     <dimen name="regButtonPaddingLeftRight">12dp</dimen>
+    <dimen name="avatarIconMarginBottom">20dp</dimen>
 
     <dimen name="editTextSplitWidth">10dp</dimen>
+    <dimen name="loginRegButtonHeight">30dp</dimen>
 
 
     <dimen name="splash_promote_text_size">20dp</dimen>
@@ -15,7 +19,7 @@
     <dimen name="splash_bubble_padding_topBottom">20dp</dimen>
     <dimen name="splash_bubble_padding_leftRight">20dp</dimen>
 
-    <dimen name="regButtonTextSize">18sp</dimen>
+    <dimen name="regButtonTextSize">16sp</dimen>
 
     <color name="splash_text_color">#ffffffff</color>
     <color name="splash_window_bg">#fffbffdf</color>

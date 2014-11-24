@@ -8,12 +8,14 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.activity.main.MainActivity;
 import com.origin.aiur.dao.UserDao;
+import com.origin.aiur.http.HttpExecutor;
 import com.origin.aiur.http.HttpUtils;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
@@ -25,6 +27,7 @@ import java.util.HashMap;
 public class LoginActivity extends BaseActivity implements TextWatcher {
     private TextView loginButton;
     private TextView registerButton;
+    private ImageView userAvatar;
 
     private EditText userAccount;
     private EditText userPassword;
@@ -47,12 +50,25 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
         loginButton = (TextView) findViewById(R.id.loginLogon);
         registerButton = (TextView) findViewById(R.id.loginRegister);
 
+        userAvatar = (ImageView) findViewById(R.id.loginUserAvatar);
+
         userAccount = (EditText) findViewById(R.id.loginAccount);
         userAccount.addTextChangedListener(this);
         userPassword = (EditText) findViewById(R.id.loginPassword);
         userPassword.addTextChangedListener(this);
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
+
+
+        User user = UserDao.getInstance().getCurrentUser();
+        if (user != null) {
+            if (user.getLoginName() != null) {
+                userAccount.setText(user.getLoginName());
+            }
+            if (user.getAvatarUrl() != null) {
+                HttpExecutor.getExecutor().loadImage(user.getAvatarUrl(), userAvatar, R.drawable.user_avatar_default_unfocused, R.drawable.user_avatar_default_unfocused);
+            }
+        }
     }
 
     @Override
@@ -136,6 +152,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
         } else {
             loginButton.setEnabled(true);
         }
+        userAvatar.setImageResource(R.drawable.user_avatar_default_unfocused);
     }
 
     @Override

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.origin.aiur"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 17
         versionCode 1
         versionName "1.0"
@@ -17,13 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    // This is important, it will run lint checks but won't abort build
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    // compile "com.android:volley:1.0"
+    //compile "com.android:volley:1.0"
     compile 'com.android.support:appcompat-v7:20.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.github.gabrielemariotti.cards:library:1.9.1'
+    compile 'com.android.support:support-v4:20.0.0'
     //compile 'commons-codec:commons-codec:1.9'
 }

@@ -1,12 +1,16 @@
 package com.origin.aiur.http;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.util.LruCache;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.origin.aiur.BaseActivity;
@@ -32,6 +36,7 @@ import java.util.Map;
 public class HttpExecutor {
     private static HttpExecutor instance = new HttpExecutor();
     private static boolean fakeHttp = false;
+    private ImageLoader imageLoader = new ImageLoader(AiurApplication.getInstance().getRequestQueue(), new BitmapCache());
 
     private HttpExecutor() {
     }
@@ -150,6 +155,32 @@ public class HttpExecutor {
         AiurApplication.getInstance().addToRequestQueue(req, tag);
     }
 
+    public  void loadImage(String requestUrl, ImageView imageView, int defaultIconId, int errorIconId) {
+        if (imageView == null || requestUrl == null) {
+            return;
+        }
+        imageLoader.get(requestUrl, ImageLoader.getImageListener(imageView, defaultIconId, errorIconId), 400, 400);
+    }
+
+    public class BitmapCache implements ImageLoader.ImageCache {
+        private LruCache<String, Bitmap> cache;
+        public BitmapCache() {
+            cache = new LruCache<String, Bitmap>(8 * 1024 * 1024) {
+                @Override
+                protected int sizeOf(String key, Bitmap bitmap) {
+                    return bitmap.getRowBytes() * bitmap.getHeight();
+                }
+            };
+        }
+        @Override
+        public Bitmap getBitmap(String url) {
+            return cache.get(url);
+        }
+        @Override
+        public void putBitmap(String url, Bitmap bitmap) {
+            cache.put(url, bitmap);
+        }
+    }
     private String parseUrl(String path) {
         String finalUrl = HttpUtils.BASE_URL;
         if (path.startsWith("/")) {

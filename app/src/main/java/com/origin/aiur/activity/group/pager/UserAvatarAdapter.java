@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.origin.aiur.R;
+import com.origin.aiur.http.HttpExecutor;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
@@ -71,6 +73,13 @@ public class UserAvatarAdapter extends BaseAdapter {
 
         TextView userName = (TextView) returnView.findViewById(R.id.userDisplayName);
         userName.setText(userInfo.getNickName());
+
+        ImageView avatarUserImage = (ImageView)returnView.findViewById(R.id.avatarUserImage);
+        avatarUserImage.setImageResource(R.drawable.user_avatar_default_unfocused);
+
+        if (!AppUtils.isEmpty(userInfo.getAvatarUrl())) {
+            HttpExecutor.getExecutor().loadImage(userInfo.getAvatarUrl(), avatarUserImage, R.drawable.user_avatar_unfocused, R.drawable.user_avatar_unfocused);
+        }
 
         return returnView;
     }

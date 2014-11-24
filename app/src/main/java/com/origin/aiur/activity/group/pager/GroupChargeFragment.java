@@ -43,6 +43,7 @@ public class GroupChargeFragment extends BaseFragment implements CompoundButton.
     private CheckBox isPrepay;
     private View chargePrePayContainer;
     private List<Long> selectedUserList = new ArrayList<Long>();
+    //private CardGridStaggeredArrayAdapter cardGridStaggeredArrayAdapter;
 
 
     private enum Actions {

@@ -19,6 +19,8 @@ public class User implements IJsonPacket {
     private String joinStatus;
     private long groupId;
     private long createTime;
+    private String avatarUrl;
+
     private double prepayMoney;
     private double consumeMoney;
 
@@ -108,6 +110,14 @@ public class User implements IJsonPacket {
         this.joinStatus = joinStatus;
     }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     @Override
     public void fromJsonObject(JSONObject jsonObject) throws JSONException {
         if (jsonObject != null) {
@@ -137,6 +147,9 @@ public class User implements IJsonPacket {
             if (jsonObject.has("joinStatus")) {
                 setJoinStatus(jsonObject.getString("joinStatus"));
             }
+            if (jsonObject.has("avatarUrl")) {
+                setJoinStatus(jsonObject.getString("avatarUrl"));
+            }
 
             if (jsonObject.has("userGroupList") && !AppUtils.isEmpty(jsonObject.getString("userGroupList"))) {
                 JSONArray groupList = jsonObject.getJSONArray("userGroupList");
@@ -161,6 +174,7 @@ public class User implements IJsonPacket {
         jsonObject.put("prepayMoney", prepayMoney);
         jsonObject.put("consumeMoney", consumeMoney);
         jsonObject.put("joinStatus", joinStatus);
+        jsonObject.put("avatarUrl", avatarUrl);
 
         if (userGroupList != null) {
             JSONArray jsonArray = new JSONArray();

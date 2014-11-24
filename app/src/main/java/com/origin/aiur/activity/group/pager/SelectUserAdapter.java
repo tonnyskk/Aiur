@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.origin.aiur.BaseFragment;
 import com.origin.aiur.R;
+import com.origin.aiur.http.HttpExecutor;
+import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
 import java.util.ArrayList;
@@ -92,6 +94,12 @@ public class SelectUserAdapter extends BaseAdapter {
             checkBox.setChecked(false);
         }
 
+        ImageView userSelectAvatarImage = (ImageView) returnView.findViewById(R.id.userSelectAvatarImage);
+        userSelectAvatarImage.setImageResource(R.drawable.user_avatar_unfocused);
+
+        if (!AppUtils.isEmpty(userInfo.getAvatarUrl())) {
+            HttpExecutor.getExecutor().loadImage(userInfo.getAvatarUrl(), userSelectAvatarImage, R.drawable.user_avatar_unfocused, R.drawable.user_avatar_unfocused);
+        }
         return returnView;
     }
 }

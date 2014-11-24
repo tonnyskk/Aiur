@@ -10,7 +10,7 @@
     <dimen name="selectUserIconWidth">40dp</dimen>
     <dimen name="selectUserIconHeight">40dp</dimen>
     <dimen name="selectUserIconMarginLeft">2dp</dimen>
-    <dimen name="selectUserIconMarginRight">2dp</dimen>
+    <dimen name="selectUserIconMarginRight">5dp</dimen>
     <dimen name="selectUserCheckboxWidth">40dp</dimen>
     <dimen name="selectUserCheckboxHeight">40dp</dimen>
     <dimen name="selectUserCheckboxMarginRight">10dp</dimen>

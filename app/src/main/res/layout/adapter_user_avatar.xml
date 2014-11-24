@@ -12,6 +12,7 @@
     android:background="@color/userSelectionListItemBg">
 
     <ImageView
+        android:id="@+id/avatarUserImage"
         android:layout_width="@dimen/avatarUserIconWidth"
         android:layout_height="@dimen/avatarUserIconHeight"
         android:layout_gravity="center_horizontal"

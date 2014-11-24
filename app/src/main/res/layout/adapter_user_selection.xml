@@ -11,12 +11,13 @@
     android:background="@color/userSelectionListItemBg">
 
     <ImageView
+        android:id="@+id/userSelectAvatarImage"
         android:layout_width="@dimen/selectUserIconWidth"
         android:layout_height="@dimen/selectUserIconHeight"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
         android:layout_marginRight="@dimen/selectUserIconMarginRight"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/user_avatar_unfocused" />
 
     <TextView
         android:id="@+id/userNameSelection"

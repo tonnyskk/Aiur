@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.origin.aiur.R;
 import com.origin.aiur.dao.UserDao;
+import com.origin.aiur.http.HttpExecutor;
+import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.User;
 
 import java.util.ArrayList;
@@ -27,15 +30,17 @@ public class ManageUserAdapter extends BaseAdapter {
         this.context = context;
         mInflater = LayoutInflater.from(context);
     }
+
     public void setListener(GroupManageFragment baseFragment) {
         this.listener = baseFragment;
     }
+
     public void setUserList(List<User> activityList) {
         userList.clear();
 
         if (activityList != null && !activityList.isEmpty()) {
             long ownerId = UserDao.getInstance().getCurrentGroup().getOwnerUserId();
-            for(User user : activityList) {
+            for (User user : activityList) {
                 if (user.getUserID() != ownerId) {
                     userList.add(user);
                 }
@@ -94,6 +99,13 @@ public class ManageUserAdapter extends BaseAdapter {
             itemButtonApprove.setVisibility(View.GONE);
             itemButtonReject.setVisibility(View.GONE);
             itemButtonRemove.setVisibility(View.VISIBLE);
+        }
+
+        ImageView groupUserManageAvatar = (ImageView) returnView.findViewById(R.id.groupUserManageAvatar);
+        groupUserManageAvatar.setImageResource(R.drawable.user_avatar_unfocused);
+
+        if (!AppUtils.isEmpty(userInfo.getAvatarUrl())) {
+            HttpExecutor.getExecutor().loadImage(userInfo.getAvatarUrl(), groupUserManageAvatar, R.drawable.user_avatar_unfocused, R.drawable.user_avatar_unfocused);
         }
         return returnView;
     }
