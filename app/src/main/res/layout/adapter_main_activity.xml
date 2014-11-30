@@ -26,15 +26,36 @@
             android:paddingRight="@dimen/mainGroupActivityItemPaddingLeftRight"
             android:paddingLeft="@dimen/mainGroupActivityItemPaddingLeftRight"/>
 
-        <TextView
-            android:id="@+id/groupActivityDesc"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="XX have joined group"
-            android:textColor="@color/mainGroupActivityItemTxtColor"
+            android:orientation="vertical"
             android:paddingRight="@dimen/mainGroupActivityItemPaddingLeftRight"
-            android:paddingLeft="@dimen/mainGroupActivityItemPaddingLeftRight"/>
+            android:paddingLeft="@dimen/mainGroupActivityItemPaddingLeftRight">
+
+            <TextView
+                android:id="@+id/groupActivityDesc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="XX have joined group"
+                android:textColor="@color/mainGroupActivityItemTxtColor"/>
+
+            <TextView
+                android:id="@+id/groupActivityDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/mainGroupActivityItemTxtColor"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/groupActivityJoinedUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/mainGroupActivityItemTxtColor"
+                android:visibility="gone"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/groupActivityStatus"
@@ -46,6 +67,5 @@
             android:textColor="@color/mainGroupActivityItemTxtColor"
             android:paddingRight="@dimen/mainGroupActivityItemPaddingLeftRight"
             android:paddingLeft="@dimen/mainGroupActivityItemPaddingLeftRight"/>
-
     </LinearLayout>
 </RelativeLayout>

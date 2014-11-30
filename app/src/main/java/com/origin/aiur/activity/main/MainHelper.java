@@ -7,6 +7,7 @@ import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.vo.Finance;
 import com.origin.aiur.vo.GroupEvent;
+import com.origin.aiur.vo.User;
 import com.origin.aiur.vo.UserGroup;
 
 import org.json.JSONArray;
@@ -88,5 +89,17 @@ public class MainHelper {
             ALogger.log(ALogger.LogPriority.error, MainHelper.class, "Parse JSON failed. %s", object.toString(), e);
         }
         return finance;
+    }
+
+    public String getJoinUserStr(List<User> userList) {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < userList.size(); i ++) {
+            User user = userList.get(i);
+            if (i > 0) {
+                builder.append(", ");
+            }
+            builder.append(user.getNickName());
+        }
+        return builder.toString();
     }
 }

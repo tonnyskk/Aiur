@@ -110,7 +110,7 @@ public class ListActivitiesAdapter extends BaseAdapter {
                 activityDesc.setText(this.context.getString(R.string.msg_index_consume_invalid, groupConsume));
                 eventStatus.setVisibility(View.GONE);
             } else {
-                String displayText = this.context.getString(R.string.msg_index_group_consume, groupConsume, userConsume, groupEvent.getDescription());
+                String displayText = this.context.getString(R.string.msg_index_group_consume, groupConsume, userConsume);
                 activityDesc.setText(displayText);
 
                 if ("PENDING".equalsIgnoreCase(groupEvent.getStatus())) {
@@ -118,6 +118,23 @@ public class ListActivitiesAdapter extends BaseAdapter {
                 } else {
                     eventStatus.setVisibility(View.GONE);
                 }
+            }
+
+            TextView activityDescription = (TextView) returnView.findViewById(R.id.groupActivityDescription);
+            if (!AppUtils.isEmpty(groupEvent.getDescription())) {
+                activityDescription.setText(groupEvent.getDescription());
+                activityDescription.setVisibility(View.VISIBLE);
+            } else {
+                activityDescription.setVisibility(View.GONE);
+            }
+
+            TextView activityJoinUser = (TextView) returnView.findViewById(R.id.groupActivityJoinedUser);
+            if (groupEvent.getActiveUserList() != null && !groupEvent.getActiveUserList().isEmpty()) {
+                String displayText = this.context.getString(R.string.msg_index_who_join, MainHelper.getInstance().getJoinUserStr(groupEvent.getActiveUserList()));
+                activityJoinUser.setText(displayText);
+                activityJoinUser.setVisibility(View.VISIBLE);
+            } else {
+                activityJoinUser.setVisibility(View.GONE);
             }
         } else if ("INCOMING".equalsIgnoreCase(type)) {
             String incoming = AppUtils.formatMoney(groupEvent.getUserConsume());
@@ -132,13 +149,30 @@ public class ListActivitiesAdapter extends BaseAdapter {
         } else {
             // Is Activity Item in MainActivity
             String groupConsume = AppUtils.formatMoney(groupEvent.getGroupConsume());
-            String displayText = this.context.getString(R.string.msg_main_group_consume, groupEvent.getGroupName(), groupConsume, groupEvent.getDescription());
+            String displayText = this.context.getString(R.string.msg_main_group_consume, groupEvent.getGroupName(), groupConsume);
             activityDesc.setText(displayText);
 
             if ("PENDING".equalsIgnoreCase(groupEvent.getStatus())) {
                 eventStatus.setText(this.context.getString(R.string.msg_index_consume_pending));
             } else {
                 eventStatus.setVisibility(View.GONE);
+            }
+
+            TextView activityDescription = (TextView) returnView.findViewById(R.id.groupActivityDescription);
+            if (!AppUtils.isEmpty(groupEvent.getDescription())) {
+                activityDescription.setText(groupEvent.getDescription());
+                activityDescription.setVisibility(View.VISIBLE);
+            } else {
+                activityDescription.setVisibility(View.GONE);
+            }
+
+            TextView activityJoinUser = (TextView) returnView.findViewById(R.id.groupActivityJoinedUser);
+            if (groupEvent.getActiveUserList() != null && !groupEvent.getActiveUserList().isEmpty()) {
+                String userListText = this.context.getString(R.string.msg_index_who_join, MainHelper.getInstance().getJoinUserStr(groupEvent.getActiveUserList()));
+                activityJoinUser.setText(userListText);
+                activityJoinUser.setVisibility(View.VISIBLE);
+            } else {
+                activityJoinUser.setVisibility(View.GONE);
             }
         }
         return returnView;

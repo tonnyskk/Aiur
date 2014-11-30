@@ -34,7 +34,7 @@
 
     <string name="menu_create_group">创建小组</string>
     <string name="menu_join_group">加入小组</string>
-    <string name="msg_main_group_consume" formatted="false">[%1$s]消费 %2$s两. %3$s</string>
+    <string name="msg_main_group_consume" formatted="false">[%1$s]消费 %2$s两.</string>
 
     <!-- New group -->
     <string name="new_group_hint_name">小组名称</string>
@@ -62,8 +62,9 @@
     <string name="msg_index_join_group">%s 加入了小组。</string>
     <string name="msg_index_join_group_left">%s 离开了小组。</string>
 
-    <string name="msg_index_group_consume" formatted="false">消费%1$s /人均%2$s. %3$s</string>
+    <string name="msg_index_group_consume" formatted="false">消费%1$s /人均%2$s.</string>
     <string name="msg_index_group_incoming" formatted="false">[%1$s]补充白银 %2$s 两！</string>
+    <string name="msg_index_who_join">参与人员：%s</string>
 
     <string name="msg_index_consume_invalid">哟！有人报假账啊！白银 %s 两啊！</string>
     <string name="msg_index_consume_pending">审批中</string>
