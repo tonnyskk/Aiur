@@ -148,7 +148,7 @@ public class User implements IJsonPacket {
                 setJoinStatus(jsonObject.getString("joinStatus"));
             }
             if (jsonObject.has("avatarUrl")) {
-                setJoinStatus(jsonObject.getString("avatarUrl"));
+                setAvatarUrl(jsonObject.getString("avatarUrl"));
             }
 
             if (jsonObject.has("userGroupList") && !AppUtils.isEmpty(jsonObject.getString("userGroupList"))) {

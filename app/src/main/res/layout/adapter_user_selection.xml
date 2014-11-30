@@ -4,10 +4,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/main.group.activity.ListPadding.leftRight"
-    android:paddingRight="@dimen/main.group.activity.ListPadding.leftRight"
-    android:paddingTop="@dimen/main.group.activity.ListPadding.topBottom"
-    android:paddingBottom="@dimen/main.group.activity.ListPadding.topBottom"
+    android:paddingLeft="@dimen/mainGroupActivityListPaddingLeftRight"
+    android:paddingRight="@dimen/mainGroupActivityListPaddingLeftRight"
+    android:paddingTop="@dimen/mainGroupActivityListPaddingTopBottom"
+    android:paddingBottom="@dimen/mainGroupActivityListPaddingTopBottom"
     android:background="@color/userSelectionListItemBg">
 
     <ImageView

@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
 
     private View userGroupInfoContainer;
     private View userGroupModifyContainer;
+    private View btnGroupSplitLine;
 
     private ListView groupActivityList;
     private ListActivitiesAdapter groupActivityAdapter;
@@ -85,6 +86,8 @@ public class MainActivity extends BaseActivity {
 
         btnJoinGroup = (TextView) findViewById(R.id.btnJoinGroup);
         btnJoinGroup.setOnClickListener(this);
+
+        btnGroupSplitLine = findViewById(R.id.btnGroupSplitLine);
 
         userGroupInfoContainer = findViewById(R.id.userGroupInfoContainer);
         userGroupModifyContainer = findViewById(R.id.userGroupModifyContainer);
@@ -195,8 +198,10 @@ public class MainActivity extends BaseActivity {
 
             if (userGroupList.size() <= 1) {
                 btnChangeGroup.setVisibility(View.GONE);
+                btnGroupSplitLine.setVisibility(View.GONE);
             } else {
                 btnChangeGroup.setVisibility(View.VISIBLE);
+                btnGroupSplitLine.setVisibility(View.VISIBLE);
             }
 
             UserGroup currentGroup = UserDao.getInstance().getCurrentGroup();

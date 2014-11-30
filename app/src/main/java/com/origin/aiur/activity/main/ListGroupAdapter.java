@@ -59,6 +59,15 @@ public class ListGroupAdapter extends BaseAdapter {
             return returnView;
         }
 
+        View container = returnView.findViewById(R.id.groupPopupContainer);
+        switch (i % 2) {
+            case 0:
+                container.setBackgroundResource(R.drawable.extra_card_selector_color4);
+                break;
+            case 1:
+                container.setBackgroundResource(R.drawable.extra_card_selector_color5);
+                break;
+        }
         UserGroup group = activityArrayList.get(i);
         returnView.setTag(group);
         TextView groupName = (TextView)returnView.findViewById(R.id.groupPopupName);

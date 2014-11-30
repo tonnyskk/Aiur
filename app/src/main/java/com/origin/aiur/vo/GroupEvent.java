@@ -1,7 +1,11 @@
 package com.origin.aiur.vo;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2014/9/23.
@@ -16,6 +20,7 @@ public class GroupEvent implements IJsonPacket {
     private String type;
     private double groupConsume;
     private double userConsume;
+    private List<User> activeUserList;
 
     public GroupEvent() {
     }
@@ -100,6 +105,14 @@ public class GroupEvent implements IJsonPacket {
         this.userConsume = userConsume;
     }
 
+    public List<User> getActiveUserList() {
+        return activeUserList;
+    }
+
+    public void setActiveUserList(List<User> activeUserList) {
+        this.activeUserList = activeUserList;
+    }
+
     @Override
     public JSONObject toJsonObject() throws JSONException {
         JSONObject jsonObject = new JSONObject();
@@ -112,6 +125,14 @@ public class GroupEvent implements IJsonPacket {
         jsonObject.put("type", type);
         jsonObject.put("groupConsume", groupConsume);
         jsonObject.put("userConsume", userConsume);
+
+        if (activeUserList != null && !activeUserList.isEmpty()) {
+            JSONArray jsonArray = new JSONArray();
+            for (User user : activeUserList) {
+                jsonArray.put(user.toJsonObject());
+            }
+            jsonObject.put("activeUserList", jsonArray);
+        }
         return jsonObject;
     }
 
@@ -153,6 +174,16 @@ public class GroupEvent implements IJsonPacket {
                 setUserConsume(jsonObject.getDouble("userConsume"));
             }
 
+            if (jsonObject.has("activeUserList") && jsonObject.get("activeUserList") != null
+                    && jsonObject.get("activeUserList").toString().length() > 0) {
+                JSONArray userList = jsonObject.getJSONArray("activeUserList");
+                activeUserList = new ArrayList<User>();
+                for (int i = 0; i < userList.length(); i++) {
+                    JSONObject userJson = userList.getJSONObject(i);
+                    User user = new User(userJson);
+                    activeUserList.add(user);
+                }
+            }
         }
     }
 }

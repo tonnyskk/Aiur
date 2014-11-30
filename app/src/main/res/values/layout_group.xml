@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="searchGroupItemPaddingTopBottom">10dp</dimen>
-    <dimen name="searchGroupItemPaddingLeftRight">10dp</dimen>
+    <dimen name="searchGroupItemPaddingTopBottom">2dp</dimen>
+    <dimen name="searchGroupItemPaddingLeftRight">5dp</dimen>
+    <dimen name="searchGroupItemMargin">5dp</dimen>
 
     <dimen name="searchGroupButtonMarginLeftRight">10dp</dimen>
     <dimen name="searchGroupButtonPaddingLeftRight">10dp</dimen>
@@ -33,7 +34,7 @@
     <dimen name="avatarUserNameTextSize">16sp</dimen>
     <dimen name="avatarUserBalanceTextSize">16sp</dimen>
 
-    <dimen name="searchGroupDescriptionTextSize">20sp</dimen>
+    <dimen name="searchGroupDescriptionTextSize">16sp</dimen>
 
     <color name="group.bg">#fff3f3f3</color>
     <color name="userSelectionListItemBg">#ffffffff</color>

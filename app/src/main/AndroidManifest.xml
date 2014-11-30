@@ -37,7 +37,8 @@
 
         <activity
             android:name=".activity.group.JoinGroupActivity"
-            android:label="@string/title_activity_join_group" >
+            android:label="@string/title_activity_join_group"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
         </activity>
         <activity
             android:name=".activity.group.GroupTabActivity"

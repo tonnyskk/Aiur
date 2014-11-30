@@ -2,17 +2,16 @@
 <resources>
 
     <!-- Group tab index  -->
-    <dimen name="tab_index_cash_padding_topBottom">10dp</dimen>
-    <dimen name="tab_index_cash_padding_leftRight">20dp</dimen>
+    <dimen name="tabIndexCashPaddingTopBottom">10dp</dimen>
+    <dimen name="tabIndexCashPaddingLeftRight">20dp</dimen>
 
-    <dimen name="tab_index_btn_margin_top">10dp</dimen>
-    <dimen name="tab_index_btn_margin_bottom">10dp</dimen>
-    <dimen name="tab_index_btn_padding_topBottom">15dp</dimen>
-    <dimen name="tab_index_btn_padding_leftRight">10dp</dimen>
+    <dimen name="tabIndexBtnMarginTop">5dp</dimen>
+    <dimen name="tabIndexBtnMarginBottom">5dp</dimen>
+    <dimen name="tabIndexBtnPaddingLeftRight">10dp</dimen>
 
-    <dimen name="tab_index_btn_icon_margin_leftRight">10dp</dimen>
-    <dimen name="tab_index_btn_icon_width">40dp</dimen>
-    <dimen name="tab_index_btn_icon_height">40dp</dimen>
+    <dimen name="tabIndexBtnIconMarginLeftRight">10dp</dimen>
+    <dimen name="tabIndexBtnIconWidth">40dp</dimen>
+    <dimen name="tabIndexBtnIconHeight">40dp</dimen>
 
     <dimen name="tab_index_cash_margin_left">20dp</dimen>
     <dimen name="tab_index_funny_margin_left">14dp</dimen>
@@ -68,6 +67,7 @@
     <!-- Group tab manage  -->
     <dimen name="tabManageTitleTopBottom">5dp</dimen>
     <dimen name="tabManageTitleLeftRight">10dp</dimen>
+    <dimen name="tabManageTitleMargin">2dp</dimen>
     <dimen name="tabManageUserItemIconWidth">40dp</dimen>
     <dimen name="tabManageUserItemIconHeight">40dp</dimen>
     <dimen name="tabManageItemDateMarginLeft">2dp</dimen>
@@ -76,11 +76,9 @@
 
     <dimen name="tabManageListPaddingLeftRight">5dp</dimen>
     <dimen name="tabManageListPaddingTopBottom">5dp</dimen>
-
-    <color name="tabManageTitleBg">#ff0fae7b</color>
-
+    <dimen name="tabManageListMargin">5dp</dimen>
 
     <dimen name="tabManageRequestEventListItemTextSize">16sp</dimen>
-    <dimen name="tabManageTitleTextSize">28sp</dimen>
+    <dimen name="tabManageTitleTextSize">16sp</dimen>
 
 </resources>

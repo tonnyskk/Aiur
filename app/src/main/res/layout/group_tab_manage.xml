@@ -17,18 +17,20 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/tabManageTitleTextSize"
             android:textColor="@color/tab_index_cash_txt_color"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             android:text="@string/tabManageUserTitle"
             android:paddingTop="@dimen/tabManageTitleTopBottom"
             android:paddingBottom="@dimen/tabManageTitleTopBottom"
             android:paddingLeft="@dimen/tabManageTitleLeftRight"
             android:paddingRight="@dimen/tabManageTitleLeftRight"
-            android:background="@color/tabManageTitleBg"/>
+            android:layout_margin="@dimen/tabManageTitleMargin"
+            android:background="@drawable/extra_card_selector_color1"/>
 
         <ListView
             android:id="@+id/groupUserItemList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:divider="@color/main.bg">
 
         </ListView>
 
@@ -46,18 +48,20 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/tabManageTitleTextSize"
             android:textColor="@color/tab_index_cash_txt_color"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             android:text="@string/tabManageRequestTitle"
             android:paddingTop="@dimen/tabManageTitleTopBottom"
             android:paddingBottom="@dimen/tabManageTitleTopBottom"
             android:paddingLeft="@dimen/tabManageTitleLeftRight"
             android:paddingRight="@dimen/tabManageTitleLeftRight"
-            android:background="@color/tabManageTitleBg"/>
+            android:layout_margin="@dimen/tabManageTitleMargin"
+            android:background="@drawable/extra_card_selector_color5"/>
 
         <ListView
             android:id="@+id/userRequestItemList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:divider="@color/main.bg">
 
         </ListView>
     </LinearLayout>

@@ -62,7 +62,23 @@ public class ListActivitiesAdapter extends BaseAdapter {
             return returnView;
         }
 
+        View container = returnView.findViewById(R.id.groupMainActivityItemContainer);
         GroupEvent groupEvent = groupEventList.get(i);
+
+        switch (i % 4) {
+            case 0:
+                container.setBackgroundResource(R.drawable.extra_card_selector_color1);
+                break;
+            case 1:
+                container.setBackgroundResource(R.drawable.extra_card_selector_color2);
+                break;
+            case 2:
+                container.setBackgroundResource(R.drawable.extra_card_selector_color3);
+                break;
+            case 3:
+                container.setBackgroundResource(R.drawable.extra_card_selector_color4);
+                break;
+        }
 
         TextView activityDate = (TextView) returnView.findViewById(R.id.groupActivityDate);
         activityDate.setText(DateUtils.formatDate(groupEvent.getCreateTime(), "MM/dd HH:mm"));

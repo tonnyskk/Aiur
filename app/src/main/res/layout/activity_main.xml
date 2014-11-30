@@ -75,43 +75,49 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/mainGroupSelectMarginTop"
+            android:layout_marginBottom="@dimen/mainGroupSelectMarginBottom"
+            android:background="@drawable/round_corner_bg">
 
             <TextView
                 android:id="@+id/btnGotoGroup"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/main.group.select.btn.height"
-                android:layout_marginLeft="@dimen/main.group.select.margin.leftRight"
-                android:layout_marginRight="@dimen/main.group.select.margin.leftRight"
-                android:layout_marginTop="@dimen/main.group.select.margin.topBottom"
-                android:layout_marginBottom="@dimen/main.group.select.margin.topBottom"
-                android:background="@drawable/button_blue_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
+                android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
+                android:paddingTop="@dimen/mainGroupSelectPaddingTop"
+                android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
                 android:clickable="true"
                 android:ellipsize="end"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:singleLine="true"
-                android:textColor="@color/commonBlueButtonTextColor"
-                android:textSize="@dimen/commonBlueButtonTextSize"
-                android:textStyle="bold"
-                android:text="@string/main_group_select"
-                android:minWidth="@dimen/reg.button.MinWidth"
-                android:maxWidth="@dimen/reg.button.MaxWidth"
-                android:layout_gravity="center"/>
+                android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
+                android:text="@string/main_group_select"/>
+
+            <View
+                android:id="@+id/btnGroupSplitLine"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/tab_index_btn_split"
+                android:layout_marginLeft="@dimen/commonSplitLineMarginLeftRight"
+                android:layout_marginRight="@dimen/commonSplitLineMarginLeftRight"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/btnChangeGroup"
-                android:layout_width="@dimen/main.group.change.btn.width"
-                android:layout_height="@dimen/main.group.select.btn.height"
-                android:layout_marginRight="@dimen/main.group.select.margin.leftRight"
-                android:background="@drawable/button_blue_bg"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textColor="@color/commonBlueButtonTextColor"
-                android:textSize="@dimen/commonBlueButtonTextSize"
-                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
+                android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
+                android:paddingTop="@dimen/mainGroupSelectPaddingTop"
+                android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
                 android:clickable="true"
-                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/mainGroupItemGray"
+                android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
                 android:text="@string/main_group_change"
                 android:visibility="gone"/>
         </LinearLayout>
@@ -120,54 +126,56 @@
             android:id="@+id/listGroupActivity"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:divider="@color/main.bg">
+
         </ListView>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/userGroupModifyContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@drawable/round_corner_bg"
+        android:layout_marginTop="@dimen/mainGroupButtonBarMarginTop"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/btnJoinGroup"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/main.group.select.btn.height"
-            android:layout_marginLeft="@dimen/main.group.select.margin.leftRight"
-            android:layout_marginRight="@dimen/main.group.select.margin.leftRight"
-            android:layout_marginTop="@dimen/main.group.select.margin.topBottom"
-            android:layout_marginBottom="@dimen/main.group.select.margin.topBottom"
-            android:background="@drawable/button_blue_bg"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
+            android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
+            android:paddingTop="@dimen/mainGroupSelectPaddingTop"
+            android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
             android:clickable="true"
             android:ellipsize="end"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:singleLine="true"
-            android:textColor="@color/commonBlueButtonTextColor"
-            android:textSize="@dimen/commonBlueButtonTextSize"
-            android:textStyle="bold"
-            android:text="@string/main_group_join"
-            android:minWidth="@dimen/reg.button.MinWidth"
-            android:maxWidth="@dimen/reg.button.MaxWidth"
-            android:layout_gravity="center"/>
+            android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
+            android:text="@string/main_group_join"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/tab_index_btn_split"
+            android:layout_marginLeft="@dimen/commonSplitLineMarginLeftRight"
+            android:layout_marginRight="@dimen/commonSplitLineMarginLeftRight"/>
+
         <TextView
             android:id="@+id/btnCreateGroup"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/main.group.select.btn.height"
-            android:layout_marginLeft="@dimen/main.group.select.margin.leftRight"
-            android:layout_marginRight="@dimen/main.group.select.margin.leftRight"
-            android:layout_marginTop="@dimen/main.group.select.margin.topBottom"
-            android:layout_marginBottom="@dimen/main.group.select.margin.topBottom"
-            android:background="@drawable/button_blue_bg"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
+            android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
+            android:paddingTop="@dimen/mainGroupSelectPaddingTop"
+            android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
             android:clickable="true"
             android:ellipsize="end"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:singleLine="true"
-            android:textColor="@color/commonBlueButtonTextColor"
-            android:textSize="@dimen/commonBlueButtonTextSize"
-            android:textStyle="bold"
-            android:text="@string/main_group_create"
-            android:minWidth="@dimen/reg.button.MinWidth"
-            android:maxWidth="@dimen/reg.button.MaxWidth"
-            android:layout_gravity="center"/>
-        </LinearLayout>
+            android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
+            android:text="@string/main_group_create"/>
+    </LinearLayout>
 </LinearLayout>

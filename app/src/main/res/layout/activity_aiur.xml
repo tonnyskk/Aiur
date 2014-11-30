@@ -13,7 +13,7 @@
         android:textColor="@color/splash_text_color"
         android:textSize="@dimen/splash_promote_text_size"
         android:text="@string/splash_promote_text"
-        android:background="@drawable/button_blue_disabled"
+        android:textStyle="bold"
         android:layout_marginTop="@dimen/splash_bubble_margin_top"
         android:layout_marginLeft="@dimen/splash_bubble_margin_leftRight"
         android:layout_marginRight="@dimen/splash_bubble_margin_leftRight"
@@ -23,6 +23,4 @@
         android:paddingBottom="@dimen/splash_bubble_padding_topBottom"
         android:layout_gravity="center_vertical"
         android:gravity="center"/>
-
-
 </LinearLayout>

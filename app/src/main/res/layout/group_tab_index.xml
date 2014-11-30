@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="@dimen/tab_index_cash_padding_topBottom"
-        android:paddingBottom="@dimen/tab_index_cash_padding_topBottom"
-        android:paddingLeft="@dimen/tab_index_cash_padding_leftRight"
-        android:paddingRight="@dimen/tab_index_cash_padding_leftRight"
+        android:paddingTop="@dimen/tabIndexCashPaddingTopBottom"
+        android:paddingBottom="@dimen/tabIndexCashPaddingTopBottom"
+        android:paddingLeft="@dimen/tabIndexCashPaddingLeftRight"
+        android:paddingRight="@dimen/tabIndexCashPaddingLeftRight"
         android:background="@color/tab_index_cash_bg">
 
         <TextView
@@ -59,10 +59,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/round_corner_bg"
-        android:layout_marginTop="@dimen/tab_index_btn_margin_top"
-        android:layout_marginBottom="@dimen/tab_index_btn_margin_bottom"
-        android:paddingLeft="@dimen/tab_index_btn_padding_leftRight"
-        android:paddingRight="@dimen/tab_index_btn_padding_leftRight">
+        android:layout_marginTop="@dimen/tabIndexBtnMarginTop"
+        android:layout_marginBottom="@dimen/tabIndexBtnMarginBottom"
+        android:paddingLeft="@dimen/tabIndexBtnPaddingLeftRight"
+        android:paddingRight="@dimen/tabIndexBtnPaddingLeftRight">
 
         <LinearLayout
             android:id="@+id/tabBtnPrepay"
@@ -73,21 +73,20 @@
             android:clickable="true">
 
             <ImageView
-                android:layout_width="@dimen/tab_index_btn_icon_width"
-                android:layout_height="@dimen/tab_index_btn_icon_height"
+                android:layout_width="@dimen/tabIndexBtnIconWidth"
+                android:layout_height="@dimen/tabIndexBtnIconHeight"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/tab_index_btn_icon_margin_leftRight"
-                android:layout_marginRight="@dimen/tab_index_btn_icon_margin_leftRight"
+                android:layout_marginLeft="@dimen/tabIndexBtnIconMarginLeftRight"
+                android:layout_marginRight="@dimen/tabIndexBtnIconMarginLeftRight"
                 android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/tab_index_btn_padding_topBottom"
-                android:paddingBottom="@dimen/tab_index_btn_padding_topBottom"
+                android:layout_height="match_parent"
                 android:textSize="@dimen/tab_index_btn_txt_size"
                 android:textStyle="normal"
-                android:text="@string/tab_index_btn_prepay" />
+                android:text="@string/tab_index_btn_prepay"
+                android:gravity="center_vertical"/>
 
         </LinearLayout>
 
@@ -105,21 +104,20 @@
             android:clickable="true">
 
             <ImageView
-                android:layout_width="@dimen/tab_index_btn_icon_width"
-                android:layout_height="@dimen/tab_index_btn_icon_height"
+                android:layout_width="@dimen/tabIndexBtnIconWidth"
+                android:layout_height="@dimen/tabIndexBtnIconHeight"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/tab_index_btn_icon_margin_leftRight"
-                android:layout_marginRight="@dimen/tab_index_btn_icon_margin_leftRight"
+                android:layout_marginLeft="@dimen/tabIndexBtnIconMarginLeftRight"
+                android:layout_marginRight="@dimen/tabIndexBtnIconMarginLeftRight"
                 android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/tab_index_btn_padding_topBottom"
-                android:paddingBottom="@dimen/tab_index_btn_padding_topBottom"
+                android:layout_height="match_parent"
                 android:textSize="@dimen/tab_index_btn_txt_size"
                 android:textStyle="normal"
-                android:text="@string/tab_index_btn_charge" />
+                android:text="@string/tab_index_btn_charge"
+                android:gravity="center_vertical"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -128,7 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_corner_bg"
-        android:layout_marginBottom="@dimen/tab_index_btn_margin_bottom"
+        android:layout_marginBottom="@dimen/tabIndexBtnMarginBottom"
         android:fillViewport="true"
         android:scrollbars="none">
 
@@ -153,6 +151,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/round_corner_bg"></ListView>
+        android:divider="@color/main.bg"/>
 
 </LinearLayout>

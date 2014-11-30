@@ -4,7 +4,7 @@ package com.origin.aiur.http;
  * Created by dongjia on 9/24/2014.
  */
 public class HttpUtils {
-    private static final String HOME_URL = "http://192.168.1.104:8080/aiur/rest";
+    private static final String HOME_URL = "http://192.168.1.105:8080/aiur/rest";
     private static final String WORK_URL = "http://10.148.202.87:8088/aiur/rest";
 
     public static final String BASE_URL = HOME_URL;

@@ -12,7 +12,18 @@
     <dimen name="commonBlueButtonSmallMarginRight">5dp</dimen>
     <dimen name="commonBlueButtonSmallTextSize">14sp</dimen>
 
+
+    <dimen name="commonSplitLineMarginLeftRight">2dp</dimen>
+
     <color name="commonBlueButtonTextColor">#ffffffff</color>
     <color name="commonBgColor">#ffffffff</color>
+
+    <!-- color card -->
+    <color name="extra_card_background_color1">#FFFFBB33</color>
+    <color name="extra_card_background_color2">#FF98CC00</color>
+    <color name="extra_card_background_color3">#FFA966CC</color>
+    <color name="extra_card_background_color4">#FF33B4E4</color>
+    <color name="extra_card_background_color5">#FFFF4343</color>
+    <color name="extra_card_background_color6">#FFFFFFFF</color>
 
 </resources>

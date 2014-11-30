@@ -19,7 +19,7 @@
     <string name="btn_register">注册</string>
 
     <!-- Register page -->
-    <string name="hint_reg_email">邮箱</string>
+    <string name="hint_reg_email">账号</string>
     <string name="hint_reg_nick">昵称</string>
     <string name="hint_reg_pwd">密码</string>
     <string name="hint_reg_confirm_pwd">确认密码</string>
@@ -27,8 +27,8 @@
     <!-- Main page -->
     <string name="main_title_balance">余额累计：</string>
     <string name="main_title_cost">消费累计：</string>
-    <string name="main_group_select">[%s]小组</string>
-    <string name="main_group_change">切换</string>
+    <string name="main_group_select">[%s]</string>
+    <string name="main_group_change">其它...</string>
     <string name="main_group_create">创建小组</string>
     <string name="main_group_join">加入小组</string>
 
