@@ -3,6 +3,7 @@ package com.origin.aiur.utils;
 import android.content.Context;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.Patterns;
 
 import com.origin.aiur.R;
 import com.origin.aiur.app.AiurApplication;
@@ -144,6 +145,13 @@ public class AppUtils {
         byte[] encryptedData = out.toByteArray();
         out.close();
         return encryptedData;
+    }
+
+    public static boolean isValidEmail(CharSequence email) {
+        if (email == null) {
+            return false;
+        }
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public static int getResIdByStatusCode(int statusCode) {

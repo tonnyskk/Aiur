@@ -124,6 +124,12 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
             return false;
         }
 
+        if (!AppUtils.isValidEmail(userAccount.getText())) {
+            userAccount.setFocusable(true);
+            userAccount.setTextColor(getResources().getColor(R.color.commonErrorFiled));
+            showToastMessage(this.getString(R.string.error_email_format));
+            return false;
+        }
         return true;
     }
 
@@ -147,11 +153,15 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         String account = userAccount.getText().toString();
         String pwd = userPassword.getText().toString();
+
+        userAccount.setTextColor(getResources().getColor(R.color.commonTextColor));
+
         if (AppUtils.isEmpty(account) || AppUtils.isEmpty(pwd)) {
             loginButton.setEnabled(false);
         } else {
             loginButton.setEnabled(true);
         }
+
         userAvatar.setImageResource(R.drawable.user_avatar_default_unfocused);
     }
 

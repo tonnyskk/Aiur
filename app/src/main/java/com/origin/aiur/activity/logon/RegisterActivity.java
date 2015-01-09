@@ -109,6 +109,8 @@ public class RegisterActivity extends BaseActivity implements TextWatcher{
         } else {
             regButton.setEnabled(true);
         }
+
+        userAccount.setTextColor(getResources().getColor(R.color.commonTextColor));
     }
 
     @Override
@@ -127,6 +129,12 @@ public class RegisterActivity extends BaseActivity implements TextWatcher{
         }
         if (!pwd.equals(pwdConfirm)) {
             showToastMessage(this.getString(R.string.pwd_not_consist));
+            return false;
+        }
+        if (!AppUtils.isValidEmail(userAccount.getText())) {
+            userAccount.setFocusable(true);
+            userAccount.setTextColor(getResources().getColor(R.color.commonErrorFiled));
+            showToastMessage(this.getString(R.string.error_email_format));
             return false;
         }
         return true;

@@ -30,6 +30,7 @@
     <string name="main_group_change">其它...</string>
     <string name="main_group_create">创建小组</string>
     <string name="main_group_join">加入小组</string>
+    <string name="main_group_profile">我的账户</string>
     <string name="menu_create_group">创建小组</string>
     <string name="menu_join_group">加入小组</string>
     <string name="msg_main_group_consume" formatted="false">[%1$s]消费 %2$s两.</string>
@@ -45,8 +46,6 @@
     <string name="btn_join_request">加入</string>
 
     <!-- Profile -->
-    <string name="profile_user_avatar">头像</string>
-    <string name="profile_user_nickname">昵称</string>
 
     <!-- Group tag page -->
     <string name="title_section_index">小组</string>
@@ -116,6 +115,7 @@
     <string name="invalid_response_format">PROGRAM > 响应解析失败！</string>
     <string name="no_input_value">请输入相关信息！</string>
     <string name="pwd_not_consist">密码不一致，请重新输入！</string>
+    <string name="error_email_format">无效的邮箱地址！</string>
     <string name="error_msg">未知异常</string>
     <string name="error_msg_4000">4000</string>
     <string name="error_msg_4001">为了账户安全，请重新登陆！</string>

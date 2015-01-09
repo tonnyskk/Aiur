@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:hint="@string/hint_login_account" />
+            android:hint="@string/hint_login_account"/>
 
         <View
             android:layout_width="match_parent"

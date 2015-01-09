@@ -20,6 +20,7 @@ import com.origin.aiur.R;
 import com.origin.aiur.activity.group.GroupTabActivity;
 import com.origin.aiur.activity.group.JoinGroupActivity;
 import com.origin.aiur.activity.group.NewGroupActivity;
+import com.origin.aiur.activity.profile.ProfileActivity;
 import com.origin.aiur.dao.FinanceDao;
 import com.origin.aiur.dao.UserEventDao;
 import com.origin.aiur.dao.UserDao;
@@ -138,6 +139,9 @@ public class MainActivity extends BaseActivity {
             return true;
         } else if (id == R.id.menuGroupJoin) {
             JoinGroupActivity.startActivity(this);
+            return true;
+        } else if (id == R.id.menuGroupProfile) {
+            ProfileActivity.startActivity(this);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="profileContainerPaddingLeft">20dp</dimen>
+    <dimen name="profileContainerPaddingRight">20dp</dimen>
+    <dimen name="profileContainerPaddingTop">40dp</dimen>
+    <dimen name="profileContainerPaddingBottom">40dp</dimen>
+
+    <dimen name="profileIconMarginBottom">5dp</dimen>
+
+    <dimen name="accountTextSize">20sp</dimen>
+
+</resources>

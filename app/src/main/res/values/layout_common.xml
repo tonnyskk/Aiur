@@ -26,4 +26,7 @@
     <color name="extra_card_background_color5">#FFFF4343</color>
     <color name="extra_card_background_color6">#FFFFFFFF</color>
 
+    <color name="commonErrorFiled">#FFFF4343</color>
+    <color name="commonTextColor">#FF000000</color>
+
 </resources>
