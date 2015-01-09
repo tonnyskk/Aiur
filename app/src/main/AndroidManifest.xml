@@ -3,8 +3,8 @@
     package="com.origin.aiur" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.AiurApplication"
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.splash.AiurActivity"
-            android:theme="@style/Theme.NoActionBar">
+            android:theme="@style/Theme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,27 +23,29 @@
         </activity>
         <activity android:name=".activity.logon.LoginActivity" />
         <activity android:name=".activity.logon.RegisterActivity" />
-
         <activity
             android:name=".activity.main.MainActivity"
-            android:label="@string/title_activity_main"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTop">
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop" >
         </activity>
         <activity
             android:name=".activity.group.NewGroupActivity"
             android:label="@string/title_activity_new_group" >
         </activity>
-
         <activity
             android:name=".activity.group.JoinGroupActivity"
-            android:label="@string/title_activity_join_group"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_join_group" >
         </activity>
         <activity
             android:name=".activity.group.GroupTabActivity"
-            android:label="@string/title_activity_group_tab"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_group_tab" >
+        </activity>
+        <activity
+            android:name=".activity.profile.ProfileActivity"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 
