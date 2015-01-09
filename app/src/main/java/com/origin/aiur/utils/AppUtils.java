@@ -33,8 +33,8 @@ public class AppUtils {
     public static String generateDeviceId() {
 
         TelephonyManager telephonyManager = (TelephonyManager) AiurApplication.getInstance().getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-        String deviceId = telephonyManager.getDeviceId();
-        String serial = telephonyManager.getSimSerialNumber();
+        String deviceId = "" + telephonyManager.getDeviceId();
+        String serial = "" + telephonyManager.getSimSerialNumber();
         String androidId = Settings.Secure.getString(AiurApplication.getInstance().getContentResolver(), Settings.Secure.ANDROID_ID);
         UUID deviceUid = new UUID(androidId.hashCode(), ((long) deviceId.hashCode() << 32) | serial.hashCode());
         return deviceUid.toString();
