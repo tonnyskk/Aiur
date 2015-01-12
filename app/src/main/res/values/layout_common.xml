@@ -15,6 +15,11 @@
 
     <dimen name="commonSplitLineMarginLeftRight">2dp</dimen>
 
+    <dimen name="commonAvatarLargeImageWidth">100dp</dimen>
+    <dimen name="commonAvatarLargeImageHeight">100dp</dimen>
+    <dimen name="commonAvatarMiddleImageWidth">50dp</dimen>
+    <dimen name="commonAvatarMiddleImageHeight">50dp</dimen>
+    
     <color name="commonBlueButtonTextColor">#ffffffff</color>
     <color name="commonBgColor">#ffffffff</color>
 

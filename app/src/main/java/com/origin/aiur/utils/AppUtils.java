@@ -1,6 +1,9 @@
 package com.origin.aiur.utils;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Patterns;
@@ -184,6 +187,8 @@ public class AppUtils {
                 return R.string.error_msg_4011;
             case 4012:
                 return R.string.error_msg_4012;
+            case 4013:
+                return R.string.error_msg_4013;
         }
         return R.string.error_msg;
     }
@@ -191,5 +196,18 @@ public class AppUtils {
     public static String formatMoney(double money) {
         DecimalFormat format = new DecimalFormat("##,##0.00");
         return format.format(money);
+    }
+
+    public static Drawable getAvatar(String avatarData) {
+        if (isEmpty(avatarData)) {
+            return  null;
+        }
+        try {
+            byte[] avatarByte = Base64Util.decode(avatarData.getBytes());
+            return new BitmapDrawable(BitmapFactory.decodeByteArray(avatarByte, 0, avatarByte.length));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

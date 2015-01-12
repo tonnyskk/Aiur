@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/userProfileAvatar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/commonAvatarLargeImageWidth"
+        android:layout_height="@dimen/commonAvatarLargeImageHeight"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/user_avatar_default_unfocused"
         android:layout_marginBottom="@dimen/profileIconMarginBottom" />
@@ -23,13 +23,74 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="@dimen/accountTextSize"
-        android:layout_marginBottom="@dimen/profileIconMarginBottom"/>
+        android:layout_marginBottom="@dimen/profileItemMarginBottom" />
 
     <TextView
         android:id="@+id/userProfileAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="@dimen/accountTextSize"/>
+        android:textSize="@dimen/accountTextSize"
+        android:layout_marginBottom="@dimen/profileItemMarginBottom" />
 
+    <TextView
+        android:id="@+id/userUpdatePwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_change_pwd"
+        android:textSize="@dimen/accountChangePwdTextSize"
+        android:padding="@dimen/profileItemMarginBottom" />
+
+    <LinearLayout
+        android:id="@+id/changePasswordContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <EditText
+            android:id="@+id/changePasswordOld"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="@string/hint_change_pwd_old"
+            android:layout_marginBottom="@dimen/profileIconMarginBottom" />
+
+        <EditText
+            android:id="@+id/changePasswordNew1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="@string/hint_reg_pwd" />
+
+        <EditText
+            android:id="@+id/changePasswordNew2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="@string/hint_reg_confirm_pwd" />
+
+        <TextView
+            android:id="@+id/btnChange"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/commonBlueButtonHeight"
+            android:layout_marginTop="@dimen/reg.button.margin.topBottom"
+            android:background="@drawable/button_blue_bg"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/commonBlueButtonTextColor"
+            android:textSize="@dimen/commonBlueButtonTextSize"
+            android:textStyle="bold"
+            android:text="@string/btn_change_pwd"
+            android:minWidth="@dimen/reg.button.MinWidth"
+            android:maxWidth="@dimen/reg.button.MaxWidth"
+            android:layout_gravity="center"
+            android:enabled="false" />
+    </LinearLayout>
 </LinearLayout>

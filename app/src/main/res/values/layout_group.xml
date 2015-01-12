@@ -8,8 +8,6 @@
     <dimen name="searchGroupButtonPaddingLeftRight">10dp</dimen>
 
     <!-- @Charge tab -->
-    <dimen name="selectUserIconWidth">40dp</dimen>
-    <dimen name="selectUserIconHeight">40dp</dimen>
     <dimen name="selectUserIconMarginLeft">2dp</dimen>
     <dimen name="selectUserIconMarginRight">5dp</dimen>
     <dimen name="selectUserCheckboxWidth">40dp</dimen>
@@ -21,8 +19,6 @@
     <!--Adapter user avatar -->
     <dimen name="avatarUserWidth">80dp</dimen>
     <dimen name="avatarUserHeight">100dp</dimen>
-    <dimen name="avatarUserIconWidth">50dp</dimen>
-    <dimen name="avatarUserIconHeight">50dp</dimen>
     <dimen name="avatarUserGridHorizontalSpacing">2dp</dimen>
 
     <dimen name="avatarUserAdapterPaddingLeft">2dp</dimen>

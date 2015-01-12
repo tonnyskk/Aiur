@@ -7,7 +7,12 @@
     <dimen name="profileContainerPaddingBottom">40dp</dimen>
 
     <dimen name="profileIconMarginBottom">5dp</dimen>
+    <dimen name="profileItemMarginBottom">10dp</dimen>
+
+
+    <dimen name="profileChangePasswordPadding">5dp</dimen>
 
     <dimen name="accountTextSize">20sp</dimen>
+    <dimen name="accountChangePwdTextSize">16sp</dimen>
 
 </resources>

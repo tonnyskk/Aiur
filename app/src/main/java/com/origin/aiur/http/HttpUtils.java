@@ -4,7 +4,7 @@ package com.origin.aiur.http;
  * Created by dongjia on 9/24/2014.
  */
 public class HttpUtils {
-    private static final String HOME_URL = "http://192.168.1.105:8080/aiur/rest";
+    private static final String HOME_URL = "http://10.148.202.66:8088/aiur/rest";
     private static final String WORK_URL = "http://54.175.121.4:8080/aiur/rest";
 
     public static final String BASE_URL = WORK_URL;
@@ -16,6 +16,9 @@ public class HttpUtils {
     public static final String user_reg= "/user/reg";
     public static final String load_user_group = "/user/%s/group";
     public static final String load_user_finance = "/user/%s/finance";
+
+    public static final String user_change_pwd = "/user/pwd";
+    public static final String user_change_avatar = "/user/avatar";
 
     public static final String load_user_activity = "/group/activity/user/%s"; // #userId
     public static final String load_group_activity = "/group/activity/%s/%s"; // /#userId/#groupId

@@ -19,8 +19,8 @@
         <ImageView
             android:id="@+id/loginUserAvatar"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/commonAvatarLargeImageWidth"
+            android:layout_height="@dimen/commonAvatarLargeImageHeight"
             android:src="@drawable/user_avatar_default_unfocused"
             android:layout_marginBottom="@dimen/avatarIconMarginBottom"/>
 

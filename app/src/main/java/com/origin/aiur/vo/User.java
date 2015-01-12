@@ -19,7 +19,7 @@ public class User implements IJsonPacket {
     private String joinStatus;
     private long groupId;
     private long createTime;
-    private String avatarUrl;
+    private String avatarData;
 
     private double prepayMoney;
     private double consumeMoney;
@@ -110,12 +110,12 @@ public class User implements IJsonPacket {
         this.joinStatus = joinStatus;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getAvatarData() {
+        return avatarData;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setAvatarData(String avatarData) {
+        this.avatarData = avatarData;
     }
 
     @Override
@@ -147,8 +147,8 @@ public class User implements IJsonPacket {
             if (jsonObject.has("joinStatus")) {
                 setJoinStatus(jsonObject.getString("joinStatus"));
             }
-            if (jsonObject.has("avatarUrl")) {
-                setAvatarUrl(jsonObject.getString("avatarUrl"));
+            if (jsonObject.has("avatarData")) {
+                setAvatarData(jsonObject.getString("avatarData"));
             }
 
             if (jsonObject.has("userGroupList") && !AppUtils.isEmpty(jsonObject.getString("userGroupList"))) {
@@ -174,7 +174,7 @@ public class User implements IJsonPacket {
         jsonObject.put("prepayMoney", prepayMoney);
         jsonObject.put("consumeMoney", consumeMoney);
         jsonObject.put("joinStatus", joinStatus);
-        jsonObject.put("avatarUrl", avatarUrl);
+        jsonObject.put("avatarData", avatarData);
 
         if (userGroupList != null) {
             JSONArray jsonArray = new JSONArray();

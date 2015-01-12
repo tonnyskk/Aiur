@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_reg_nick"/>
 
-
     <EditText
         android:id="@+id/registerPassword"
         android:layout_width="match_parent"

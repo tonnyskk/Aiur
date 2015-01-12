@@ -1,6 +1,7 @@
 package com.origin.aiur.activity.group.pager;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,9 +78,11 @@ public class UserAvatarAdapter extends BaseAdapter {
         ImageView avatarUserImage = (ImageView)returnView.findViewById(R.id.avatarUserImage);
         avatarUserImage.setImageResource(R.drawable.user_avatar_default_unfocused);
 
-        if (!AppUtils.isEmpty(userInfo.getAvatarUrl())) {
-            HttpExecutor.getExecutor().loadImage(userInfo.getAvatarUrl(), avatarUserImage, R.drawable.user_avatar_unfocused, R.drawable.user_avatar_unfocused);
+        Drawable avatar = AppUtils.getAvatar(userInfo.getAvatarData());
+        if (avatar != null) {
+            avatarUserImage.setImageDrawable(avatar);
         }
+
 
         return returnView;
     }

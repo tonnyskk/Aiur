@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/userSelectAvatarImage"
-        android:layout_width="@dimen/selectUserIconWidth"
-        android:layout_height="@dimen/selectUserIconHeight"
+        android:layout_width="@dimen/commonAvatarMiddleImageWidth"
+        android:layout_height="@dimen/commonAvatarMiddleImageWidth"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
         android:layout_marginRight="@dimen/selectUserIconMarginRight"

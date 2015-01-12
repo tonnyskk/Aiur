@@ -2,6 +2,7 @@ package com.origin.aiur.activity.logon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -65,8 +66,10 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
             if (user.getLoginName() != null) {
                 userAccount.setText(user.getLoginName());
             }
-            if (user.getAvatarUrl() != null) {
-                HttpExecutor.getExecutor().loadImage(user.getAvatarUrl(), userAvatar, R.drawable.user_avatar_default_unfocused, R.drawable.user_avatar_default_unfocused);
+
+            Drawable avatar = AppUtils.getAvatar(user.getAvatarData());
+            if (avatar != null) {
+                userAvatar.setImageDrawable(avatar);
             }
         }
     }
