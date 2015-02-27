@@ -10,14 +10,27 @@
     android:paddingBottom="@dimen/mainGroupActivityListPaddingTopBottom"
     android:background="@color/userSelectionListItemBg">
 
-    <ImageView
-        android:id="@+id/userSelectAvatarImage"
-        android:layout_width="@dimen/commonAvatarMiddleImageWidth"
-        android:layout_height="@dimen/commonAvatarMiddleImageWidth"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
-        android:layout_marginRight="@dimen/selectUserIconMarginRight"
-        android:src="@drawable/user_avatar_unfocused" />
+        android:layout_marginRight="@dimen/selectUserIconMarginRight">
+
+        <ImageView
+            android:layout_width="@dimen/commonAvatarMiddleBgImageWidth"
+            android:layout_height="@dimen/commonAvatarMiddleBgImageHeight"
+            android:src="@drawable/user_avatar_bg"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:id="@+id/userSelectAvatarImage"
+            android:layout_width="@dimen/commonAvatarMiddleImageWidth"
+            android:layout_height="@dimen/commonAvatarMiddleImageHeight"
+            android:src="@drawable/user_avatar_unfocused"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/userNameSelection"
@@ -36,6 +49,6 @@
         android:layout_height="@dimen/selectUserCheckboxHeight"
         android:layout_gravity="center"
         android:layout_marginRight="@dimen/selectUserCheckboxMarginRight"
-        android:onClick="onClick"/>
+        android:onClick="onClick" />
 
 </LinearLayout>

@@ -9,13 +9,27 @@
     android:orientation="vertical"
     tools:context="com.origin.aiur.activity.profile.ProfileActivity">
 
-    <ImageView
-        android:id="@+id/userProfileAvatar"
-        android:layout_width="@dimen/commonAvatarLargeImageWidth"
-        android:layout_height="@dimen/commonAvatarLargeImageHeight"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/user_avatar_default_unfocused"
-        android:layout_marginBottom="@dimen/profileIconMarginBottom" />
+        android:layout_marginBottom="@dimen/profileIconMarginBottom">
+
+        <ImageView
+            android:layout_width="@dimen/commonAvatarLargeBgImageWidth"
+            android:layout_height="@dimen/commonAvatarLargeBgImageHeight"
+            android:src="@drawable/user_avatar_bg"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:id="@+id/userProfileAvatar"
+            android:layout_width="@dimen/commonAvatarLargeImageWidth"
+            android:layout_height="@dimen/commonAvatarLargeImageHeight"
+            android:src="@drawable/user_avatar_default_unfocused"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/userProfileName"

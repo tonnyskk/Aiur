@@ -5,6 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -18,13 +23,12 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.origin.aiur.BaseActivity;
 import com.origin.aiur.R;
 import com.origin.aiur.dao.UserDao;
-import com.origin.aiur.http.HttpExecutor;
 import com.origin.aiur.http.HttpUtils;
+import com.origin.aiur.utils.ALogger;
 import com.origin.aiur.utils.AppUtils;
 import com.origin.aiur.utils.Base64Util;
 import com.origin.aiur.vo.User;
@@ -257,7 +261,8 @@ public class ProfileActivity extends BaseActivity implements TextWatcher {
     private void showResizeImage(Intent data) {
         Bundle extras = data.getExtras();
         if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
+            Bitmap photoData = extras.getParcelable("data");
+            Bitmap photo = AppUtils.toRoundBitmap(photoData, true);
             Drawable drawable = new BitmapDrawable(photo);
             userProfileAvatar.setImageDrawable(drawable);
 

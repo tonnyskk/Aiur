@@ -102,7 +102,7 @@
     <string name="btn_prepay_user">充值</string>
 
     <!-- Group tag page @charge -->
-    <string name="btn_charge_group">付款</string>
+    <string name="btn_charge_group">记账</string>
     <string name="tab_charge_amount_title">消费</string>
     <string name="tab_charge_amount_hint">金額</string>
     <string name="tab_charge_desc_hint">描述</string>

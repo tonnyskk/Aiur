@@ -1,7 +1,13 @@
 package com.origin.aiur.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
@@ -204,10 +210,77 @@ public class AppUtils {
         }
         try {
             byte[] avatarByte = Base64Util.decode(avatarData.getBytes());
-            return new BitmapDrawable(BitmapFactory.decodeByteArray(avatarByte, 0, avatarByte.length));
+            Bitmap bitmap = BitmapFactory.decodeByteArray(avatarByte, 0, avatarByte.length);
+            return new BitmapDrawable(toRoundBitmap(bitmap, true));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
+
+    @SuppressWarnings("SuspiciousNameCombination")
+    public static Bitmap toRoundBitmap(Bitmap bitmap, boolean recycleOriginalBmp) {
+        if (bitmap == null || bitmap.getWidth() == 0 || bitmap.getHeight() == 0 || bitmap.isRecycled()) {
+            return null;
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float roundPx;
+        float left, top, right, bottom, dst_left, dst_top, dst_right, dst_bottom;
+        if (width <= height) {
+            roundPx = width / 2.0f;
+            float clip = (height - width) / 2.0f;
+            top = clip;
+            bottom = height - clip;
+            left = 0;
+            right = width;
+            height = width;
+            dst_left = 0;
+            dst_top = 0;
+            dst_right = width;
+            dst_bottom = width;
+        } else {
+            roundPx = height / 2.0f;
+            float clip = (width - height) / 2.0f;
+            left = clip;
+            right = width - clip;
+            top = 0;
+            bottom = height;
+            width = height;
+            dst_left = 0;
+            dst_top = 0;
+            dst_right = height;
+            dst_bottom = height;
+        }
+        Bitmap output = null;
+        try {
+            output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(output);
+
+            final int color = 0xff424242;
+            final Paint paint = new Paint();
+            final Rect src = new Rect((int) left, (int) top, (int) right, (int) bottom);
+            final Rect dst = new Rect((int) dst_left, (int) dst_top, (int) dst_right, (int) dst_bottom);
+
+            paint.setAntiAlias(true);
+
+            canvas.drawARGB(0, 0, 0, 0);
+            paint.setColor(color);
+            canvas.drawCircle(roundPx, roundPx, roundPx, paint);
+
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, src, dst, paint);
+        } catch (Throwable t) {
+            ALogger.log(ALogger.LogPriority.error, AppUtils.class, "toRoundBitmap()", t);
+        } finally {
+            // recycle the original bitmap
+            if (recycleOriginalBmp && !bitmap.isRecycled()) {
+                bitmap.recycle();
+            }
+        }
+        return output;
+    }
+
 }

@@ -11,14 +11,29 @@
     android:paddingBottom="@dimen/avatarUserAdapterPaddingBottom"
     android:background="@color/userSelectionListItemBg">
 
-    <ImageView
-        android:id="@+id/avatarUserImage"
-        android:layout_width="@dimen/commonAvatarMiddleImageWidth"
-        android:layout_height="@dimen/commonAvatarMiddleImageWidth"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
-        android:layout_marginRight="@dimen/selectUserIconMarginRight"
-        android:src="@drawable/user_avatar_unfocused" />
+        android:layout_marginRight="@dimen/selectUserIconMarginRight">
+
+        <ImageView
+            android:layout_width="@dimen/commonAvatarMiddleBgImageWidth"
+            android:layout_height="@dimen/commonAvatarMiddleBgImageHeight"
+            android:src="@drawable/user_avatar_bg"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:id="@+id/avatarUserImage"
+            android:layout_width="@dimen/commonAvatarMiddleImageWidth"
+            android:layout_height="@dimen/commonAvatarMiddleImageHeight"
+            android:src="@drawable/user_avatar_unfocused"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/userDisplayName"
         android:layout_width="match_parent"
