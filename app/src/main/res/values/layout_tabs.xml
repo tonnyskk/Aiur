@@ -10,6 +10,7 @@
     <dimen name="tabIndexBtnPaddingLeftRight">10dp</dimen>
 
     <dimen name="tabIndexBtnIconMarginLeftRight">10dp</dimen>
+    <dimen name="tabIndexBtnIconPadding">8dp</dimen>
     <dimen name="tabIndexBtnIconWidth">40dp</dimen>
     <dimen name="tabIndexBtnIconHeight">40dp</dimen>
 

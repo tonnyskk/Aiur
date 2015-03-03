@@ -23,6 +23,10 @@
     <dimen name="commonAvatarMiddleBgImageHeight">63dp</dimen>
     <dimen name="commonAvatarMiddleImageWidth">50dp</dimen>
     <dimen name="commonAvatarMiddleImageHeight">50dp</dimen>
+    <dimen name="commonAvatarSmallBgImageWidth">40dp</dimen>
+    <dimen name="commonAvatarSmallBgImageHeight">40dp</dimen>
+    <dimen name="commonAvatarSmallImageWidth">32dp</dimen>
+    <dimen name="commonAvatarSmallImageHeight">32dp</dimen>
     
     <color name="commonBlueButtonTextColor">#ffffffff</color>
     <color name="commonBgColor">#ffffffff</color>

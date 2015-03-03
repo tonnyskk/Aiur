@@ -8,6 +8,8 @@
     <dimen name="searchGroupButtonPaddingLeftRight">10dp</dimen>
 
     <!-- @Charge tab -->
+    <dimen name="selectUserItemPaddingLeftRight">5dp</dimen>
+    <dimen name="selectUserItemPaddingTopBottom">5dp</dimen>
     <dimen name="selectUserIconMarginLeft">2dp</dimen>
     <dimen name="selectUserIconMarginRight">5dp</dimen>
     <dimen name="selectUserCheckboxWidth">40dp</dimen>

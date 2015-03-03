@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">I-AIUR</string>
+    <string name="app_name">Taster</string>
     <string name="title_activity_main">账户概览</string>
     <string name="title_activity_new_group">创建小组</string>
     <string name="title_activity_join_group">加入小组</string>

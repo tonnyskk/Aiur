@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.origin.aiur.BaseFragment;
@@ -42,6 +43,8 @@ public class GroupIndexFragment extends BaseFragment {
     private View tabBtnCharge;
     private GridView listUserPrepayList;
     private UserAvatarAdapter userAdapter;
+    private ProgressBar loadingUserPrepayList;
+    private ProgressBar loadingGroupActivity;
 
     private enum Actions {
         load_user_finance_by_group, load_group_activity, load_group_user
@@ -84,6 +87,10 @@ public class GroupIndexFragment extends BaseFragment {
         listUserPrepayList = (GridView) rootView.findViewById(R.id.listUserPrepayList);
         userAdapter = new UserAvatarAdapter(this.getContext());
         listUserPrepayList.setAdapter(userAdapter);
+
+        loadingGroupActivity = (ProgressBar) rootView.findViewById(R.id.loadingGroupActivity);
+        loadingUserPrepayList = (ProgressBar) rootView.findViewById(R.id.loadingUserPrepayList);
+
         return rootView;
     }
 
@@ -104,6 +111,11 @@ public class GroupIndexFragment extends BaseFragment {
         this.getSync(Actions.load_user_finance_by_group.name(), currentUserId, currentGroupId);
         this.getSync(Actions.load_group_activity.name(), currentUserId, currentGroupId);
         this.getSync(Actions.load_group_user.name(), currentGroupId);
+
+        loadingGroupActivity.setVisibility(View.VISIBLE);
+        loadingUserPrepayList.setVisibility(View.VISIBLE);
+        groupActivityList.setVisibility(View.GONE);
+        listUserPrepayList.setVisibility(View.GONE);
     }
 
     @Override
@@ -139,10 +151,16 @@ public class GroupIndexFragment extends BaseFragment {
             case load_group_activity:
                 List<GroupEvent> groupEventList = GroupHelper.getInstance().getGroupEventList(response);
                 refreshGroupEvent(groupEventList);
+
+                groupActivityList.setVisibility(View.VISIBLE);
+                loadingGroupActivity.setVisibility(View.GONE);
                 break;
             case load_group_user:
                 List<User> userList = GroupHelper.getInstance().getGroupUserList(response);
                 refreshUserList(userList);
+
+                listUserPrepayList.setVisibility(View.VISIBLE);
+                loadingUserPrepayList.setVisibility(View.GONE);
                 break;
         }
     }
@@ -151,17 +169,23 @@ public class GroupIndexFragment extends BaseFragment {
     public void onPostExecuteFailed(String action) {
         switch (Actions.valueOf(action)) {
             case load_user_finance_by_group:
-                List<GroupEvent> groupEventList = GroupEventDao.getInstance().getGroupEvents();
-                refreshGroupEvent(groupEventList);
-                break;
-            case load_group_activity:
                 Finance finance = FinanceDao.getInstance().getGroupFinance();
                 refreshFinance(finance);
+                break;
+            case load_group_activity:
+                List<GroupEvent> groupEventList = GroupEventDao.getInstance().getGroupEvents();
+                refreshGroupEvent(groupEventList);
+
+                groupActivityList.setVisibility(View.VISIBLE);
+                loadingGroupActivity.setVisibility(View.GONE);
                 break;
             case load_group_user:
                 long currentGroupId = UserDao.getInstance().getCurrentGroup().getGroupId();
                 List<User> userList = GroupUserDao.getInstance().getGroupJoinedUserList(currentGroupId);
                 refreshUserList(userList);
+
+                listUserPrepayList.setVisibility(View.VISIBLE);
+                loadingUserPrepayList.setVisibility(View.GONE);
                 break;
         }
     }

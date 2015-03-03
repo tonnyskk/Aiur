@@ -4,10 +4,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/mainGroupActivityListPaddingLeftRight"
-    android:paddingRight="@dimen/mainGroupActivityListPaddingLeftRight"
-    android:paddingTop="@dimen/mainGroupActivityListPaddingTopBottom"
-    android:paddingBottom="@dimen/mainGroupActivityListPaddingTopBottom"
+    android:paddingLeft="@dimen/selectUserItemPaddingLeftRight"
+    android:paddingRight="@dimen/selectUserItemPaddingLeftRight"
+    android:paddingTop="@dimen/selectUserItemPaddingTopBottom"
+    android:paddingBottom="@dimen/selectUserItemPaddingTopBottom"
     android:background="@color/userSelectionListItemBg">
 
     <FrameLayout
@@ -18,15 +18,15 @@
         android:layout_marginRight="@dimen/selectUserIconMarginRight">
 
         <ImageView
-            android:layout_width="@dimen/commonAvatarMiddleBgImageWidth"
-            android:layout_height="@dimen/commonAvatarMiddleBgImageHeight"
+            android:layout_width="@dimen/commonAvatarSmallBgImageWidth"
+            android:layout_height="@dimen/commonAvatarSmallBgImageHeight"
             android:src="@drawable/user_avatar_bg"
             android:layout_gravity="center" />
 
         <ImageView
             android:id="@+id/userSelectAvatarImage"
-            android:layout_width="@dimen/commonAvatarMiddleImageWidth"
-            android:layout_height="@dimen/commonAvatarMiddleImageHeight"
+            android:layout_width="@dimen/commonAvatarSmallImageWidth"
+            android:layout_height="@dimen/commonAvatarSmallImageHeight"
             android:src="@drawable/user_avatar_unfocused"
             android:scaleType="fitCenter"
             android:layout_gravity="center" />

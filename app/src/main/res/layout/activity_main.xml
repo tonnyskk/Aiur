@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="@color/main.bg"
-              tools:context="com.origin.aiur.activity.main.MainActivity"
-              android:id="@+id/mainWin">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main.bg"
+    tools:context="com.origin.aiur.activity.main.MainActivity"
+    android:id="@+id/mainWin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/main.grid.title.txt.size"
-                android:textColor="@color/main.balance.txt"/>
+                android:textColor="@color/main.balance.txt" />
 
             <TextView
                 android:id="@+id/txtTotalBalance"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="@color/main.balance.txt"
-                android:gravity="center"/>
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/main.grid.title.txt.size"
-                android:textColor="@color/main.balance.txt"/>
+                android:textColor="@color/main.balance.txt" />
 
             <TextView
                 android:id="@+id/txtTotalCost"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="@color/main.balance.txt"
-                android:gravity="center"/>
+                android:gravity="center" />
         </LinearLayout>
     </LinearLayout>
 
@@ -80,47 +80,70 @@
             android:layout_marginBottom="@dimen/mainGroupSelectMarginBottom"
             android:background="@drawable/round_corner_bg">
 
-            <TextView
-                android:id="@+id/btnGotoGroup"
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/loadUserGroupList"
+                android:scrollbarStyle="insideInset"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
-                android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
-                android:paddingTop="@dimen/mainGroupSelectPaddingTop"
-                android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
-                android:clickable="true"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
-                android:text="@string/main_group_select"/>
-
-            <View
-                android:id="@+id/btnGroupSplitLine"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/tab_index_btn_split"
-                android:layout_marginLeft="@dimen/commonSplitLineMarginLeftRight"
-                android:layout_marginRight="@dimen/commonSplitLineMarginLeftRight"
+                android:layout_gravity="center_horizontal"
                 android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/btnChangeGroup"
+            <LinearLayout
+                android:id="@+id/userGroupListContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
-                android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
-                android:paddingTop="@dimen/mainGroupSelectPaddingTop"
-                android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
-                android:clickable="true"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:textColor="@color/mainGroupItemGray"
-                android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
-                android:text="@string/main_group_change"
-                android:visibility="gone"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btnGotoGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
+                    android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
+                    android:paddingTop="@dimen/mainGroupSelectPaddingTop"
+                    android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
+                    android:clickable="true"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
+                    android:text="@string/main_group_select" />
+
+                <View
+                    android:id="@+id/btnGroupSplitLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/tab_index_btn_split"
+                    android:layout_marginLeft="@dimen/commonSplitLineMarginLeftRight"
+                    android:layout_marginRight="@dimen/commonSplitLineMarginLeftRight"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/btnChangeGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/mainGroupSelectMarginLeft"
+                    android:layout_marginRight="@dimen/mainGroupSelectMarginRight"
+                    android:paddingTop="@dimen/mainGroupSelectPaddingTop"
+                    android:paddingBottom="@dimen/mainGroupSelectPaddingBottom"
+                    android:clickable="true"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="@color/mainGroupItemGray"
+                    android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
+                    android:text="@string/main_group_change"
+                    android:visibility="gone" />
+            </LinearLayout>
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loadGroupActivity"
+            android:scrollbarStyle="insideInset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
 
         <ListView
             android:id="@+id/listGroupActivity"
@@ -154,14 +177,14 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
-            android:text="@string/main_group_join"/>
+            android:text="@string/main_group_join" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/tab_index_btn_split"
             android:layout_marginLeft="@dimen/commonSplitLineMarginLeftRight"
-            android:layout_marginRight="@dimen/commonSplitLineMarginLeftRight"/>
+            android:layout_marginRight="@dimen/commonSplitLineMarginLeftRight" />
 
         <TextView
             android:id="@+id/btnCreateGroup"
@@ -176,6 +199,6 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textSize="@dimen/mainGroupButtonBarItemTxtSize"
-            android:text="@string/main_group_create"/>
+            android:text="@string/main_group_create" />
     </LinearLayout>
 </LinearLayout>

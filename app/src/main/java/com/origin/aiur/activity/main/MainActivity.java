@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.origin.aiur.BaseActivity;
@@ -54,6 +55,9 @@ public class MainActivity extends BaseActivity {
     private PopupWindow groupPopupWindow;
 
     private ListGroupAdapter popupAdapter = null;
+    private ProgressBar loadGroupActivity;
+    private ProgressBar loadUserGroupList;
+    private View userGroupListContainer;
 
     public MainActivity() {
     }
@@ -99,6 +103,10 @@ public class MainActivity extends BaseActivity {
         groupActivityList = (ListView) findViewById(R.id.listGroupActivity);
         groupActivityAdapter = new ListActivitiesAdapter(this);
         groupActivityList.setAdapter(groupActivityAdapter);
+
+        userGroupListContainer = findViewById(R.id.userGroupListContainer);
+        loadGroupActivity = (ProgressBar) findViewById(R.id.loadGroupActivity);
+        loadUserGroupList = (ProgressBar) findViewById(R.id.loadUserGroupList);
     }
 
 
@@ -119,6 +127,12 @@ public class MainActivity extends BaseActivity {
         this.getSync(Actions.load_user_group.name());
         this.getSync(Actions.load_group_activity.name());
         this.getSync(Actions.load_user_finance.name());
+
+        loadGroupActivity.setVisibility(View.VISIBLE);
+        groupActivityList.setVisibility(View.GONE);
+
+        loadUserGroupList.setVisibility(View.VISIBLE);
+        userGroupListContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -153,11 +167,17 @@ public class MainActivity extends BaseActivity {
             case load_group_activity:
                 List<GroupEvent> groupEventList = MainHelper.getInstance().getGroupEventList(response);
                 refreshGroupEvent(groupEventList);
+
+                loadGroupActivity.setVisibility(View.GONE);
+                groupActivityList.setVisibility(View.VISIBLE);
                 break;
 
             case load_user_group:
                 List<UserGroup> userGroupList = MainHelper.getInstance().getGroupList(response);
                 refreshUserGroup(userGroupList);
+
+                loadUserGroupList.setVisibility(View.GONE);
+                userGroupListContainer.setVisibility(View.VISIBLE);
                 break;
             case load_user_finance:
                 Finance finance = MainHelper.getInstance().getFinanceInfo(response);
@@ -173,11 +193,17 @@ public class MainActivity extends BaseActivity {
             case load_group_activity:
                 List<GroupEvent> groupEventList = UserEventDao.getInstance().getUserEvents();
                 refreshGroupEvent(groupEventList);
+
+                loadGroupActivity.setVisibility(View.GONE);
+                groupActivityList.setVisibility(View.VISIBLE);
                 break;
 
             case load_user_group:
                 List<UserGroup> userGroupList = UserDao.getInstance().getUserGroupList();
                 refreshUserGroup(userGroupList);
+
+                loadUserGroupList.setVisibility(View.GONE);
+                userGroupListContainer.setVisibility(View.VISIBLE);
                 break;
             case load_user_finance:
                 Finance finance = FinanceDao.getInstance().getUserFinance();

@@ -15,14 +15,28 @@
         android:layout_margin="@dimen/tabManageListMargin"
         android:background="@drawable/extra_card_selector_color6">
 
-        <ImageView
-            android:id="@+id/groupUserManageAvatar"
-            android:layout_width="@dimen/tabManageUserItemIconWidth"
-            android:layout_height="@dimen/tabManageUserItemIconHeight"
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/selectUserIconMarginLeft"
-            android:layout_marginRight="@dimen/selectUserIconMarginRight"
-            android:src="@drawable/ic_launcher"/>
+            android:layout_marginRight="@dimen/selectUserIconMarginRight">
+
+            <ImageView
+                android:layout_width="@dimen/commonAvatarSmallBgImageWidth"
+                android:layout_height="@dimen/commonAvatarSmallBgImageHeight"
+                android:src="@drawable/user_avatar_bg"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/groupUserManageAvatar"
+                android:layout_width="@dimen/commonAvatarSmallImageWidth"
+                android:layout_height="@dimen/commonAvatarSmallImageHeight"
+                android:src="@drawable/user_avatar_unfocused"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/groupUserManageText"
@@ -31,7 +45,7 @@
             android:layout_weight="1"
             android:text="AIUR"
             android:textSize="@dimen/selectUserNameTextSize"
-            android:gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"/>
 
         <TextView
             android:id="@+id/groupUserManageApprove"
